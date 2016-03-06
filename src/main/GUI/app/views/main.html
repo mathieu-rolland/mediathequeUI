@@ -1,23 +1,52 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div ng-controller="MainCtrl">
+	<div class="jumbotron">
+	  <h1> Médiathèque </h1>
+	  <p class="lead">
+		Rechercher un film
+		<br>
+	    
+	  </p>
+	  <p>
+	  	<input type="text" ng-model="movies.search"/>
+	  	<a class="btn btn-lg btn-success" ng-href="#/" ng-click="searchMovie(movies.search)" >Search<span class="glyphicon glyphicon-ok"></span></a></p>
+	</div>
+	
+	<div class="row marketing">
+	  	<div>{{movies.response}}</div> 
+	</div>
+	
+	<div class="search result">
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>casting</th>
+					<th>genre</th>
+					<th>statistique</th>
+					<th>link</th>
+					<th>Poster</th>
+				</tr>
+				
+			</thead>
+			
+			<tbody>
+				
+				<tr ng-repeat="movie in movies.list">
+					<td>{{movie.title}}</td>
+					<td>{{movie.casting.actors}}</td>
+					<td></td>
+					<td><a href="{{movie.links[0].href}}">Détails de {{movie.title}} sur allo cine</a></td>
+					<td>
+						 Evaluation presse : {{movie.statistiques.pressRating}} <br />
+						 Evaluation spectateur : {{movie.statistiques.userRating}}
+					</td>
+					<td>
+						<img class="poster" alt="Poster de {{movie.title}}" ng-src="{{movie.poster.href}}">
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+	
 </div>

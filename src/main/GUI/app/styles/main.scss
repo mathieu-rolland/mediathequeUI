@@ -67,6 +67,25 @@ body {
   }
 }
 
+.search.result {
+
+	th{
+		min-width: 50px;
+		margin:20px 0px 20px 0px;
+	}
+
+	td{
+		padding:2px;
+		margin-left:2px;
+		margin-right:2px;
+	}
+		
+	.poster {
+		max-width: 280px;
+	}
+
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
