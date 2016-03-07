@@ -15,8 +15,15 @@ angular.module('mediathequeUiApp')
 	  
 	  this.searchMovie = function ( search , callBack ){
 		var response = {};
-		if( search === null || search === '' ){
-			response = { errorCode : -1 , ErrorDesc: 'Search could not be empty' , movies:[] };
+		console.log(search);
+		if( search === null || search === '' || search === undefined ){
+			response = { errorCode : -1 , errorDesc: 'La recherche ne peut pas être vide.' , movies:[] };
+			callBack( response );
+			return;
+		}
+		else if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
+			console.error( 'Callback function is not defined' );
+			return;
 		}else{
 			$http.get( mainURL + moviesSearch , {params: {q:search}}).then(
 					function( response ){
@@ -28,12 +35,11 @@ angular.module('mediathequeUiApp')
 						callBack( response );
 					},
 					function(){
-						response = { errorCode : -2 , ErrorDesc: 'Failed to call WS' , movies:[] };
+						response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
 						callBack( response );
 					}
 			);
 		}
-		return response;
 	  };
 	  
   });

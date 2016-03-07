@@ -19,6 +19,7 @@ angular.module('mediathequeUiApp').controller('MainCtrl', [ '$scope', 'AllocineW
 		
 		if( response.errorCode !== 0 ){
 			console.log('An error occured');
+			$scope.addAlert( response.errorDesc , 'danger' );
 			return;
 		}
 		for(var i = 0 ; i < response.movies.length ; i++){
@@ -101,4 +102,32 @@ angular.module('mediathequeUiApp').controller('MainCtrl', [ '$scope', 'AllocineW
 	    return array;
 	  }
 	
+	  var alerts = $scope.alerts = [];
+	  
+	  $scope.addAlert = function(message, errorType) {
+		console.log(message + ' => ' + errorType );
+	    alerts.push({msg: message, type:errorType});
+	  };
+	  
+	  $scope.closeAlert = function(index) {
+	    $scope.alerts.splice(index, 1);
+	  };
+	  
+	  $scope.rate = 7;
+	  $scope.max = 5;
+	  $scope.isReadonly = false;
+
+	  $scope.hoveringOver = function(value) {
+	    $scope.overStar = value;
+	    $scope.percent = 100 * (value / $scope.max);
+	  };
+
+	  $scope.ratingStates = [
+	    {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+	    {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+	    {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+	    {stateOn: 'glyphicon-heart'},
+	    {stateOff: 'glyphicon-off'}
+	  ];
+	  
 }]);
