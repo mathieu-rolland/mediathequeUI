@@ -4,7 +4,7 @@
 	<groupId>com.perso</groupId>
 	<artifactId>UIMediatheque</artifactId>
 	<version>0.0.1</version>
-	<name>Mediatheque</name>
+	<name>Mediatheque-WS</name>
 
 	<profiles>
 		<profile>
@@ -89,6 +89,22 @@
 									<directory>src/main/resources/</directory>
 									<filtering>true</filtering>
 									<include>*${build.profile.id}*.properties</include>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resources2</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/gui</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/GUI</directory>
+									<filtering>true</filtering>
 								</resource>
 							</resources>
 						</configuration>
