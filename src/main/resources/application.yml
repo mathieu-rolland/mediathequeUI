@@ -1,12 +1,21 @@
-server:
-   address:192.168.1.23
-   port:8080
----   
+spring:
+  profiles:
+    active: dev
+    
+---
+
 spring:
    profiles: dev
+   datasource:
+      url:jdbc:mysql://192.168.1.23/mediatheque_dev
+      username:mediatheque_dev
+      password:3ZJj3sEEbdxJt8Xx
+      driver-class-name:com.mysql.jdbc.Driver
 server:
    address: 0.0.0.0
----   
+   
+---
+   
 spring:
    profiles: prod
 server:
