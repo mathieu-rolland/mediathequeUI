@@ -10,7 +10,7 @@
 angular.module('mediathequeUiApp')
   .service('AllocineWebService', function ($http) {
     
-	  var mainURL = 'http://localhost:8080/';
+	  var mainURL = 'http://localhost:8989/';
 	  var moviesSearch = 'movies/search';
 	  
 	  this.searchMovie = function ( search , callBack ){
