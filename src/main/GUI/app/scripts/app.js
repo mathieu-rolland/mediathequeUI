@@ -35,6 +35,11 @@ angular
           controller: 'MymoviesCtrl',
           controllerAs: 'mymovies'
       })
+    .when('/load-disk',{
+    	  templateUrl: 'views/loadfromdisk.html',
+          controller: 'LoadfromdiskCtrl',
+          controllerAs: 'loadfromdisk'
+      })
       .otherwise({
         redirectTo: '/'
       });

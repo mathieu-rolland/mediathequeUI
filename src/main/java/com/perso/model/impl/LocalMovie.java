@@ -26,7 +26,7 @@ public class LocalMovie implements ILocalMovie {
 	
 	@Override
 	public void setTitle(String asString) {
-		this.setTitle( asString );
+		this.title = asString ;
 	}
 
 	@Override

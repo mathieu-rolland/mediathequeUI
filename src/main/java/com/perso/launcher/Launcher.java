@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
-@ComponentScan({"com.perso.service", "com.perso.config"})
+@ComponentScan({"com.perso.service", "com.perso.config, com.perso.spring.cors"})
 @ImportResource({"classpath:config.xml"})
 @SpringBootApplication
 public class Launcher {

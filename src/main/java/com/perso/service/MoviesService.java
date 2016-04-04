@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +20,8 @@ import com.perso.manager.movies.MoviesLoader;
 import com.perso.model.ILocalMovie;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:9000")
 @RequestMapping("/movies")
+@CrossOrigin(origins = "*" , methods = RequestMethod.GET )
 public class MoviesService {
 
 	private Logger logger = Logger.getLogger(MoviesService.class);
