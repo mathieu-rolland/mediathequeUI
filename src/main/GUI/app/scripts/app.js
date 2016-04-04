@@ -30,6 +30,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/my-movies',{
+    	  templateUrl: 'views/mymovies.html',
+          controller: 'MymoviesCtrl',
+          controllerAs: 'mymovies'
+      })
       .otherwise({
         redirectTo: '/'
       });
