@@ -7,8 +7,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import ch.qos.logback.core.filter.Filter;
-
 /**
  * Enabling CORS support  - Access-Control-Allow-Origin
  * @author zeroows@gmail.com
@@ -29,10 +27,6 @@ import ch.qos.logback.core.filter.Filter;
 @Configuration
 @EnableWebMvc
 public class CORSFilter extends WebMvcConfigurerAdapter {
-
-	public CORSFilter() {
-		System.out.println("LOAD Class OK\n\n");
-	}
 	
 	@Bean
 	public CommonsRequestLoggingFilter logFilter() {

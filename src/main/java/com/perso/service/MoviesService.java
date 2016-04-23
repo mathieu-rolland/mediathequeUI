@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,8 @@ import com.api.allocine.model.IMovie;
 import com.perso.factory.IMediathequeFactory;
 import com.perso.manager.movies.MoviesLoader;
 import com.perso.model.ILocalMovie;
+import com.perso.model.impl.Movie;
+import com.perso.repository.MovieRepository;
 
 @RestController
 @RequestMapping("/movies")
@@ -52,6 +55,12 @@ public class MoviesService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Bean
+	@RequestMapping("/my-movies/db/")
+	public @ResponseBody List<Movie> getMyMovies(MovieRepository movieRepo){
+		return movieRepo.findAll();
 	}
 	
 }

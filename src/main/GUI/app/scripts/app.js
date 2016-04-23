@@ -40,6 +40,11 @@ angular
           controller: 'LoadfromdiskCtrl',
           controllerAs: 'loadfromdisk'
       })
+      .when('/parameters',{
+    	  templateUrl: 'views/parameters.html',
+          controller: 'ParametersCtrl',
+          controllerAs: 'parameters'
+      })
       .otherwise({
         redirectTo: '/'
       });

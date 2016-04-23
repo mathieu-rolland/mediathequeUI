@@ -22,6 +22,7 @@ angular.module('mediathequeUiApp').controller('MainCtrl', [ '$scope', 'AllocineW
 			$scope.addAlert( response.errorDesc , 'danger' );
 			return;
 		}
+		
 		for(var i = 0 ; i < response.movies.length ; i++){
 			var poster = response.movies[i].poster;
 			console.log(poster);

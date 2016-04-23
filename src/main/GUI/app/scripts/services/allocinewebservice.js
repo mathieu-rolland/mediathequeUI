@@ -11,8 +11,11 @@ angular.module('mediathequeUiApp')
   .service('AllocineWebService', function ($http) {
     
 	  var mainURL = 'http://localhost:8989/';
-	  var moviesSearch = 'movies/search';
-	  var loadFromDisk = 'movies/my-movies/disk';
+	  var moviesSearch = 'movies/search/';
+	  var loadFromDisk = 'movies/my-movies/disk/';
+	  var loadAllParameters = 'parameters/';
+	  var addParameters  = 'parameters/add/';
+	  var deleteParameters = 'parameters/delete/';
 	  
 	  this.searchMovie = function ( search , callBack ){
 		var response = {};
@@ -73,5 +76,83 @@ angular.module('mediathequeUiApp')
 			);
 		}
 	  };
+	
+	  
+	  this.loadAllParameters = function ( callBack ){
+		var response = {};
+		console.log('Start fetch parameters');
+		if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
+			console.error( 'Callback function is not defined' );
+			return;
+		}else{
+			$http.get( mainURL + loadAllParameters).then(
+					function( response ){
+						response = {
+							errorCode:0,
+							errorDesc:'',
+						parameters: response.data
+					};
+					callBack( response );
+				},
+				function(){
+					response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+						callBack( response );
+					}
+			);
+		}
+	  };
+	  
+	  this.addParameter = function ( callBack , param ){
+			var response = {};
+			console.log('Start adding parameters');
+			if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
+				console.error( 'Callback function is not defined' );
+				return;
+			}else{
+				$http.post( mainURL + addParameters, param).then(
+						function( response ){
+							response = {
+								errorCode:0,
+								errorDesc:'',
+								operation: 'add',
+								parameters: response.data
+							};
+							callBack( response );
+						},
+						function(){
+							response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+							response.operation = 'add';
+							callBack( response );
+						}
+				);
+			}
+	  };
+	  
+	  this.deleteParameter = function ( callBack , param ){
+			var response = {};
+			console.log('Start deleting parameters');
+			if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
+				console.error( 'Callback function is not defined' );
+				return;
+			}else{
+				$http.post( mainURL + deleteParameters, param).then(
+						function( response ){
+							response = {
+								errorCode:0,
+								errorDesc:'',
+								operation: 'delete',
+								parameters: response.data
+							};
+							callBack( response );
+						},
+						function(){
+							response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+							response.operation = 'delete';
+							callBack( response );
+						}
+				);
+			}
+	  };
 	  
   });
+
