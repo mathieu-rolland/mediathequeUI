@@ -48,8 +48,7 @@ public class Parameter implements IParameter {
 
 	@Override
 	public String toString() {
-		return "Parameter [id=" + id + ", name=" + name + ", value=" + value
-				+ "]";
+		return "Parameter [id=" + id + ", name=" + name + ", value=" + value + "]";
 	}
 
 }

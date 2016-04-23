@@ -21,11 +21,13 @@ import com.api.allocine.model.ISearchResponse;
 import com.api.allocine.model.IStats;
 import com.perso.factory.IMediathequeFactory;
 import com.perso.model.ILocalMovie;
+import com.perso.model.IRegexParameter;
 import com.perso.model.impl.AllocineLink;
 import com.perso.model.impl.Casting;
 import com.perso.model.impl.Feed;
 import com.perso.model.impl.Movie;
 import com.perso.model.impl.Poster;
+import com.perso.model.impl.RegexParameter;
 import com.perso.model.impl.Release;
 import com.perso.model.impl.Result;
 import com.perso.model.impl.SearchResponse;
@@ -121,6 +123,11 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 	@Override
 	public ISearchResponse createSearchResponse() {
 		return new SearchResponse();
+	}
+
+	@Override
+	public IRegexParameter createRegexParameter() {
+		return new RegexParameter();
 	}
 	
 }

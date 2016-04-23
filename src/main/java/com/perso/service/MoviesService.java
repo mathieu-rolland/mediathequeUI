@@ -21,6 +21,7 @@ import com.perso.manager.movies.MoviesLoader;
 import com.perso.model.ILocalMovie;
 import com.perso.model.impl.Movie;
 import com.perso.repository.MovieRepository;
+import com.perso.repository.ParametersRepository;
 
 @RestController
 @RequestMapping("/movies")
@@ -35,6 +36,9 @@ public class MoviesService {
 	@Autowired
 	private IMediathequeFactory mediathequeFactory;
 	
+	@Autowired
+	private ParametersRepository parameterRepository;
+	
 	@RequestMapping("/search")
 	public @ResponseBody List<IMovie> searchMovie(@RequestParam(value="q", defaultValue="default") String search){
 		try {
@@ -47,8 +51,12 @@ public class MoviesService {
 	
 	@RequestMapping("/my-movies/disk")
 	public @ResponseBody List<ILocalMovie> listFromDisk(@RequestParam(value="q", defaultValue="/dev/null") String search){
+		logger.info("Start listing data from disk");
 		try {
-			return MoviesLoader.loadFromDisk(search, mediathequeFactory);
+			return MoviesLoader.loadFromDisk(	search, 
+												mediathequeFactory , 
+												parameterRepository.findByName("movie.include") ,
+												parameterRepository.findByName("movie.regex") );
 		} catch (IOException e) {
 			logger.error("Failed to load movies from disk.");
 			logger.error(e);
