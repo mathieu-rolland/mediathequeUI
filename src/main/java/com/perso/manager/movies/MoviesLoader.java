@@ -35,7 +35,7 @@ public class MoviesLoader {
 		return movies;
 	}
 	
-	private static List<IRegexParameter> generateRegexFromParameter(IMediathequeFactory factory, List<Parameter> allRegexParam ){
+	public static List<IRegexParameter> generateRegexFromParameter(IMediathequeFactory factory, List<Parameter> allRegexParam ){
 		List<IRegexParameter> allRegex = new ArrayList<IRegexParameter>();
 		
 		for(Parameter param : allRegexParam){
@@ -93,7 +93,7 @@ public class MoviesLoader {
 		return movies;
 	}
 	
-	private static void preformateMovieName( ILocalMovie movie, List<IRegexParameter> allRegex ){
+	public static void preformateMovieName( ILocalMovie movie, List<IRegexParameter> allRegex ){
 		
 		for( IRegexParameter regex : allRegex ){
 			String originalTitle = movie.getTitle();

@@ -33,13 +33,10 @@ public class RegexParameter implements IRegexParameter{
 	public String applyRegex(String input) {
 		if( input != null ){
 			Matcher m = pattern.matcher(input);
-			if( m.find()) {
-
-//				System.out.println( this.regex + "/" + this.replace + "/" + input + " => " + m.replaceAll(replace));
-				return m.replaceAll(replace);
-				
+			if( m.find() ) {
+				return m.replaceAll(replace).trim();
 			}else{
-				System.err.println(this.regex + "no match to ");
+				System.err.println(this.regex + "no match to " + input);
 			}
 		}else{
 			System.err.println("Input is null");
