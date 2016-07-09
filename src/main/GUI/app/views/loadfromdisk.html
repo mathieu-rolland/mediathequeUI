@@ -27,7 +27,7 @@
 			<tr ng-repeat="movie in movies.list">
 				<td>{{movie.path}}</td>
 				<td>{{movie.title}}</td>
-				<td> <a class="btn btn-lg btn-success" type="button">Search in allocine"</a></td>
+				<td> <a class="btn btn-lg btn-success" type="button" ng-click="searchMovieInAllocine(movie);">Search in allocine</a></td>
 			</tr>
 		</table>
 	</div>

@@ -45,6 +45,11 @@ angular
           controller: 'ParametersCtrl',
           controllerAs: 'parameters'
       })
+      .when('/load-disk/search',{
+    	  templateUrl: 'views/searchlocalmovietoallocine.html',
+          controller: 'SearchlocalmovietoallocineCtrl',
+          controllerAs: 'Searchlocalmovietoallocine'
+      })
       .otherwise({
         redirectTo: '/'
       });

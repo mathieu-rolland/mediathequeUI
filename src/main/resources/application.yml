@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev-pc
+    active: dev-pc-local
     
 ---
 
@@ -55,4 +55,25 @@ spring:
    profiles: prod
 server:
    address: 127.0.0.0
+   port: 8989
+   
+--- 
+
+spring:
+   profiles: dev-pc-local
+   datasource:
+      url: jdbc:mysql://localhost/mediatheque_dev
+      username: mediathequedev
+      password: mediathequedev
+      driverClassName: com.mysql.jdbc.Driver
+   jpa:
+      hibernate:
+         naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+         dialect: org.hibernate.dialect.MySQL5Dialect
+         show-sql: true
+         ddl-auto: create
+         globally_quoted_identifiers: true
+  
+server:
+   address: localhost
    port: 8989
