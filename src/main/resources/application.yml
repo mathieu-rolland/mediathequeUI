@@ -71,7 +71,7 @@ spring:
          naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
          dialect: org.hibernate.dialect.MySQL5Dialect
          show-sql: true
-         ddl-auto: create
+         ddl-auto: update
          globally_quoted_identifiers: true
   
 server:

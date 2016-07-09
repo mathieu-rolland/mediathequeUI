@@ -65,6 +65,13 @@ public class MoviesService {
 		return null;
 	}
 	
+	@RequestMapping("/my-movies/disk/synchronize")
+	public @ResponseBody boolean linkLocalMovieWithAlloCineMovie( ILocalMovie movie , int allocineCode ){
+		System.out.println( "Link movie " + movie.getTitle() + " with " + allocineCode);
+		return true;
+	}
+	
+	
 	@Bean
 	@RequestMapping("/my-movies/db/")
 	public @ResponseBody List<Movie> getMyMovies(MovieRepository movieRepo){

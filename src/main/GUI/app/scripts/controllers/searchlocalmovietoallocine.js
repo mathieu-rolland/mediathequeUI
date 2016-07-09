@@ -16,6 +16,17 @@ angular.module('mediathequeUiApp')
 		  
 	  $scope.movie = $rootScope.movie;
 	  
+	  var alerts = $scope.alerts = [];
+	  
+	  $scope.addAlert = function(message, errorType) {
+		console.log(message + ' => ' + errorType );
+	    alerts.push({msg: message, type:errorType});
+	  };
+	  
+	  $scope.closeAlert = function(index) {
+	    $scope.alerts.splice(index, 1);
+	  };
+	  
 	  var alloCineSearchCallback = function( response ){
 		  console.log( response );
 			
