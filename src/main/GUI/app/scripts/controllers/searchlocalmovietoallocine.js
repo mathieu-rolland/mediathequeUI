@@ -55,6 +55,10 @@ angular.module('mediathequeUiApp')
 	  console.log( 'Search movies in AlloCine API from disk : ' );
 	  console.log( $scope.movie );
 	  
-	  AllocineWebService.searchMovie( $scope.movie.title , alloCineSearchCallback );
+	  if( $scope.movie !== undefined ){
+		  AllocineWebService.searchMovie( $scope.movie.title , alloCineSearchCallback );
+	  }else{
+		  $scope.addAlert( 'No movie selected' , 'danger' );
+	  }
 	  
  }]);

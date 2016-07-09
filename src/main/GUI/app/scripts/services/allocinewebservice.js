@@ -16,6 +16,7 @@ angular.module('mediathequeUiApp')
 	  var loadAllParameters = 'parameters/';
 	  var addParameters  = 'parameters/add/';
 	  var deleteParameters = 'parameters/delete/';
+	  var synchronizeMovie = 'movies/my-movies/disk/synchronize';
 	  
 	  this.searchMovie = function ( search , callBack ){
 		var response = {};
@@ -153,6 +154,30 @@ angular.module('mediathequeUiApp')
 				);
 			}
 	  };
+	  
+	  this.synchronizeMovie = function( callback, localMovie, code){
+		  
+		  if( localMovie !== undefined && code !== undefined ){
+			  
+			  $http.post( mainURL + synchronizeMovie , "movie="+localMovie + "&code=" + code ).then(
+					  
+						function( response ){
+							response = {
+								errorCode:0,
+								errorDesc:'',
+							parameters: response.data
+						};
+						callBack( response );
+					},
+					
+					function(){
+						response = { errorCode : -3 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+							callBack( response );
+						}
+				);
+			  
+		  }
+	  }
 	  
   });
 
