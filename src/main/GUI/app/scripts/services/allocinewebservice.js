@@ -13,6 +13,7 @@ angular.module('mediathequeUiApp')
 	  var mainURL = 'http://localhost:8989/';
 	  var moviesSearch = 'movies/search/';
 	  var loadFromDisk = 'movies/my-movies/disk/';
+	  var loadMyMovies = 'movies/my-movies/db/';
 	  var loadAllParameters = 'parameters/';
 	  var addParameters  = 'parameters/add/';
 	  var deleteParameters = 'parameters/delete/';
@@ -182,6 +183,29 @@ angular.module('mediathequeUiApp')
 			  
 		  }
 	  }
+	  
+	  this.loadMyMovie = function ( callBack ){
+			var response = {};
+			if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
+				console.error( 'Callback function is not defined' );
+				return;
+			}else{
+				$http.get( mainURL + loadMyMovies ).then(
+						function( response ){
+							response = {
+								errorCode:0,
+								errorDesc:'',
+								movies: response.data
+							};
+							callBack( response );
+						},
+						function(){
+							response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+							callBack( response );
+						}
+				);
+			}
+		  };
 	  
   });
 

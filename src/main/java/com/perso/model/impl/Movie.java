@@ -4,18 +4,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CollectionType;
+
 import com.api.allocine.model.IAllocineLink;
 import com.api.allocine.model.ICasting;
 import com.api.allocine.model.IGenre;
-import com.api.allocine.model.IMovie;
 import com.api.allocine.model.IPoster;
 import com.api.allocine.model.IRelease;
 import com.api.allocine.model.IStats;
@@ -23,7 +28,7 @@ import com.perso.model.ILocalMovie;
 
 @Entity
 @Table(name="MOVIE")
-public class Movie implements IMovie, ILocalMovie{
+public class Movie implements ILocalMovie{
 
 	@Id
 	private int code;
@@ -35,24 +40,25 @@ public class Movie implements IMovie, ILocalMovie{
 	
 	private int year;
 	
-	@OneToOne(targetEntity=Release.class, fetch=FetchType.LAZY)
+	@OneToOne(targetEntity=Release.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private IRelease releaseDate;
 	
-	@OneToOne(targetEntity=Casting.class)
+	@OneToOne(targetEntity=Casting.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private ICasting casting;
 	
-	@OneToOne(targetEntity=Stats.class)
+	@OneToOne(targetEntity=Stats.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private IStats statistiques;
 	
-	@OneToOne(targetEntity=Poster.class)
+	@OneToOne(targetEntity=Poster.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private IPoster poster;
 	
-	@ManyToMany(targetEntity=AllocineLink.class)
+	@ManyToMany(targetEntity=AllocineLink.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL )
 	private Collection<IAllocineLink> links;
 	
 	@ManyToMany(targetEntity=Genre.class)
 	private List<IGenre> genre;
 	
+	@Column(columnDefinition = "TEXT")
 	private String synospis;
 	private int duration;
 	private String path;
@@ -176,12 +182,10 @@ public class Movie implements IMovie, ILocalMovie{
 
 	@Override
 	public String toString() {
-		return "Mediatheque Movie [code=" + code + ", originalTitle=" + originalTitle
-				+ ", title=" + title + ", keywords=" + keywords + ", year="
-				+ year + ", release=" + releaseDate + ", casting=" + casting
-				+ ", statistiques=" + statistiques + ", poster=" + poster
-				+ ", links=" + links + ", genre=" + genre + ", synospis="
-				+ synospis + ", duration=" + duration + "]";
+		return "Movie [code=" + code + ", originalTitle=" + originalTitle + ", title=" + title + ", keywords="
+				+ keywords + ", year=" + year + ", releaseDate=" + releaseDate + ", casting=" + casting
+				+ ", statistiques=" + statistiques + ", poster=" + poster + ", links=" + links + ", genre=" + genre
+				+ ", synospis=" + synospis + ", duration=" + duration + ", path=" + path + "]";
 	}
 
 	@Override

@@ -113,9 +113,26 @@ body {
 		margin-right:2px;
 		min-width: 100px;
 	}
+	
+	tr{
+		border: 1px solid black;
+	}	
 		
 	.poster {
 		max-width: 280px;
+	}
+	
+	.directors{
+		text-decoration: underline;
+    	font-weight: bold;
+	}
+	
+	.actors{
+		text-decoration: underline;
+    	font-weight: bold;
+	}
+
+	.synapsis{
 	}
 
 }

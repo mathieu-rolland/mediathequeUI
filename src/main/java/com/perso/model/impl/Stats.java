@@ -1,6 +1,8 @@
 package com.perso.model.impl;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.api.allocine.model.IStats;
@@ -9,6 +11,7 @@ import com.api.allocine.model.IStats;
 public class Stats implements IStats{
 
 	@Id
+	@GeneratedValue( strategy = GenerationType.AUTO )
 	private int id;
 	private double userRating;
 	private double pressRating;
@@ -35,8 +38,7 @@ public class Stats implements IStats{
 	
 	@Override
 	public String toString() {
-		return "Stats [userRating=" + userRating + ", pressRating="
-				+ pressRating + "]";
+		return "Stats [id=" + id + ", userRating=" + userRating + ", pressRating=" + pressRating + "]";
 	}
 	
 }

@@ -1,15 +1,10 @@
 package com.perso.model.impl;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import com.perso.model.IPersonn;
 
-@Entity
 public class Personn implements IPersonn {
 
-	@Id
-	private String name;
+	private String name = "UNKNOWN";
 
 	public String getName() {
 		return name;

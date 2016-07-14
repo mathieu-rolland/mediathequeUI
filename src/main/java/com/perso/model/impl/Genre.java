@@ -13,8 +13,13 @@ import com.api.allocine.model.IMovie;
 @Entity
 public class Genre {
 
+	@Override
+	public String toString() {
+		return "Genre [name=" + name + ", movies=" + movies + "]";
+	}
+
 	@Id
-	private String name;
+	private String name = "N/A";
 
 	@ManyToMany(targetEntity=Movie.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<IMovie> movies;

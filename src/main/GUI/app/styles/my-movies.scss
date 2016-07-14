@@ -1,0 +1,22 @@
+.MyMovies.movie{
+
+	.content{
+		float: right;
+		width: 70%;
+	}
+
+	.preview{
+	
+		float:left;
+		
+		img{
+			width: 180px;
+		}
+		
+	}
+
+	.clear{
+		clear:both;
+	}
+
+}

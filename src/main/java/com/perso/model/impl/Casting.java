@@ -3,9 +3,13 @@ package com.perso.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 
 import com.api.allocine.model.ICasting;
 
@@ -13,12 +17,17 @@ import com.api.allocine.model.ICasting;
 public class Casting implements ICasting {
 
 	@Id
+	@GeneratedValue( strategy = GenerationType.AUTO )
 	private int id;
 	
-	@ManyToMany(targetEntity=Personn.class)
+//	@ManyToMany(targetEntity=Personn.class)
+	@ElementCollection
+	@CollectionTable( name = "personn" , joinColumns = @JoinColumn(name = "name"))
 	private List<String> actors;
 	
-	@ManyToMany(targetEntity=Personn.class)
+//	@ManyToMany(targetEntity=Personn.class)
+	@ElementCollection
+	@CollectionTable( name = "personn" , joinColumns = @JoinColumn(name = "name"))
 	private List<String> directors;
 	
 	public int getId() {
@@ -60,7 +69,7 @@ public class Casting implements ICasting {
 
 	@Override
 	public String toString() {
-		return "Casting [actors=" + actors + ", directors=" + directors + "]";
+		return "Casting [id=" + id + ", actors=" + actors + ", directors=" + directors + "]";
 	}
 	
 }

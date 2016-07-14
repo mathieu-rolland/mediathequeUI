@@ -3,6 +3,8 @@ package com.perso.factory.impl;
 import java.io.File;
 import java.lang.reflect.Type;
 
+import org.hibernate.proxy.HibernateProxy;
+
 import com.api.allocine.IAllocineAPI;
 import com.api.allocine.IAllocineAPI.RESPONSE_FORMAT;
 import com.api.allocine.decod.IDecoder;
@@ -32,6 +34,7 @@ import com.perso.model.impl.Release;
 import com.perso.model.impl.Result;
 import com.perso.model.impl.SearchResponse;
 import com.perso.model.impl.Stats;
+import com.perso.serializer.HibernateProxyTypeAdapter;
 import com.perso.serializer.InterfaceSerializer;
 
 public class MediathequeFactory implements IMediathequeFactory, IFactory {
@@ -103,7 +106,6 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T create(Type type) {
-		System.out.println( "Type : " + type );
 		if( IMovie.class.equals(type) ) return (T) createMovie();
 		if( IPoster.class.equals(type)) return (T) createPoster();
 		if( IAllocineLink.class.equals(type)) return (T) createLink();
@@ -115,7 +117,6 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		if( IStats.class.equals(type)) return (T) createStats();
 		if( ISearchResponse.class.equals(type)) return (T) createSearchResponse();
 		if( ILocalMovie.class.equals(type)) return (T) createLocalMovie();
-		System.out.println(type);
 		return null;
 	}
 
@@ -131,6 +132,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		decoder.addTypeAdapter( IPoster.class , new InterfaceSerializer<Poster>( this, decoder ) );
 		decoder.addTypeAdapter( IRelease.class , new InterfaceSerializer<Release>( this, decoder ) );
 		decoder.addTypeAdapter( IAllocineLink.class , new InterfaceSerializer<AllocineLink>( this, decoder ) );
+		decoder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
 		return decoder;
 	}
 

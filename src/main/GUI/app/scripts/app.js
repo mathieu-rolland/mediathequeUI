@@ -20,7 +20,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/search', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
@@ -30,7 +30,7 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/my-movies',{
+      .when('/',{
     	  templateUrl: 'views/mymovies.html',
           controller: 'MymoviesCtrl',
           controllerAs: 'mymovies'

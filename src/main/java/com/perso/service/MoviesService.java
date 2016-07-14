@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.allocine.IAllocineAPI;
 import com.api.allocine.model.IMovie;
+import com.api.allocine.model.IMovieResponse;
 import com.perso.factory.IMediathequeFactory;
 import com.perso.manager.movies.MoviesLoader;
 import com.perso.model.ILocalMovie;
@@ -40,6 +41,10 @@ public class MoviesService {
 	
 	@Autowired
 	private ParametersRepository parameterRepository;
+	
+	@Autowired
+	private MovieRepository movieRepository;
+	
 	
 	@RequestMapping("/search")
 	public @ResponseBody List<IMovie> searchMovie(@RequestParam(value="q", defaultValue="default") String search){
@@ -71,15 +76,31 @@ public class MoviesService {
 	public @ResponseBody boolean linkLocalMovieWithAlloCineMovie( 
 			@RequestBody   Movie  movie
 	){
-		System.out.println( "Link movie " + movie /*+ " with " + allocineCode*/ );
+		
+		System.out.println( "Link movie " + movie );
+		
+		if( movie != null  ){
+			try {
+				IMovieResponse response = api.getMovieDetails(movie);
+				if( response != null ){
+					ILocalMovie movieResponse = (ILocalMovie) response.getMovie();
+					movieResponse.setPath( movie.getPath() );
+					movieRepository.saveAndFlush( (Movie) movieResponse );
+				}
+				System.out.println( " Response : " + response.getMovie().getClass() );
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+					
 		return true;
 	}
 	
 	
-	@Bean
 	@RequestMapping("/my-movies/db/")
-	public @ResponseBody List<Movie> getMyMovies(MovieRepository movieRepo){
-		return movieRepo.findAll();
+	public @ResponseBody List<Movie> getMyMovies(){
+		return movieRepository.findAll();
 	}
 	
 }

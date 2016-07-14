@@ -1,6 +1,8 @@
 package com.perso.model.impl;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.api.allocine.model.IAllocineLink;
@@ -9,6 +11,7 @@ import com.api.allocine.model.IAllocineLink;
 public class AllocineLink implements IAllocineLink{
 
 	@Id
+	@GeneratedValue( strategy = GenerationType.AUTO )
 	private int id;
 	private String rel;
 	private String href;
@@ -40,7 +43,7 @@ public class AllocineLink implements IAllocineLink{
 
 	@Override
 	public String toString() {
-		return "AllocineLink [rel=" + rel + ", href=" + href + "]";
+		return "AllocineLink [id=" + id + ", rel=" + rel + ", href=" + href + ", name=" + name + "]";
 	}
 
 	public String getName() {
