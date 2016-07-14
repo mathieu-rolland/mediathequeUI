@@ -63,6 +63,8 @@ public class Movie implements ILocalMovie{
 	private int duration;
 	private String path;
 	
+	private boolean isSynchronized;
+	
 	public Movie(){
 		links = new ArrayList<IAllocineLink>();
 		releaseDate = new Release();
@@ -70,6 +72,7 @@ public class Movie implements ILocalMovie{
 		statistiques = new Stats();
 		poster = new Poster();
 		setKeywords(new ArrayList<String>());
+		isSynchronized = false;
 	}
 	
 	public String getOriginalTitle() {
@@ -196,6 +199,16 @@ public class Movie implements ILocalMovie{
 	@Override
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	@Override
+	public void setSynchronized(boolean b) {
+		this.isSynchronized = b;
+	}
+
+	@Override
+	public boolean isSynchronized() {
+		return isSynchronized;
 	}
 	
 }

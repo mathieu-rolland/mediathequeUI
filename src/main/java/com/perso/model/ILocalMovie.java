@@ -6,5 +6,7 @@ public interface ILocalMovie extends IMovie {
 
 	public String getPath();
 	public void setPath(String path);
+	public void setSynchronized(boolean b);
+	public boolean isSynchronized();
 	
 }

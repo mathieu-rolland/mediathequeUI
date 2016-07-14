@@ -17,4 +17,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer>{
 	@Query (value = "select m from Movie m")
 	List<Movie> findByName(String name);
 	
+	@Query (value = "select m from Movie m where m.path = ?")
+	Movie findByPath(String path);
+	
 }

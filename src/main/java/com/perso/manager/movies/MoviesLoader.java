@@ -8,10 +8,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.api.allocine.model.IMovie;
 import com.perso.factory.IMediathequeFactory;
 import com.perso.model.ILocalMovie;
 import com.perso.model.IRegexParameter;
 import com.perso.model.impl.Parameter;
+import com.perso.repository.MovieRepository;
 
 public class MoviesLoader {
 
@@ -113,6 +115,16 @@ public class MoviesLoader {
 				movies.add( factory.createLocalMovie( f ) );
 			}
 		}
+		return movies;
+	}
+
+	public static List<ILocalMovie> findSynchronizedMovies( MovieRepository repository , List<ILocalMovie> movies )
+	{
+		for(ILocalMovie movie : movies ){
+			IMovie synchronizedMovie = repository.findByPath( movie.getPath() );
+			if (synchronizedMovie != null) movie.setSynchronized(true);
+		}
+		
 		return movies;
 	}
 	

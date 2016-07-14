@@ -12,6 +12,16 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<bean id="allocineDecoder"
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetObject">
+			<bean class="com.perso.factory.impl.MediathequeFactory" />
+		</property>
+		<property name="targetMethod">
+			<value>createAllocineDecoder</value>
+		</property>
+	</bean>
+
 	<bean id="AlloCineAPI"
 		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 		<property name="targetObject">
@@ -32,15 +42,4 @@
 		</property>
 	</bean>
 
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<bean
-					class="org.springframework.http.converter.json.GsonHttpMessageConverter" />
-			</list>
-		</property>
-		
-	</bean>
-	
 </beans>

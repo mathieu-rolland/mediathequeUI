@@ -24,7 +24,7 @@
 
 	<div>
 		<table>
-			<tr ng-repeat="movie in movies.list">
+			<tr ng-repeat="movie in movies.list" ng-class="{synchronized:movie.isSynchronized}">
 				<td>{{movie.path}}</td>
 				<td>{{movie.title}}</td>
 				<td> <a class="btn btn-lg btn-success" type="button" ng-click="searchMovieInAllocine(movie);">Search in allocine</a></td>

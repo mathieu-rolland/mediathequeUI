@@ -60,10 +60,13 @@ public class MoviesService {
 	public @ResponseBody List<ILocalMovie> listFromDisk(@RequestParam(value="q", defaultValue="/dev/null") String search){
 		logger.info("Start listing data from disk");
 		try {
-			return MoviesLoader.loadFromDisk(	search, 
+			List<ILocalMovie> result = MoviesLoader.loadFromDisk(	search, 
 												mediathequeFactory , 
 												parameterRepository.findByName("movie.include") ,
 												parameterRepository.findByName("movie.regex") );
+			
+			return MoviesLoader.findSynchronizedMovies( movieRepository ,  result );
+			
 		} catch (IOException e) {
 			logger.error("Failed to load movies from disk.");
 			logger.error(e);
