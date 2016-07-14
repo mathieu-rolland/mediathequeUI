@@ -158,8 +158,12 @@ angular.module('mediathequeUiApp')
 	  this.synchronizeMovie = function( callback, localMovie, code){
 		  
 		  if( localMovie !== undefined && code !== undefined ){
-			  
-			  $http.post( mainURL + synchronizeMovie , "movie="+localMovie + "&code=" + code ).then(
+			  var movieData = angular.toJson(localMovie, false);
+			  var data = {
+					 'movie' : movieData,
+					 'allocineCode' : code
+			  };
+			  $http.post( mainURL + synchronizeMovie ,  movieData ).then(
 					  
 						function( response ){
 							response = {
@@ -167,13 +171,13 @@ angular.module('mediathequeUiApp')
 								errorDesc:'',
 							parameters: response.data
 						};
-						callBack( response );
+						callback( response );
 					},
 					
 					function(){
 						response = { errorCode : -3 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
-							callBack( response );
-						}
+						callback( response );
+					}
 				);
 			  
 		  }

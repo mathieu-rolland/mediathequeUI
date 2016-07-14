@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev-pc-local
+    active: dev
     
 ---
 
@@ -9,19 +9,18 @@ spring:
    datasource:
       testWhileIdle: true
       show-sql: true
-      ddl-auto: update
       url: jdbc:mysql://192.168.1.23/mediatheque_dev
       username: mediatheque_dev
       password: 3ZJj3sEEbdxJt8Xx
-      driver-class-name: com.mysql.jdbc.Driver
-      
-jpa:
-   hibernate:
-      database: mediatheque_dev
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-      dialect: org.hibernate.dialect.MySQL5Dialect
-      show-sql: true
-      
+      driver-class-name: com.mysql.jdbc.Driver  
+   jpa:
+      hibernate:
+         database: mediatheque_dev
+         naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+         dialect: org.hibernate.dialect.MySQL5Dialect
+         show-sql: true
+         ddl-auto: update
+        
 server:
    address: 127.0.0.1
    port: 8989

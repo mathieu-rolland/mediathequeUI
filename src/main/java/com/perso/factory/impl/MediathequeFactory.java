@@ -32,6 +32,7 @@ import com.perso.model.impl.Release;
 import com.perso.model.impl.Result;
 import com.perso.model.impl.SearchResponse;
 import com.perso.model.impl.Stats;
+import com.perso.serializer.InterfaceSerializer;
 
 public class MediathequeFactory implements IMediathequeFactory, IFactory {
 
@@ -46,6 +47,10 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		return movie;
 	}
 
+	public ILocalMovie createLocalMovie(){
+		return new Movie();
+	}
+	
 	public static IMediathequeFactory createMediathequeFactory(){
 		return new MediathequeFactory();
 	}
@@ -98,6 +103,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T create(Type type) {
+		System.out.println( "Type : " + type );
 		if( IMovie.class.equals(type) ) return (T) createMovie();
 		if( IPoster.class.equals(type)) return (T) createPoster();
 		if( IAllocineLink.class.equals(type)) return (T) createLink();
@@ -108,6 +114,8 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		if( IResult.class.equals(type) ) return (T) createResult();
 		if( IStats.class.equals(type)) return (T) createStats();
 		if( ISearchResponse.class.equals(type)) return (T) createSearchResponse();
+		if( ILocalMovie.class.equals(type)) return (T) createLocalMovie();
+		System.out.println(type);
 		return null;
 	}
 
@@ -117,7 +125,13 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 	}
 
 	private IDecoder createAllocineDecoder() {
-		return new AllocineDecoder(this);
+		IDecoder decoder = new AllocineDecoder(this);
+		decoder.addTypeAdapter( IMovie.class , new InterfaceSerializer<Movie>( this, decoder ) );
+		decoder.addTypeAdapter( IStats.class , new InterfaceSerializer<Stats>( this, decoder ) );
+		decoder.addTypeAdapter( IPoster.class , new InterfaceSerializer<Poster>( this, decoder ) );
+		decoder.addTypeAdapter( IRelease.class , new InterfaceSerializer<Release>( this, decoder ) );
+		decoder.addTypeAdapter( IAllocineLink.class , new InterfaceSerializer<AllocineLink>( this, decoder ) );
+		return decoder;
 	}
 
 	@Override

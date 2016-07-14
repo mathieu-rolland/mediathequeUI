@@ -7,7 +7,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +27,7 @@ import com.perso.repository.ParametersRepository;
 
 @RestController
 @RequestMapping("/movies")
-@CrossOrigin(origins = "*" , methods = RequestMethod.GET )
+@CrossOrigin(origins = "*" , methods = {RequestMethod.GET, RequestMethod.POST} )
 public class MoviesService {
 
 	private Logger logger = Logger.getLogger(MoviesService.class);
@@ -65,9 +67,11 @@ public class MoviesService {
 		return null;
 	}
 	
-	@RequestMapping("/my-movies/disk/synchronize")
-	public @ResponseBody boolean linkLocalMovieWithAlloCineMovie( ILocalMovie movie , int allocineCode ){
-		System.out.println( "Link movie " + movie.getTitle() + " with " + allocineCode);
+	@RequestMapping( value = "/my-movies/disk/synchronize" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody boolean linkLocalMovieWithAlloCineMovie( 
+			@RequestBody   Movie  movie
+	){
+		System.out.println( "Link movie " + movie /*+ " with " + allocineCode*/ );
 		return true;
 	}
 	

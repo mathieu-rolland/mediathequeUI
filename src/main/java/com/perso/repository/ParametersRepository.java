@@ -18,7 +18,6 @@ public interface ParametersRepository extends CrudRepository<Parameter, Integer>
 	@Query("select p from Parameter p")
 	public List<Parameter> findAll();
 	
-	@Query("select p from Parameter p where p.name = ?")
 	public List<Parameter> findByName(String name);
 	
 }

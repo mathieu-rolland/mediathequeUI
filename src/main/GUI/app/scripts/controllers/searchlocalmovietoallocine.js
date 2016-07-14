@@ -28,7 +28,7 @@ angular.module('mediathequeUiApp')
 	  };
 	  
 	  var alloCineSearchCallback = function( response ){
-		  console.log( response );
+		  	console.log( response );
 			
 			if( response === null ){
 				return;
@@ -42,8 +42,7 @@ angular.module('mediathequeUiApp')
 			
 			for(var i = 0 ; i < response.movies.length ; i++){
 				var poster = response.movies[i].poster;
-				console.log(poster);
-				if( poster.href === undefined){
+				if( poster !== undefined && poster.href === undefined){
 					poster.href = 'images/yeoman.png';
 				}
 			}
@@ -52,6 +51,10 @@ angular.module('mediathequeUiApp')
 			
 	  };
 	  
+	  var allocineSynchronizeCallback = function( response ){
+		  console.log( response );
+	  }
+	  
 	  console.log( 'Search movies in AlloCine API from disk : ' );
 	  console.log( $scope.movie );
 	  
@@ -59,6 +62,17 @@ angular.module('mediathequeUiApp')
 		  AllocineWebService.searchMovie( $scope.movie.title , alloCineSearchCallback );
 	  }else{
 		  $scope.addAlert( 'No movie selected' , 'danger' );
+		  AllocineWebService.searchMovie( 'District 9' , alloCineSearchCallback );
+	  }
+	  
+	  
+	  $scope.synchronizeMovie = function( code ){
+		  console.log('code : ' + code );
+		  console.log( $scope.movie );
+		  if( $scope.movie !== undefined ){
+			  $scope.movie.code = code;
+			  AllocineWebService.synchronizeMovie( allocineSynchronizeCallback , $scope.movie , code );
+		  }
 	  }
 	  
  }]);
