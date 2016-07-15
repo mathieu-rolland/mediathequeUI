@@ -30,14 +30,16 @@
 							<p>{{movie.title}}</p>
 							<p>
 								<input type="button" class="btn btn-lg btn-success" ng-click="synchronizeMovie( movie.code )" value="Associer" />
-								<span class="glyphicon glyphicon-ok"></span></a>
+<!-- 								<span class="glyphicon glyphicon-ok"></span></a> -->
 							</p>
 						</div>
 					</td>
 					<td>
 						{{movie.casting.actors}}
 					</td>
-					<td></td>
+					<td>
+						<span ng-repeat="genre in movie.genre">{{genre}}, </span>
+					</td>
 					<td><a href="{{movie.links[0].href}}">Détails de {{movie.title}} sur allo cine</a></td>
 					<td>
 <!-- 						 Evaluation presse : {{movie.statistiques.pressRating}} <br /> -->

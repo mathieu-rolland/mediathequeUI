@@ -8,7 +8,8 @@
  * Controller of the mediathequeUiApp
  */
 angular.module('mediathequeUiApp')
-  .controller('SearchlocalmovietoallocineCtrl', [ '$scope' , '$location' , '$rootScope' , 'AllocineWebService' , function ( $scope , $location , $rootScope , AllocineWebService) {
+  .controller('SearchlocalmovietoallocineCtrl', [ '$scope' , '$location' , '$rootScope' , 'AllocineWebService' , 'localStorageService',
+                                                  	function ( $scope , $location , $rootScope , AllocineWebService, localStorageService) {
 	  
 	  $scope.movies = {
 			  list: []
@@ -61,8 +62,13 @@ angular.module('mediathequeUiApp')
 	  if( $scope.movie !== undefined ){
 		  AllocineWebService.searchMovie( $scope.movie.title , alloCineSearchCallback );
 	  }else{
-		  $scope.addAlert( 'No movie selected' , 'danger' );
-		  AllocineWebService.searchMovie( 'District 9' , alloCineSearchCallback );
+		  var searchMovie = localStorageService.get('localMovieSearch');
+		  if( !angular.isDefined(searchMovie) ){
+			  console.log('Movie search : '); 
+			  console.log( searchMovie );
+			  $scope.movie = searchMovie;
+		  }
+		  AllocineWebService.searchMovie( searchMovie , alloCineSearchCallback );
 	  }
 	  
 	  

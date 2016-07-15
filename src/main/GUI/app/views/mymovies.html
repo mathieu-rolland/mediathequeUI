@@ -14,15 +14,19 @@
 			</p>
 			
 			<p>	
-				De : <span ng-repeat="person in movie.casting.directors">{{person}}</span>
+				De : <span ng-repeat="person in movie.casting.directors track by $index">{{person}}</span>
 			</p>
 			
 			<p>
-				Avec : <span ng-repeat="person in movie.casting.actors">{{person}}, </span>
+				Avec : <span ng-repeat="person in movie.casting.actors track by $index">{{person}}, </span>
 			</p>
 			
 			<p>
 				Durée : {{movie.duration | formatDuration}}
+			</p>
+			
+			<p>
+				Genre de film : <span ng-repeat="genre in movie.genre track by $index">{{genre.name}}, </span>
 			</p>
 			
 			<p>

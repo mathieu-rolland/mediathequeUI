@@ -16,9 +16,13 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'LocalStorageModule'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider , localStorageServiceProvider) {
+	
+	localStorageServiceProvider.setPrefix('uiMediatheque');
+	  
     $routeProvider
       .when('/search', {
         templateUrl: 'views/main.html',

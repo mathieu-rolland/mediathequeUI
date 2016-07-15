@@ -13,6 +13,6 @@ angular.module('mediathequeUiApp')
     return function (input) {
     	var hours = parseInt(input/3600);
     	var mins = parseInt((input - (hours*3600))/60);
-      return hours + "h" + mins;
+      return hours + "h" + String( 0 + mins).slice(-2);
     };
   });

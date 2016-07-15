@@ -1,28 +1,16 @@
 package com.perso.model.impl;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
-import com.api.allocine.model.IMovie;
+import com.api.allocine.model.IGenre;
 
 @Entity
-public class Genre {
-
-	@Override
-	public String toString() {
-		return "Genre [name=" + name + ", movies=" + movies + "]";
-	}
+public class Genre implements IGenre {
 
 	@Id
-	private String name = "N/A";
-
-	@ManyToMany(targetEntity=Movie.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<IMovie> movies;
+	private int code;
+	private String name;
 	
 	public String getName() {
 		return name;
@@ -31,5 +19,21 @@ public class Genre {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public int getCode() {
+		return 0;
+	}
+
+	@Override
+	public void setCode(int code) {
+		this.code = code;
+	}
+	
+	@Override
+	public String toString() {
+		return "Genre [code = " + code + ", name=" + name + "]";
+	}
+
 	
 }

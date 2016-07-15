@@ -3,8 +3,6 @@ package com.perso.factory.impl;
 import java.io.File;
 import java.lang.reflect.Type;
 
-import org.hibernate.proxy.HibernateProxy;
-
 import com.api.allocine.IAllocineAPI;
 import com.api.allocine.IAllocineAPI.RESPONSE_FORMAT;
 import com.api.allocine.decod.IDecoder;
@@ -14,6 +12,7 @@ import com.api.allocine.impl.AllocineAPI;
 import com.api.allocine.model.IAllocineLink;
 import com.api.allocine.model.ICasting;
 import com.api.allocine.model.IFeed;
+import com.api.allocine.model.IGenre;
 import com.api.allocine.model.IJsonResponse;
 import com.api.allocine.model.IMovie;
 import com.api.allocine.model.IPoster;
@@ -27,6 +26,7 @@ import com.perso.model.IRegexParameter;
 import com.perso.model.impl.AllocineLink;
 import com.perso.model.impl.Casting;
 import com.perso.model.impl.Feed;
+import com.perso.model.impl.Genre;
 import com.perso.model.impl.Movie;
 import com.perso.model.impl.Poster;
 import com.perso.model.impl.RegexParameter;
@@ -117,6 +117,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		if( IStats.class.equals(type)) return (T) createStats();
 		if( ISearchResponse.class.equals(type)) return (T) createSearchResponse();
 		if( ILocalMovie.class.equals(type)) return (T) createLocalMovie();
+		if( IGenre.class.equals(type)) return (T) createGenre();
 		return null;
 	}
 
@@ -132,6 +133,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		decoder.addTypeAdapter( IPoster.class , new InterfaceSerializer<Poster>( this, decoder ) );
 		decoder.addTypeAdapter( IRelease.class , new InterfaceSerializer<Release>( this, decoder ) );
 		decoder.addTypeAdapter( IAllocineLink.class , new InterfaceSerializer<AllocineLink>( this, decoder ) );
+		decoder.addTypeAdapter( IGenre.class , new InterfaceSerializer<Genre>( this, decoder ) );
 		decoder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
 		return decoder;
 	}
@@ -144,6 +146,11 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 	@Override
 	public IRegexParameter createRegexParameter() {
 		return new RegexParameter();
+	}
+
+	@Override
+	public IGenre createGenre() {
+		return new Genre();
 	}
 	
 }

@@ -3,10 +3,6 @@ package com.psero.model.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.perso.factory.IMediathequeFactory;
@@ -17,6 +13,8 @@ import com.perso.model.IParameter;
 import com.perso.model.IRegexParameter;
 import com.perso.model.impl.Movie;
 import com.perso.model.impl.Parameter;
+
+import junit.framework.TestCase;
 
 public class RegexTest extends TestCase {
 

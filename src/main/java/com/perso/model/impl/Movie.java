@@ -8,15 +8,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.CollectionType;
 
 import com.api.allocine.model.IAllocineLink;
 import com.api.allocine.model.ICasting;
@@ -55,8 +51,8 @@ public class Movie implements ILocalMovie{
 	@ManyToMany(targetEntity=AllocineLink.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL )
 	private Collection<IAllocineLink> links;
 	
-	@ManyToMany(targetEntity=Genre.class)
-	private List<IGenre> genre;
+	@ManyToMany(targetEntity=Genre.class, fetch = FetchType.LAZY , cascade = CascadeType.ALL )
+	private Collection<IGenre> genre;
 	
 	@Column(columnDefinition = "TEXT")
 	private String synospis;
@@ -71,6 +67,7 @@ public class Movie implements ILocalMovie{
 //		casting = new Casting();
 		statistiques = new Stats();
 		poster = new Poster();
+		genre = new ArrayList<IGenre>();
 		setKeywords(new ArrayList<String>());
 		isSynchronized = false;
 	}
@@ -147,11 +144,11 @@ public class Movie implements ILocalMovie{
 		this.links = link;
 	}
 	
-	public List<IGenre> getGenre() {
+	public Collection<IGenre> getGenre() {
 		return genre;
 	}
 
-	public void setGenre(List<IGenre> genre) {
+	public void setGenre(Collection<IGenre> genre) {
 		this.genre = genre;
 	}
 

@@ -8,7 +8,7 @@
  * Controller of the mediathequeUiApp
  */
 angular.module('mediathequeUiApp')
-  .controller('LoadfromdiskCtrl', [ '$scope' , '$location', '$rootScope' , 'AllocineWebService' , function ( $scope , $location , $rootScope , AllocineWebService) {
+  .controller('LoadfromdiskCtrl', [ '$scope' , '$location', '$rootScope' , 'AllocineWebService', 'localStorageService' ,  function ( $scope , $location , $rootScope , AllocineWebService, localStorageService ) {
 
 	  var responseCallBack = function( response ){
 		  console.log( response );
@@ -19,7 +19,7 @@ angular.module('mediathequeUiApp')
 	  $scope.searchOnDisk = function( search )
 	  {
 			console.log('search : ' + search );
-			console.log( AllocineWebService );
+			localStorageService.set('search-path' , search );
 			console.log( AllocineWebService.loadDisk( search , responseCallBack) );
 	  };
 	  
@@ -27,5 +27,16 @@ angular.module('mediathequeUiApp')
 		  $rootScope.movie = movie;
 		  $location.path('/load-disk/search');
 	  };
+	  
+	  /*Find last search : */
+	  var lastPathSearch = localStorageService.get('search-path');
+	  if( lastPathSearch != undefined ){
+		  console.log('Previous search : ' + lastPathSearch );
+		  $scope.movies = {
+			path : lastPathSearch
+		  }
+	  }
+	  
+	  $scope.searchOnDisk( lastPathSearch );
 	  
  }]);
