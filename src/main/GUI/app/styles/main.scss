@@ -3,6 +3,97 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+.menu{
+
+	float: left;
+	position:fixed;
+	width: 200px;
+	text-color: white;
+	//background-color: rgb(55, 62, 77);
+	background-color: #449d44;
+	
+	a{
+		color: none;
+	}
+	
+	ul{
+		padding: 0;
+		margin: 0;
+		color: white;
+		
+	 	li{
+			text-decoration : none;
+			list-style: none;
+			
+			a{
+				text-decoration: none;
+				color:inherit;
+			}
+			
+		}
+	}
+
+	.item{
+	
+		padding: 20px;
+		height: 60px;
+		vertical-align: middle;
+		
+		&:hover{
+
+			padding: 0px;
+
+			&:before{
+					background-color: #333333;
+					width: 5px;
+					height: 61px;
+					display: inline-block;
+					content: "";
+					margin-right: 15px;
+					vertical-align: middle;
+			}
+		}
+		
+		&.active{
+		
+			padding: 0px;
+			
+			&:before{
+			
+				background-color: #333333;
+				width: 5px;
+				height: 61px;
+				display: inline-block;
+				content: "";
+				margin-right: 15px;
+				vertical-align: middle;
+				
+			}
+		}
+		
+	}
+
+	.menu_label{
+		
+		font-style: bold;
+		padding-left:15px; 
+		
+		&:before{
+			background-image: url('../images/simple_menu.png');
+			background-size: 40px 40px;
+			background-repeat: no-repeat;
+    		display: inline-block;
+    		width: 50px; 
+    		height: 40px;
+    		content:"";
+    		vertical-align: middle;
+		}
+	}
+
+}
+
+
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -12,6 +103,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 body {
   padding: 0;
+}
+
+.header{
+	//float:left;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */

@@ -31,7 +31,7 @@ public class ParametersService {
 	@RequestMapping(path = "/add", method = RequestMethod.POST)
 	public List<Parameter> addParameter(@RequestBody Parameter param){
 		logger.info("Create new parameter " + param);
-		repo.save(param);
+		repo.saveAndFlush(param);
 		return readParameters();
 	}
 	

@@ -17,14 +17,43 @@
     <link rel="stylesheet" href="styles/my-movies.css">
     <!-- endbuild -->
   </head>
+  
   <body ng-app="mediathequeUiApp">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+<!-- 	 <div id="cssmenu"> -->
+<!-- 		  <ul> -->
+<!-- 		     <li class="active"><a href="#/"><i class="fa fa-fw fa-home"></i>Recherche de film</a></li> -->
+<!-- 		     <li><a href="#/my-movies"><i class="fa fa-fw fa-cog"></i>Mes films</a></li> -->
+<!-- 		     <li><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
+<!-- 		     <li><a href="#/parameters"><i class="fa fa-fw fa-phone"></i>Paramètres</a></li> -->
+<!-- 		  </ul> -->
+<!-- 	</div> -->
+	
+		<div class="menu">
+			<h2 class="menu_label">Naviguer</h2>
+			<ul>
+				<li class="item active" ><a href="#/my-movies">Mes films</a></li>
+				 <li class="item"><a href="#/search">Recherche de film</a></li>
+			     <li class="item"><a href="#/load-disk">Recherche sur disque</a></li>
+			     <li class="item"><a href="#/parameters">Paramètres</a></li>
+			</ul>
+		</div>
+	
+<!-- 	<div class="nav nav-pills nav-stacked"> -->
+<!-- 		  <ul> -->
+<!-- 		     <li role="presentation" class="active"><a href="#/"><i class="fa fa-fw fa-home"></i>Recherche de film</a></li> -->
+<!-- 		     <li role="presentation"><a href="#/my-movies"><i class="fa fa-fw fa-cog"></i>Mes films</a></li> -->
+<!-- 		     <li role="presentation"><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
+<!-- 		     <li role="presentation"><a href="#/parameters"><i class="fa fa-fw fa-phone"></i>Paramètres</a></li> -->
+<!-- 		  </ul> -->
+<!-- 	</div> -->
+
     <!-- Add your site or application content here -->
     <div class="header">
-      <div class="navbar navbar-default" role="navigation">
+      <!-- <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
 
@@ -45,17 +74,9 @@
               <li class="item"><a ng-href="#/about">About</a></li>
             </ul>
           </div>
-        </div>
+          
+        </div> -->
       </div>
-      
-      <div id="cssmenu">
-		  <ul>
-		     <li class="active"><a href="#/"><i class="fa fa-fw fa-home"></i>Recherche de film</a></li>
-		     <li><a href="#/my-movies"><i class="fa fa-fw fa-cog"></i>Mes films</a></li>
-		     <li><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li>
-		     <li><a href="#/parameters"><i class="fa fa-fw fa-phone"></i>Paramètres</a></li>
-		  </ul>
-	</div>
       
     </div>
     
@@ -109,5 +130,6 @@
         <script src="scripts/controllers/searchlocalmovietoallocine.js"></script>
         <script src="scripts/filters/formatduration.js"></script>
         <!-- endbuild -->
+        
 </body>
 </html>
