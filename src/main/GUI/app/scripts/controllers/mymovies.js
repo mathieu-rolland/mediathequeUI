@@ -14,6 +14,7 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , 'Alloc
 		 $scope.movies = {
 				  list: response.movies
 		  };
+		$scope.pageLoaded = true;
 	};
 	
 	AllocineWebService.loadMyMovie( myMovieCallback );

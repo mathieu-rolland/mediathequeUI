@@ -22,7 +22,12 @@
 		
 	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 	
-	<div>
+	<div class="loading" ng-show="!pageLoaded">
+		<img src="images/loading.gif">
+	</div>
+	
+	
+	<div ng-show="pageLoaded">
 		<table>
 			<tr ng-repeat="movie in movies.list" ng-class="{synchronized:movie.isSynchronized}">
 				<td>{{movie.path}}</td>

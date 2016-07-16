@@ -92,7 +92,13 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 }
 
-
+.loading{
+	text-align:center;
+	
+	img{
+		width : 150px;
+	}
+}
 
 .browsehappy {
   margin: 0.2em 0;

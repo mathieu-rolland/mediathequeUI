@@ -11,13 +11,14 @@ angular.module('mediathequeUiApp')
   .controller('LoadfromdiskCtrl', [ '$scope' , '$location', '$rootScope' , 'AllocineWebService', 'localStorageService' ,  function ( $scope , $location , $rootScope , AllocineWebService, localStorageService ) {
 
 	  var responseCallBack = function( response ){
-		  console.log( response );
 		  $scope.movies.list = response.movies;
+		  $scope.pageLoaded = true;
 	  };
 	  
 	  
 	  $scope.searchOnDisk = function( search )
 	  {
+		    $scope.pageLoaded = false;
 			console.log('search : ' + search );
 			localStorageService.set('search-path' , search );
 			console.log( AllocineWebService.loadDisk( search , responseCallBack) );
