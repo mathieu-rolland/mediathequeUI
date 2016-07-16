@@ -10,7 +10,35 @@
 
 <div class="search result">
 	
-	<div class="MyMovies movie" ng-repeat="movie in movies.list">
+	<label> Recherche : <input ng-model="search" /> </label><br />
+	
+	
+	 <!-- Single button using append-to-body -->
+    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+    
+    <label> Trier par : 
+      <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
+        {{sortBy}} <span class="caret"></span>
+      </button>
+      
+<!--       <select class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body"> -->
+<!--       	<option >Test 1</option> -->
+<!--       </select> -->
+      
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+      
+        <li role="menuitem"><a ng-click="changeSort('year')">Date de sortie</a></li>
+        <li role="menuitem"><a ng-click="changeSort('title')">Titre</a></li>
+        <li role="menuitem"><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a href="#">Separated link</a></li>
+      </ul>
+    </label>  
+    </div>
+	
+	
+	
+	<div class="MyMovies movie" ng-repeat="movie in movies.list | filter:search | orderBy: sortKey ">
 		
 		<div class="title">
 			<h3>{{movie.title}}</h3>
