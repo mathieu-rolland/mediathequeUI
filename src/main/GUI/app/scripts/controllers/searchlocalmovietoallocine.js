@@ -58,19 +58,10 @@ angular.module('mediathequeUiApp')
 	  
 	  console.log( 'Search movies in AlloCine API from disk : ' );
 	  
-	  if( $scope.movie !== undefined ){
-		  localStorageService.set('localMovieSearch' , $scope.movie );
-		  AllocineWebService.searchMovie( $scope.movie.title , alloCineSearchCallback );
-	  }else{
-		  var searchMovie = localStorageService.get('localMovieSearch');
-		  if( angular.isDefined(searchMovie) ){
-			  console.log('Movie search : '); 
-			  console.log( searchMovie );
-			  $scope.movie = searchMovie;
-			  AllocineWebService.searchMovie( searchMovie.title , alloCineSearchCallback );
-		  }
-	  }
 	  
+	  $scope.searchMovie = function( movie ){
+		  AllocineWebService.searchMovie( movie.title , alloCineSearchCallback );
+	  }
 	  
 	  $scope.synchronizeMovie = function( code ){
 		  console.log('code : ' + code );
@@ -78,6 +69,20 @@ angular.module('mediathequeUiApp')
 		  if( $scope.movie !== undefined ){
 			  $scope.movie.code = code;
 			  AllocineWebService.synchronizeMovie( allocineSynchronizeCallback , $scope.movie , code );
+		  }
+	  }
+	  
+
+	  if( $scope.movie !== undefined ){
+		  localStorageService.set('localMovieSearch' , $scope.movie );
+		  $scope.searchMovie( $scope.movie );
+	  }else{
+		  var searchMovie = localStorageService.get('localMovieSearch');
+		  if( angular.isDefined(searchMovie) ){
+			  console.log('Movie search : '); 
+			  console.log( searchMovie );
+			  $scope.movie = searchMovie;
+			  $scope.searchMovie( searchMovie );
 		  }
 	  }
 	  

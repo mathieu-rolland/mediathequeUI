@@ -32,14 +32,16 @@
 <!-- 		  </ul> -->
 <!-- 	</div> -->
 	
-		<div class="menu">
-			<h2 class="menu_label">Naviguer</h2>
-			<ul>
-				<li class="item active" ><a href="#/my-movies">Mes films</a></li>
-				 <li class="item"><a href="#/search">Recherche de film</a></li>
-			     <li class="item"><a href="#/load-disk">Recherche sur disque</a></li>
-			     <li class="item"><a href="#/parameters">Paramètres</a></li>
-			</ul>
+		<div ng-controller="MenuCtrl">
+			<div class="menu">
+				<h2 class="menu_label">Naviguer</h2>
+				<ul>
+					 <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/">Mes films</a></li>
+					 <li ng-class="page == 'search'    ? 'active' : ''" class="item"><a href="#/search">Recherche de film</a></li>
+				     <li ng-class="page == 'load-disk' ? 'active' : ''" class="item"><a href="#/load-disk">Recherche sur disque</a></li>
+				     <li ng-class="page == 'parameters'? 'active' : ''" class="item"><a href="#/parameters">Paramètres</a></li>
+				</ul>
+			</div>
 		</div>
 	
 <!-- 	<div class="nav nav-pills nav-stacked"> -->
@@ -128,6 +130,7 @@
         <script src="scripts/controllers/loadfromdisk.js"></script>
         <script src="scripts/controllers/parameters.js"></script>
         <script src="scripts/controllers/searchlocalmovietoallocine.js"></script>
+        <script src="scripts/controllers/menu.js"></script>
         <script src="scripts/filters/formatduration.js"></script>
         <!-- endbuild -->
         

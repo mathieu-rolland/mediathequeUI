@@ -21,7 +21,7 @@
 	</script>
 		
 	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
-
+	
 	<div>
 		<table>
 			<tr ng-repeat="movie in movies.list" ng-class="{synchronized:movie.isSynchronized}">

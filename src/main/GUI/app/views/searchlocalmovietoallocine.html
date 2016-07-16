@@ -2,11 +2,21 @@
 	
 	<h1>Recherche du film : {{movie.title}}</h1>
 	
+	
 	<script type="text/ng-template" id="alert.html">
     <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
       <div ng-transclude></div>
     </div>
 	</script>
+	
+	<button type="button" class="btn btn-primary" ng-model="editTitle" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+        <span ng-if="!editTitle">Editer le titre</span>
+        <span ng-if="editTitle" ng-click="searchMovie(movie)">Rechercher Ã  nouveau</span>
+    </button>
+	
+	<input ng-show="editTitle" type="text" ng-model="movie.title" />
+	
+	<br />
 	
 	<div class="search result">
 	<table>
@@ -40,7 +50,7 @@
 					<td>
 						<span ng-repeat="genre in movie.genre">{{genre}}, </span>
 					</td>
-					<td><a href="{{movie.links[0].href}}">Détails de {{movie.title}} sur allo cine</a></td>
+					<td><a href="{{movie.links[0].href}}">Dï¿½tails de {{movie.title}} sur allo cine</a></td>
 					<td>
 <!-- 						 Evaluation presse : {{movie.statistiques.pressRating}} <br /> -->
 <!-- 						 Evaluation spectateur : {{movie.statistiques.userRating}} -->
