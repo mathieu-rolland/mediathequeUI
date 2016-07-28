@@ -10,17 +10,13 @@
 angular.module('mediathequeUiApp').controller('ParametersCtrl', [ '$scope', 'AllocineWebService', function ( $scope , AllocineWebService) {
 
 	$scope.addParameter = function( newParameter ){
-		
 		console.log('add parameter : ' + newParameter.name + '/' + newParameter.value );
 		AllocineWebService.addParameter( responseCallback , newParameter );
-		
 	};
 	
 	$scope.deleteParameter = function( parmaterToDelete ){
-		
 		console.log('add parameter : ' + parmaterToDelete.name + '/' + parmaterToDelete.value );
 		AllocineWebService.deleteParameter( responseCallback , parmaterToDelete );
-		
 	};
 	
 	var responseCallback = function( data ){

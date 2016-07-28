@@ -15,6 +15,11 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , 'Alloc
 				  list: response.movies
 		  };
 		$scope.pageLoaded = true;
+		
+		if( response.errorCode != 0 ){
+			$scope.addAlert( response.errorDesc , 'danger' );
+		}
+		
 	};
 	
 	AllocineWebService.loadMyMovie( myMovieCallback );
@@ -40,9 +45,22 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , 'Alloc
 	};
 	
 	var previousSort = localStorageService.get('my-movie-sort');
-	if( angular.isDefined(previousSort) ){
+	if( angular.isDefined( previousSort ) ){
 		$scope.changeSort( previousSort );
 	}
+	
+	$scope.addAlert = function(message, errorType) {
+		console.log(message + ' => ' + errorType );
+	    $scope.alerts.push({msg: message, type:errorType});
+	    console.log(alerts);
+	};
+	
+	$scope.closeAlert = function(index) {
+	    $scope.alerts.splice(index, 1);
+	};
+	
+	//start module: 
+	var alerts = $scope.alerts = [];
 	
 	
 }]);

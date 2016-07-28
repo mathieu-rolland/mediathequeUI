@@ -1,19 +1,26 @@
-<div ng-controller="MainCtrl">
+<div ng-controller="MymoviesCtrl">
 
 <div class="jumbotron">
 		<h1>Médiathèque</h1>
 		<p class="lead">
 			Mes films <br>
 		</p>
-
 	</div>
 
+
+	<script type="text/ng-template" id="alert.html">
+    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+      <div ng-transclude></div>
+    </div>
+	</script>
+	
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
 	<div class="loading" ng-show="!pageLoaded">
 		<img src="images/loading.gif">
 	</div>
 
-<div class="search result">
+<div class="search result" ng-show="pageLoaded">
 	
 	<label ng-show="pageLoaded"> Recherche : <input ng-model="search" /> </label><br />
 	
@@ -21,7 +28,7 @@
 	 <!-- Single button using append-to-body -->
     <div class="btn-group" uib-dropdown dropdown-append-to-body>
     
-    <label ng-show="pageLoaded"> Trier par : 
+    <label> Trier par : 
     
       <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
         {{sortBy}} <span class="caret"></span>
