@@ -1,5 +1,32 @@
 'use strict';
 
+function delayBetweenDates( date1 , date2 , mesure ){
+	
+	var beginDate, endDate, timeDiff;
+	
+	if( date1.getTime() > date2.getTime() ){
+		beginDate = date2; endDate = date1;
+	}else{
+		beginDate = date1; endDate = date2;
+	}
+
+	timeDiff = endDate.getTime() - beginDate.getTime();
+	
+	switch( mesure ){
+		
+	case 'day':
+		return parseInt( timeDiff / ( 1 * 24 * 60 * 60 * 1000 ) );
+	case 'hour':
+		return parseInt( timeDiff / ( 1 * 60 * 60 * 1000 ) );
+	case 'minute':
+		return parseInt( timeDiff / ( 1 * 60 * 60 * 1000 ) );
+	default: //ms
+		return timeDiff;	
+	
+	}
+	
+}
+
 /**
  * @ngdoc function
  * @name mediathequeUiApp.controller:LoadfromdiskCtrl
@@ -33,19 +60,21 @@ angular.module('mediathequeUiApp')
 	  
 	  /*Find last search : */
 	  var lastPathSearch = localStorageService.get('search-path');
-	  if( lastPathSearch != undefined ){
+	  if( lastPathSearch !== undefined ){
 		  console.log('Previous search : ' + lastPathSearch );
 		  $scope.movies = {
 			path : lastPathSearch
-		  }
+		  };
 	  }
 	  
 	  var cacheInCookie = localStorageService.get( 'searchOnDisk-result' );
 	  var lastDateCacheUpdated = localStorageService.get( 'searchOnDisk-lastDate' );
-	  console.log("cache : ");
+	  console.log('cache : ');
 	  console.log(cacheInCookie);
-	  if( angular.isDefined(cacheInCookie) && cacheInCookie != null 
-			  && lastDateCacheUpdated != null && delayBetweenDates( new Date() , new Date(lastDateCacheUpdated) , 'day') < 1 ){
+	  if( angular.isDefined(cacheInCookie) && 
+			  cacheInCookie !== null  && 
+			  lastDateCacheUpdated !== null && 
+			  delayBetweenDates( new Date() , new Date(lastDateCacheUpdated) , 'day') < 1 ){
 		  $scope.movies.list = cacheInCookie;
 		  $scope.pageLoaded = true;
 	  }else{
@@ -53,30 +82,3 @@ angular.module('mediathequeUiApp')
 	  }
 	  
  }]);
-
-function delayBetweenDates( date1 , date2 , mesure ){
-	
-	var beginDate, endDate, timeDiff;
-	
-	if( date1.getTime() > date2.getTime() ){
-		beginDate = date2; endDate = date1;
-	}else{
-		beginDate = date1; endDate = date2;
-	}
-
-	timeDiff = endDate.getTime() - beginDate.getTime();
-	
-	switch( mesure ){
-		
-	case 'day':
-		return parseInt( timeDiff / ( 1 * 24 * 60 * 60 * 1000 ) );
-	case 'hour':
-		return parseInt( timeDiff / ( 1 * 60 * 60 * 1000 ) );
-	case 'minute':
-		return parseInt( timeDiff / ( 1 * 60 * 60 * 1000 ) );
-	default: //ms
-		return timeDiff;	
-	
-	}
-	
-}

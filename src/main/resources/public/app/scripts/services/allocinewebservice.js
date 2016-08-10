@@ -160,10 +160,6 @@ angular.module('mediathequeUiApp')
 		  
 		  if( localMovie !== undefined && code !== undefined ){
 			  var movieData = angular.toJson(localMovie, false);
-			  var data = {
-					 'movie' : movieData,
-					 'allocineCode' : code
-			  };
 			  $http.post( mainURL + synchronizeMovie ,  movieData ).then(
 					  
 						function( response ){
@@ -176,13 +172,13 @@ angular.module('mediathequeUiApp')
 					},
 					
 					function(){
-						response = { errorCode : -3 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+						var response = { errorCode : -3 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
 						callback( response );
 					}
 				);
 			  
 		  }
-	  }
+	  };
 	  
 	  this.loadMyMovie = function ( callBack ){
 			var response = {};

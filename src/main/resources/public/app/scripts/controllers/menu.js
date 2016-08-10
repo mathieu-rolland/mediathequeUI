@@ -12,9 +12,8 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', function ( $scope , $l
 
 	$scope.$on('$routeChangeSuccess', function () {
         
-		var items = $scope.items;
         var path = $location.path();
-        console.log('path : ' + path + " " + $scope.page);
+        console.log('path : ' + path + ' ' + $scope.page);
         
         switch( path ){
 			case '/':

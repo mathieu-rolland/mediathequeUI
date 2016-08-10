@@ -45,7 +45,7 @@ angular.module('mediathequeUiApp')
 			
 			
 			if( response.movies.length === 0 ){
-				$scope.addAlert( "no result found" , 'warning' );
+				$scope.addAlert( 'no result found' , 'warning' );
 			}
 			
 			for(var i = 0 ; i < response.movies.length ; i++){
@@ -63,11 +63,11 @@ angular.module('mediathequeUiApp')
 		  $scope.pageLoaded = true;
 		  console.log( response );
 		  if( response.parameters === true ){
-			  $scope.addAlert( "Synchronization terminée avec succès" , 'success' );
+			  $scope.addAlert( 'Synchronization terminée avec succès' , 'success' );
 		  }else{
-			  $scope.addAlert( "Synchronization terminée en erreur." , 'danger' );
+			  $scope.addAlert( 'Synchronization terminée en erreur.' , 'danger' );
 		  }
-	  }
+	  };
 	  
 	  console.log( 'Search movies in AlloCine API from disk : ' );
 	  
@@ -75,7 +75,7 @@ angular.module('mediathequeUiApp')
 	  $scope.searchMovie = function( movie ){
 		  $scope.pageLoaded = false;
 		  AllocineWebService.searchMovie( movie.title , alloCineSearchCallback );
-	  }
+	  };
 	  
 	  $scope.synchronizeMovie = function( code ){
 		  $scope.pageLoaded = false;
@@ -85,7 +85,7 @@ angular.module('mediathequeUiApp')
 			  $scope.movie.code = code;
 			  AllocineWebService.synchronizeMovie( allocineSynchronizeCallback , $scope.movie , code );
 		  }
-	  }
+	  };
 	  
 
 	  if( $scope.movie !== undefined ){

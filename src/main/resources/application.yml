@@ -27,6 +27,29 @@ server:
    
 ---
 
+spring:
+   profiles: dev-external
+   datasource:
+      testWhileIdle: true
+      show-sql: true
+      url: jdbc:mysql://mtee.ddns.net:5000/mediatheque_dev
+      username: mediatheque_dev
+      password: 3ZJj3sEEbdxJt8Xx
+      driver-class-name: com.mysql.jdbc.Driver  
+   jpa:
+      hibernate:
+         database: mediatheque_dev
+         naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+         dialect: org.hibernate.dialect.MySQL5Dialect
+         show-sql: true
+         ddl-auto: update
+        
+server:
+   address: 127.0.0.1
+   port: 8989
+   
+---
+
 logging.level: debug
 
 spring:

@@ -16,7 +16,7 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , 'Alloc
 		  };
 		$scope.pageLoaded = true;
 		
-		if( response.errorCode != 0 ){
+		if( response.errorCode !== 0 ){
 			$scope.addAlert( response.errorDesc , 'danger' );
 		}
 		
