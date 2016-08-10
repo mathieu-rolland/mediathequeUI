@@ -42,7 +42,7 @@ function deployPackage
 		exit 2
 	fi
 
-	ln -s "${PRODUCT_DIR}/${FINAL_JAR_NAME}_${DEPLOY_DATE}.jar" "${CURRENT_VERSION}"
+	ln -s "${PRODUCT_DIR}/${FINAL_JAR_NAME}_${DEPLOY_DATE}.jar" "${PRODUCT_DIR}/${CURRENT_VERSION}"
 	ret=$?
 	if [ "${ret}" -ne 0 ]
 	then
