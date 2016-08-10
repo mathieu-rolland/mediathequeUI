@@ -1,0 +1,85 @@
+<div ng-controller="MainCtrl">
+	<div class="jumbotron">
+		<h1>Médiathèque</h1>
+		<p class="lead">
+			Rechercher un film <br>
+
+		</p>
+		<p>
+			<input type="text" ng-model="movies.search" placeholder="Film" /> <a
+				class="btn btn-lg btn-success" ng-href="#/search"
+				ng-click="searchMovie(movies.search)">Search<span
+				class="glyphicon glyphicon-ok"></span></a>
+		</p>
+
+	</div>
+
+	<script type="text/ng-template" id="alert.html">
+    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+      <div ng-transclude></div>
+    </div>
+	</script>
+	
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+	
+	<div class="row marketing">
+	  	<div style="height: 305px" class="carousel">
+		    <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+		      <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+		        <img class="poster" ng-src="{{slide.image}}" style="margin:auto;">
+		        <div class="carousel-caption">
+		          <h4>Slide {{slide.id}}</h4>
+		          <p>{{slide.text}}</p>
+		        </div>
+		      </uib-slide>
+		    </uib-carousel>
+		  </div> 
+	</div>
+	
+	<div class="search result">
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>casting</th>
+					<th>genre</th>
+					<th>statistique</th>
+					<th>link</th>
+					<th>Poster</th>
+				</tr>
+				
+			</thead>
+			
+			<tbody>
+				
+				<tr ng-repeat="movie in movies.list">
+					<td>{{movie.title}}</td>
+					<td>
+						{{movie.casting.actors}}
+					</td>
+					<td></td>
+					<td><a href="{{movie.links[0].href}}">Détails de {{movie.title}} sur allo cine</a></td>
+					<td>
+<!-- 						 Evaluation presse : {{movie.statistiques.pressRating}} <br /> -->
+<!-- 						 Evaluation spectateur : {{movie.statistiques.userRating}} -->
+						 
+						  <uib-rating ng-model="movie.statistiques.pressRating" max="max" read-only="true" 
+						  	on-hover="hoveringOver(value)" on-leave="overStar = null" 
+						  	titles="['un','deux','trois', 'quatre', 'cinq']" aria-labelledby="default-rating"></uib-rating><br />
+						  <uib-rating ng-model="movie.statistiques.userRating" max="max" read-only="true" 
+						  	on-hover="hoveringOver(value)" on-leave="overStar = null" 
+						  	titles="['un','deux','trois', 'quatre', 'cinq']" aria-labelledby="default-rating"></uib-rating>
+<!--    						 <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"  -->
+<!--    						 	ng-show="overStar && !isReadonly">{{percent}}%</span> -->
+						 
+					</td>
+					<td>
+						<img class="poster" alt="Poster de {{movie.title}}" ng-src="{{movie.poster.href}}">
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+	
+</div>

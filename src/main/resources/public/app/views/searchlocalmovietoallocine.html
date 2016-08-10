@@ -1,0 +1,82 @@
+<div ng-controller="SearchlocalmovietoallocineCtrl">
+	
+	<h1>Recherche du film : {{movie.title}}</h1>
+	
+	
+	<script type="text/ng-template" id="alert.html">
+    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+      <div ng-transclude></div>
+    </div>
+	</script>
+	
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+	
+	<button type="button" class="btn btn-primary" ng-model="editTitle" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">
+        <span ng-if="!editTitle">Editer le titre</span>
+        <span ng-if="editTitle" ng-click="searchMovie(movie)">Rechercher à nouveau</span>
+    </button>
+	
+	<input ng-show="editTitle" type="text" ng-model="movie.title" />
+	
+	<div class="loading" ng-show="!pageLoaded">
+		<img src="images/loading.gif">
+	</div>
+	
+	<br />
+	
+	<div class="search result">
+	<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>casting</th>
+					<th>genre</th>
+					<th>statistique</th>
+					<th>link</th>
+					<th>Poster</th>
+				</tr>
+				
+			</thead>
+			
+			<tbody>
+				
+				<tr ng-repeat="movie in movies.list">
+					<td>
+						<div>
+							<p>{{movie.title}}</p>
+							<p>
+								<input type="button" class="btn btn-lg btn-success" ng-click="synchronizeMovie( movie.code )" value="Associer" />
+<!-- 								<span class="glyphicon glyphicon-ok"></span></a> -->
+							</p>
+						</div>
+					</td>
+					<td>
+						{{movie.casting.actors}}
+					</td>
+					<td>
+						<span ng-repeat="genre in movie.genre">{{genre}}, </span>
+					</td>
+					<td><a href="{{movie.links[0].href}}">D�tails de {{movie.title}} sur allo cine</a></td>
+					<td>
+<!-- 						 Evaluation presse : {{movie.statistiques.pressRating}} <br /> -->
+<!-- 						 Evaluation spectateur : {{movie.statistiques.userRating}} -->
+						 
+						  <uib-rating ng-model="movie.statistiques.pressRating" max="max" read-only="true" 
+						  	on-hover="hoveringOver(movie.statistiques.userRating)" on-leave="overStar = null" 
+						  	titles="['un','deux','trois', 'quatre', 'cinq']" aria-labelledby="default-rating"></uib-rating><br />
+						  <uib-rating ng-model="movie.statistiques.userRating" max="max" read-only="true" 
+						  	on-hover="hoveringOver(movie.statistiques.userRating)" on-leave="overStar = null" 
+						  	titles="['un','deux','trois', 'quatre', 'cinq']" aria-labelledby="default-rating"></uib-rating>
+<!--    						 <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}"  -->
+<!--    						 	ng-show="overStar && !isReadonly">{{percent}}%</span> -->
+						 
+					</td>
+					<td>
+						<img class="poster" alt="Poster de {{movie.title}}" ng-src="{{movie.poster.href}}">
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+</di>

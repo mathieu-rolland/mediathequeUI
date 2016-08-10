@@ -1,0 +1,30 @@
+.MyMovies.movie{
+
+	.synchronied{
+		text-color:green;
+	}
+
+	.content{
+		float: right;
+		width: 70%;
+	}
+
+	.preview{
+	
+		float:left;
+		
+		img{
+			width: 180px;
+		}
+		
+	}
+
+	.synospis{
+		text-align: justify;
+	}
+
+	.clear{
+		clear:both;
+	}
+
+}
