@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/sh
 
 WORKSPACE_DIR=$1
 
@@ -10,7 +10,7 @@ then
 	exit 1
 fi
 
-function installTools
+installTools()
 {
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
 	npm install
@@ -31,7 +31,7 @@ function installTools
 
 }
 
-function build
+build()
 {
 	grunt
 	ret=$?
