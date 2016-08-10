@@ -9,6 +9,8 @@ PRODUCT_DIR="/product/mediatheque"
 DEPLOY_DATE=$(date +%Y%m%dT%H%M%S)
 
 JAVA_JDK_BIN="/usr/lib/jvm/java-8-openjdk-armhf"
+LOG_DIR="/varsoft/mediatheque/logs"
+LOG_FILE="${LOG_DIR}/mediatheque-ui_${DEPLOY_DATE}.log"
 
 function getPackage
 {
@@ -48,11 +50,13 @@ function deployPackage
 		exit 3
 	fi
 
+	mkdir -p "${LOG_DIR}"
+
 }
 
 function startServer
 {
-	"${JAVA_JDK_BIN}/bin/java" -jar "${CURRENT_VERSION}"
+	nohup "${JAVA_JDK_BIN}/bin/java" -jar "${CURRENT_VERSION}" 1>"${LOG_FILE}"  &
 	if [ "${ret}" -ne 0 ]
 	then
 		echo "[ERROR] Failed to start application ${CURRENT_VERSION}"
