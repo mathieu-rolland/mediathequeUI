@@ -6,6 +6,12 @@
 	<version>0.0.1</version>
 	<name>Mediatheque-WS</name>
 
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 	<profiles>
 		<profile>
 			<id>dev</id>
@@ -30,11 +36,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
-		        <exclusion>
-		            <artifactId>jackson-databind</artifactId>
-		            <groupId>com.fasterxml.jackson.core</groupId>
-		        </exclusion>
-		    </exclusions>
+				<exclusion>
+					<artifactId>jackson-databind</artifactId>
+					<groupId>com.fasterxml.jackson.core</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -59,6 +65,12 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<properties>
@@ -68,63 +80,60 @@
 		<build.profile.id>dev</build.profile.id>
 	</properties>
 
-
+	<packaging>war</packaging>
 
 	<build>
 
-		<finalName>${project.name}_${project.version}</finalName>
+		<finalName>${project.name}</finalName>
 
 		<plugins>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<profiles>dev</profiles>
-				</configuration>
 			</plugin>
 
-
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/external-resources</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/resources/</directory>
-									<filtering>true</filtering>
-									<include>*${build.profile.id}*.properties</include>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
-						<id>copy-resources2</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/gui</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/GUI</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <artifactId>maven-resources-plugin</artifactId> <executions> 
+				<execution> <id>copy-resources</id> <phase>validate</phase> <goals> <goal>copy-resources</goal> 
+				</goals> <configuration> <outputDirectory>${basedir}/target/external-resources</outputDirectory> 
+				<resources> <resource> <directory>src/main/resources/</directory> <filtering>true</filtering> 
+				<include>*${build.profile.id}*.properties</include> </resource> </resources> 
+				</configuration> </execution> <execution> <id>copy-resources2</id> <phase>package</phase> 
+				<goals> <goal>copy-resources</goal> </goals> <configuration> <outputDirectory>${basedir}/target/gui</outputDirectory> 
+				<resources> <resource> <directory>src/main/GUI</directory> <filtering>true</filtering> 
+				</resource> </resources> </configuration> </execution> </executions> </plugin> -->
 
 		</plugins>
 
+<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<webResources>
+							<webResource>
+								<directory>src\main\resources</directory>
+								<excludes>
+									<exclude>public\**</exclude>
+								</excludes>
+							</webResource>
+						</webResources>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.3</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
 	</build>
 

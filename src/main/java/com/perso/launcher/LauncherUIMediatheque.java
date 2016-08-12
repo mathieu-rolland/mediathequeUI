@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
@@ -22,7 +24,7 @@ import com.perso.service.ParametersService;
 @EnableAutoConfiguration(exclude = { JacksonAutoConfiguration.class })
 @ImportResource({"classpath:config.xml"})
 @SpringBootApplication
-public class LauncherUIMediatheque {
+public class LauncherUIMediatheque extends SpringBootServletInitializer {
 
 	static Logger log = Logger.getLogger(LauncherUIMediatheque.class.getName());
 	
@@ -30,5 +32,10 @@ public class LauncherUIMediatheque {
 		SpringApplication.run(LauncherUIMediatheque.class, args);
 		log.info( "Start application successfully" );
 	}
+	
+	@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(LauncherUIMediatheque.class);
+    }
 	
 }

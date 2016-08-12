@@ -37,7 +37,7 @@ build()
 	ret=$?
 	if [ "${ret}" -ne 0 ]
 	then
-		echo "[ERROR] Failed to build"
+		echo "[ERROR] Failed to build with return code ${ret}"
 		exit 3
 	fi
 }

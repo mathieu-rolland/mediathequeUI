@@ -6,6 +6,9 @@ spring:
 
 spring:
    profiles: dev
+   logging:
+      path: D:\Programmation\Workspace\UIMediatheque\log
+      file: mediatheque.log
    datasource:
       testWhileIdle: true
       show-sql: true
@@ -20,7 +23,13 @@ spring:
          dialect: org.hibernate.dialect.MySQL5Dialect
          show-sql: true
          ddl-auto: update
-        
+         
+logging:
+  org.springframework.web: DEBUG
+  guru.springframework.controllers: DEBUG
+  org.hibernate: DEBUG
+  file: log/mediatheque.log 
+   
 server:
    address: 127.0.0.1
    port: 8989
@@ -43,7 +52,13 @@ spring:
          dialect: org.hibernate.dialect.MySQL5Dialect
          show-sql: true
          ddl-auto: update
-        
+         
+logging:
+  org.springframework.web: DEBUG
+  guru.springframework.controllers: DEBUG
+  org.hibernate: DEBUG
+  file: /varsoft/mediatheque/logs/mediatheque.log 
+          
 server:
    address: 127.0.0.1
    port: 8989
