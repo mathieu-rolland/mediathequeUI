@@ -2,7 +2,7 @@
 
 WORKSPACE_DIR=$1
 
-APPLICATION_GUI_LOCATION="src/main/resources/public/"
+APPLICATION_GUI_LOCATION="src/main/resources/public"
 GENERATED_GUI_PROD_FOLDER_NAME="dist"
 GENERATED_GUI_PROD_FOLDER="${APPLICATION_GUI_LOCATION}/${GENERATED_GUI_PROD_FOLDER_NAME}"
 DELIVERY_FOLDER="/varsoft/jenkins/available"
@@ -41,10 +41,22 @@ catchError()
 
 installTools()
 {
+
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
+
+	printMessage "I" "Clean npm module"
+	npm prune
+	if [ -d "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/node_modules/" ]
+	then
+		rm -rf "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/node_modules/"
+		catchError $? "Failed to clean npm modules with return code $?"
+	fi
+	
+	printMessage "I" "Start installation of NPM modules"
 	npm install
 	catchError $? "Failed to install npm dependencies with return code $?"
 
+	printMessage "I" "Start installation of Bower modules"
 	bower install
 	catchError $? "Failed to install bower dependencies with $?"
 
@@ -63,7 +75,7 @@ generateGuiArchive()
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
 	printMessage "I" "Generate archive file of ${GUI_NAME}.tar"
 	
-	tar cvf "${GUI_NAME}.tar" "${WORKSPACE_DIR}/${GENERATED_GUI_PROD_FOLDER}/*"
+	tar cvf "${GUI_NAME}.tar" "${WORKSPACE_DIR}/${GENERATED_GUI_PROD_FOLDER}"
 	catchError $? "Failed to generate tar of the gui"
 	
 	gzip "${GUI_NAME}.tar"
@@ -72,6 +84,7 @@ generateGuiArchive()
 	printMessage "I" "Make GUI available in ${DELIVERY_FOLDER}/"
 	mv "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/${GUI_NAME}.tar.gz" "${DELIVERY_FOLDER}/"
 	catchError $? "Failed to delivered the archive file of gui"
+	printMessage "I" "GUI is now available in ${DELIVERY_FOLDER}/${GUI_NAME}.tar.gz"
 
 }
 
