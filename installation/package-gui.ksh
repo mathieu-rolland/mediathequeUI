@@ -8,7 +8,7 @@ GENERATED_GUI_PROD_FOLDER="${APPLICATION_GUI_LOCATION}/${GENERATED_GUI_PROD_FOLD
 JENKINS_VARSOFT_DIR="/varsoft/jenkins"
 DELIVERY_FOLDER="${JENKINS_VARSOFT_DIR}/available"
 JENKINS_LOG_DIR="${JENKINS_VARSOFT_DIR}/logs"
-GUI_NAME="Mediatheque-ui"
+GUI_NAME="mediatheque-ui"
 installationDateLogFile=$(date +'%Y%m%d%H%M%S')
 OUTPUT_LOG_FILE="${JENKINS_LOG_DIR}/installation-${installationDateLogFile}.log"
 
@@ -63,6 +63,7 @@ installTools()
 	
 	printMessage "I" "Start installation of NPM modules"
 	npm install >> ${OUTPUT_LOG_FILE}
+	npm install >> ${OUTPUT_LOG_FILE} #NPM Failed at first time : TODO : Fix it
 	catchError $? "Failed to install npm dependencies with return code $?"
 
 	printMessage "I" "Start installation of Bower modules"
