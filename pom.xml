@@ -4,7 +4,7 @@
 	<groupId>com.perso</groupId>
 	<artifactId>UIMediatheque</artifactId>
 	<version>0.0.1</version>
-	<name>Mediatheque-WS</name>
+	<name>Mediatheque-WebService</name>
 
 	<repositories>
 		<repository>

@@ -10,7 +10,7 @@
 angular.module('mediathequeUiApp')
   .service('AllocineWebService', function ($http) {
     
-	  var mainURL = 'http://92.222.86.206:8080/Mediatheque-WS_0.0.1';
+	  var mainURL = 'http://92.222.86.206:8080/Mediatheque-WebService';
 	  var moviesSearch = 'movies/search/';
 	  var loadFromDisk = 'movies/my-movies/disk/';
 	  var loadMyMovies = 'movies/my-movies/db/';

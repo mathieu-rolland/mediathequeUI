@@ -97,6 +97,12 @@ generateGuiArchive()
 
 }
 
+cleanPublicFolder()
+{
+	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
+	rm -rf "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/*"
+}
+
 ###############################################################################
 #
 #			MAIN PART
@@ -119,6 +125,7 @@ fi
 installTools
 build
 generateGuiArchive
+cleanPublicFolder
 
 printMessage "I" "Fin de l'installation"
 exit 0
