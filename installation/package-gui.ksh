@@ -5,24 +5,32 @@ WORKSPACE_DIR=$1
 APPLICATION_GUI_LOCATION="src/main/resources/public"
 GENERATED_GUI_PROD_FOLDER_NAME="dist"
 GENERATED_GUI_PROD_FOLDER="${APPLICATION_GUI_LOCATION}/${GENERATED_GUI_PROD_FOLDER_NAME}"
-DELIVERY_FOLDER="/varsoft/jenkins/available"
+JENKINS_VARSOFT_DIR="/varsoft/jenkins"
+DELIVERY_FOLDER="${JENKINS_VARSOFT_DIR}/available"
+JENKINS_LOG_DIR="${JENKINS_VARSOFT_DIR}/logs"
 GUI_NAME="Mediatheque-ui"
+installationDate=$(date +'%Y/%m/%d %H:%M:%S')
+OUTPUT_LOG_FILE="${JENKINS_LOG_DIR}/installation-${installationDate}.log"
 
 printMessage()
 {
 	msgType="${1}"
 	msg="${2}"
 	dateMesg=$(date +'%Y/%m/%d %H:%M:%S')
+	msgPrefix=""
 	case "${msgType}" in
-		'I') echo "${dateMesg} : [INFO] ${msg}"
+		'I') msgPrefix="INFO"
 		;;
-		'E') echo "${dateMesg} : [ERROR] ${msg}"
+		'E') msgPrefix="ERROR"
 		;;
-		'W') echo "${dateMesg} : [WARNING] ${msg}"
+		'W') msgPrefix="WARNING"
 		;;
-		*) echo "${dateMesg} : [UNKOWN] ${msg}"
+		*) msgPrefix="UNKOWN"
 		;;
 	esac
+
+	echo "${dateMesg} : [${msgPrefix}] ${msg}"
+	echo "${dateMesg} : [${msgPrefix}] ${msg}" >> ${OUTPUT_LOG_FILE}
 
 }
 
@@ -34,6 +42,7 @@ catchError()
 	if [ "${returnValue}" -ne 0 ]
 	then
 		printMessage "E" "${message}"
+		printMessage "E" "See log in ${OUTPUT_LOG_FILE}"
 		exit 1
 	fi
 
@@ -45,7 +54,7 @@ installTools()
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
 
 	printMessage "I" "Clean npm module"
-	npm prune
+	npm prune >> ${OUTPUT_LOG_FILE}
 	if [ -d "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/node_modules/" ]
 	then
 		rm -rf "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/node_modules/"
@@ -53,18 +62,18 @@ installTools()
 	fi
 	
 	printMessage "I" "Start installation of NPM modules"
-	npm install
+	npm install >> ${OUTPUT_LOG_FILE}
 	catchError $? "Failed to install npm dependencies with return code $?"
 
 	printMessage "I" "Start installation of Bower modules"
-	bower install
+	bower install >> ${OUTPUT_LOG_FILE}
 	catchError $? "Failed to install bower dependencies with $?"
 
 }
 
 build()
 {
-	grunt
+	grunt >> ${OUTPUT_LOG_FILE}
 	catchError $? "Failed to build with return code $?"
 }
 
