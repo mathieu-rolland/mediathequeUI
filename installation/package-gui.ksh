@@ -84,10 +84,10 @@ generateGuiArchive()
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
 	printMessage "I" "Generate archive file of ${GUI_NAME}.tar"
 	
-	tar cvf "${GUI_NAME}.tar" "${WORKSPACE_DIR}/${GENERATED_GUI_PROD_FOLDER}"
+	tar cvf "${GUI_NAME}.tar" "${WORKSPACE_DIR}/${GENERATED_GUI_PROD_FOLDER}" >> ${OUTPUT_LOG_FILE}
 	catchError $? "Failed to generate tar of the gui"
 	
-	gzip "${GUI_NAME}.tar"
+	gzip "${GUI_NAME}.tar" >> ${OUTPUT_LOG_FILE}
 	catchError $? "Failed to compress the gui"
 
 	printMessage "I" "Make GUI available in ${DELIVERY_FOLDER}/"
@@ -100,7 +100,8 @@ generateGuiArchive()
 cleanPublicFolder()
 {
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
-	rm -rf "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/*"
+	rm -rf "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
+	catchError $? "Failed to clean public folder ${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
 }
 
 ###############################################################################
