@@ -53,13 +53,13 @@ installTools()
 
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
 
-	printMessage "I" "Clean npm module"
-	npm prune >> ${OUTPUT_LOG_FILE}
-	if [ -d "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/node_modules/" ]
-	then
-		rm -rf "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/node_modules/"
-		catchError $? "Failed to clean npm modules with return code $?"
-	fi
+	# printMessage "I" "Clean npm module"
+	# npm prune >> ${OUTPUT_LOG_FILE}
+	# if [ -d "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/node_modules/" ]
+	# then
+	# 	rm -rf "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}/node_modules/"
+	# 	catchError $? "Failed to clean npm modules with return code $?"
+	# fi
 	
 	printMessage "I" "Start installation of NPM modules"
 	npm install >> ${OUTPUT_LOG_FILE}
