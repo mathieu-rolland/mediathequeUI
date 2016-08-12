@@ -43,7 +43,7 @@ installTools()
 {
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
 	npm install
-	catchError $? "Failed to install npm dependencies"
+	catchError $? "Failed to install npm dependencies with return code $?"
 
 	bower install
 	catchError $? "Failed to install bower dependencies with $?"
