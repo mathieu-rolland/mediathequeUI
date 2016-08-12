@@ -9,8 +9,8 @@ JENKINS_VARSOFT_DIR="/varsoft/jenkins"
 DELIVERY_FOLDER="${JENKINS_VARSOFT_DIR}/available"
 JENKINS_LOG_DIR="${JENKINS_VARSOFT_DIR}/logs"
 GUI_NAME="Mediatheque-ui"
-installationDate=$(date +'%Y/%m/%d %H:%M:%S')
-OUTPUT_LOG_FILE="${JENKINS_LOG_DIR}/installation-${installationDate}.log"
+installationDateLogFile=$(date +'%Y%m%d%H%M%S')
+OUTPUT_LOG_FILE="${JENKINS_LOG_DIR}/installation-${installationDateLogFile}.log"
 
 printMessage()
 {
