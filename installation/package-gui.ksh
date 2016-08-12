@@ -84,7 +84,10 @@ generateGuiArchive()
 	cd "${WORKSPACE_DIR}/${APPLICATION_GUI_LOCATION}"
 	printMessage "I" "Generate archive file of ${GUI_NAME}.tar"
 	
-	tar cvf "${GUI_NAME}.tar" "${WORKSPACE_DIR}/${GENERATED_GUI_PROD_FOLDER}" >> ${OUTPUT_LOG_FILE}
+	mv "${GENERATED_GUI_PROD_FOLDER_NAME}" "${GUI_NAME}"
+	catchError $? "Failed to rename gui folder"
+	
+	tar cvf "${GUI_NAME}.tar" "${GUI_NAME}" >> ${OUTPUT_LOG_FILE}
 	catchError $? "Failed to generate tar of the gui"
 	
 	gzip "${GUI_NAME}.tar" >> ${OUTPUT_LOG_FILE}
