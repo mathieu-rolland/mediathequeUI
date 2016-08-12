@@ -63,8 +63,12 @@ installTools()
 	
 	printMessage "I" "Start installation of NPM modules"
 	npm install >> ${OUTPUT_LOG_FILE}
-	npm install >> ${OUTPUT_LOG_FILE} #NPM Failed at first time : TODO : Fix it
-	catchError $? "Failed to install npm dependencies with return code $?"
+	if [ "${?}" -ne 0 ]
+	then
+		printMessage "W" "First installation failed. Try to install second time..."
+		npm install >> ${OUTPUT_LOG_FILE} #NPM Failed at first time : TODO : Fix it
+		catchError $? "Failed to install npm dependencies with return code $?"
+	fi
 
 	printMessage "I" "Start installation of Bower modules"
 	bower install >> ${OUTPUT_LOG_FILE}
