@@ -125,7 +125,7 @@ then
 	exit 1
 fi
 
-if [ ! -d ${WORKSPACE_DIR} ]
+if [ ! -d "${WORKSPACE_DIR}" ]
 then
 	printMessage "E" "The ${WORKSPACE_DIR} does not exist."
 	exit 1
