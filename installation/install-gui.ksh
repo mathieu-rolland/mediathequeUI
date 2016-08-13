@@ -46,13 +46,13 @@ catchError()
 
 checkEnvironment()
 {
-	if [ -z "${OVH_HOST}"]
+	if [ -z "${OVH_HOST}" ]
 	then
 		printMessage "E" "OVH_HOST is not defined"
 		exit 1
 	fi
 
-	if [ -z "${OVH_USER}"]
+	if [ -z "${OVH_USER}" ]
 	then
 		printMessage "E" "OVH_USER is not defined"
 		exit 1
@@ -90,7 +90,7 @@ archiveCurrentRelease()
 #
 ##############################################################################################
 
-checkEnvironment
+#checkEnvironment
 archiveCurrentRelease
 getPackage
 deployPackage
