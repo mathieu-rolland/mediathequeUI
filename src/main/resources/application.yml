@@ -28,7 +28,6 @@ logging:
   org.springframework.web: DEBUG
   guru.springframework.controllers: DEBUG
   org.hibernate: DEBUG
-  file: log/mediatheque.log 
    
 server:
    address: 127.0.0.1

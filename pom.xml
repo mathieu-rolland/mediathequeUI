@@ -105,22 +105,28 @@
 
 		</plugins>
 
-<pluginManagement>
+		<pluginManagement>
 			<plugins>
+
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+			        <artifactId>tomcat7-maven-plugin</artifactId>
+					<configuration>
+						<url>http://92.222.86.206:8080/manager/text</url>
+						<server>OVHTomcat</server>
+						<path>/${project.name}</path>
+					</configuration>
+				</plugin>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.6</version>
 					<configuration>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
-						<webResources>
-							<webResource>
-								<directory>src\main\resources</directory>
-								<excludes>
-									<exclude>public\**</exclude>
-								</excludes>
-							</webResource>
-						</webResources>
+						<warSourceExcludes>public/*</warSourceExcludes>
+						<warSourceExcludes>installation/*</warSourceExcludes>
+						<warSourceExcludes>src/test/*</warSourceExcludes>
 					</configuration>
 				</plugin>
 				<plugin>
