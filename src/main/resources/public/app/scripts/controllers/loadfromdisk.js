@@ -68,9 +68,10 @@ angular.module('mediathequeUiApp')
 	  }
 	  
 	  /*Load movies load in CSV file*/
-	  if( angular.isDefined( $rootScope.searchMovieFromCsv ) ){
-		  $scope.movies.list = $rootScope.searchMovieFromCsv;
+	  if( angular.isDefined( $rootScope.movieFromCsv ) ){
+		  $scope.movies.list = $rootScope.movieFromCsv;
 		  $scope.pageLoaded = true;
+		  $scope.movies.path =  $rootScope.csvUploadedName;
 	  }else{
 	  
 		  var cacheInCookie = localStorageService.get( 'searchOnDisk-result' );

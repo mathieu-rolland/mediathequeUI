@@ -23,7 +23,8 @@ angular.module('mediathequeUiApp')
 					  console.log('No movie generated');
 				  }else{
 					  console.log('as data');
-					  $rootScope.searchMovieFromCsv = response.data;
+					  $rootScope.movieFromCsv = response.data;
+					  $rootScope.csvUploadedName = $scope.picFile.name;
 					  $location.path('/load-disk');
 				  }
 			  }

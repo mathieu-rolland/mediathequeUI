@@ -51,14 +51,24 @@ public class CSVParser {
 				String title = parsedLine[ TITLE_MOVIE_INDEX ];
 				
 				ILocalMovie movie = factory.createLocalMovie();
-				movie.setPath( movieLocation );
-				movie.setTitle( title );
+				movie.setPath( removeFirstAndLastQuotes( movieLocation ) );
+				movie.setTitle( removeFirstAndLastQuotes( title ) );
 				
 				movies.add(movie);
 			}
 		}
 		
 		return movies;
+	}
+	
+	private static String removeFirstAndLastQuotes( String field ){
+		if( field.startsWith("\"") ){
+			field = field.substring(1);
+		}
+		if( field.endsWith("\"")){
+			field = field.substring(0 , field.length()-1);
+		}
+		return field;
 	}
 	
 }
