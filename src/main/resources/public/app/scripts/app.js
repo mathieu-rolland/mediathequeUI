@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'ngFileUpload'
   ])
   .config(function ($routeProvider , localStorageServiceProvider) {
 	
@@ -53,6 +54,11 @@ angular
     	  templateUrl: 'views/searchlocalmovietoallocine.html',
           controller: 'SearchlocalmovietoallocineCtrl',
           controllerAs: 'Searchlocalmovietoallocine'
+      })
+      .when('/csv',{
+    	  templateUrl : 'views/csvupload.html',
+    	  controller: 'CsvuploadCtrl',
+    	  controllerAs: 'cvupload'
       })
       .otherwise({
         redirectTo: '/'

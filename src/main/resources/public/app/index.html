@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="styles/menu.css">
     <link rel="stylesheet" href="styles/parameters.css">
     <link rel="stylesheet" href="styles/my-movies.css">
+     <link rel="stylesheet" href="styles/csvupload.css">
     <!-- endbuild -->
   </head>
   
@@ -41,6 +42,7 @@
 					 <li ng-class="page == 'search'    ? 'active' : ''" class="item"><a href="#/search">Recherche de film</a></li>
 				     <li ng-class="page == 'load-disk' ? 'active' : ''" class="item"><a href="#/load-disk">Recherche sur disque</a></li>
 				     <li ng-class="page == 'parameters'? 'active' : ''" class="item"><a href="#/parameters">Paramètres</a></li>
+				     <li ng-class="page == 'csv'? 'active' : ''" class="item"><a href="#/csv">Charger un csv</a></li>
 				</ul>
 			</div>
 		</div>
@@ -119,6 +121,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -133,6 +136,7 @@
         <script src="scripts/controllers/searchlocalmovietoallocine.js"></script>
         <script src="scripts/controllers/menu.js"></script>
         <script src="scripts/filters/formatduration.js"></script>
+        <script src="scripts/controllers/csvupload.js"></script>
         <!-- endbuild -->
         
 </body>

@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev-external
+    active: dev
     
 ---
 
@@ -15,7 +15,7 @@ spring:
       url: jdbc:mysql://192.168.1.23/mediatheque_dev
       username: mediatheque_dev
       password: 3ZJj3sEEbdxJt8Xx
-      driver-class-name: com.mysql.jdbc.Driver  
+      driver-class-name: com.mysql.jdbc.Driver 
    jpa:
       hibernate:
          database: mediatheque_dev
@@ -32,7 +32,9 @@ logging:
 server:
    address: 127.0.0.1
    port: 8989
-   
+
+mediatheque:
+   downloadPath: D:\Programmation\Workspace\UIMediatheque\dowload
 ---
 
 spring:
@@ -44,6 +46,7 @@ spring:
       username: mediatheque_dev
       password: 3ZJj3sEEbdxJt8Xx
       driver-class-name: com.mysql.jdbc.Driver  
+      driverClassName: com.mysql.jdbc.Driver  
    jpa:
       hibernate:
          database: mediatheque_dev
@@ -51,17 +54,14 @@ spring:
          dialect: org.hibernate.dialect.MySQL5Dialect
          show-sql: true
          ddl-auto: update
-         
-logging:
-  org.springframework.web: DEBUG
-  guru.springframework.controllers: DEBUG
-  org.hibernate: DEBUG
-  file: /varsoft/mediatheque/logs/mediatheque.log 
           
 server:
    address: 127.0.0.1
    port: 8989
    
+mediatheque:
+   downloadPath: /varsoft/mediatheque/download
+
 ---
 
 logging.level: debug

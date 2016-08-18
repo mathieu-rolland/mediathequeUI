@@ -67,18 +67,25 @@ angular.module('mediathequeUiApp')
 		  };
 	  }
 	  
-	  var cacheInCookie = localStorageService.get( 'searchOnDisk-result' );
-	  var lastDateCacheUpdated = localStorageService.get( 'searchOnDisk-lastDate' );
-	  console.log('cache : ');
-	  console.log(cacheInCookie);
-	  if( angular.isDefined(cacheInCookie) && 
-			  cacheInCookie !== null  && 
-			  lastDateCacheUpdated !== null && 
-			  delayBetweenDates( new Date() , new Date(lastDateCacheUpdated) , 'day') < 1 ){
-		  $scope.movies.list = cacheInCookie;
+	  /*Load movies load in CSV file*/
+	  if( angular.isDefined( $rootScope.movieFromCsv ) ){
+		  $scope.movies.list = $rootScope.movieFromCsv;
 		  $scope.pageLoaded = true;
+		  $scope.movies.path =  $rootScope.csvUploadedName;
 	  }else{
-		  $scope.searchOnDisk( lastPathSearch );
-	  }
 	  
+		  var cacheInCookie = localStorageService.get( 'searchOnDisk-result' );
+		  var lastDateCacheUpdated = localStorageService.get( 'searchOnDisk-lastDate' );
+
+		  if( angular.isDefined(cacheInCookie) && 
+				  cacheInCookie !== null  && 
+				  lastDateCacheUpdated !== null && 
+				  delayBetweenDates( new Date() , new Date(lastDateCacheUpdated) , 'day') < 1 ){
+			  $scope.movies.list = cacheInCookie;
+			  $scope.pageLoaded = true;
+		  }else{
+			  $scope.searchOnDisk( lastPathSearch );
+		  }
+		  
+	  }
  }]);

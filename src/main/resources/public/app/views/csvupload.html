@@ -1,0 +1,30 @@
+<div ng-controller="CsvuploadCtrl">
+
+	<div class="jumbotron">
+		<h2>Upload movie from CSV</h2>
+		
+		<div>
+			<p>Télécharger un CSV contenant le chemin du film accompagné de son titre original pour synchroniser en base</p>
+		</div>
+		
+	</div>
+	
+	<div>
+	
+		<label>Uploader un fichier : </label>
+		
+		<div class="form-upload-file">
+		
+		  <input type="file" ngf-select ng-model="picFile" name="file"    
+             accept=".csv" required
+             ngf-model-invalid="errorFile">
+		
+		</div>
+		
+		<button type="button" class="btn btn-primary" ng-click="uploadFile()">Charger</button>
+		
+		<a href="#"><i>Exemple de fichier</i></a>
+		
+	</div>
+	
+</div>
