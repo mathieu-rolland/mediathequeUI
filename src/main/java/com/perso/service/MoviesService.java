@@ -1,5 +1,8 @@
 package com.perso.service;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -7,27 +10,28 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.api.allocine.IAllocineAPI;
 import com.api.allocine.model.IMovie;
 import com.api.allocine.model.IMovieResponse;
+import com.perso.config.CustomApplicationProperties;
 import com.perso.factory.IMediathequeFactory;
 import com.perso.manager.movies.MoviesLoader;
 import com.perso.model.ILocalMovie;
 import com.perso.model.impl.Movie;
 import com.perso.repository.MovieRepository;
 import com.perso.repository.ParametersRepository;
+import com.perso.utils.CSVParser;
 
 @RestController
 @RequestMapping("/movies")
-@CrossOrigin(origins = "*" , methods = {RequestMethod.GET, RequestMethod.POST} )
 public class MoviesService {
 
 	private Logger logger = Logger.getLogger(MoviesService.class);
@@ -44,6 +48,8 @@ public class MoviesService {
 	@Autowired
 	private MovieRepository movieRepository;
 	
+	@Autowired
+	private CustomApplicationProperties properties;
 	
 	@RequestMapping("/search")
 	public @ResponseBody List<IMovie> searchMovie(@RequestParam(value="q", defaultValue="default") String search){
@@ -104,5 +110,37 @@ public class MoviesService {
 	public @ResponseBody List<Movie> getMyMovies(){
 		return movieRepository.findAll();
 	}
+	
+	@RequestMapping(value = "/csv", method = RequestMethod.POST )
+	public @ResponseBody List<IMovie> handleFileUpload(@RequestParam("name") String name,
+            @RequestParam("file") MultipartFile file){
+		if ( file != null ){
+			logger.info("File " + file.getName() + " is not empty and download started in " + properties.getDownloadPath() + ".");
+	        if (!file.isEmpty()) {
+	        	
+	            try {
+	                byte[] bytes = file.getBytes();
+	                BufferedOutputStream stream =
+	                        new BufferedOutputStream(new FileOutputStream(new File( properties.getDownloadPath() + File.separator + name )));
+	                stream.write(bytes);
+	                stream.close();
+	            } catch (Exception e) {
+	            	e.printStackTrace();
+	            }
+	            
+	            try {
+					return CSVParser.generateMovieFromFile( properties.getDownloadPath() + File.separator + name , mediathequeFactory);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+	            
+	        } else {
+	        	logger.info("File " + file.getName() + " is empty.");
+	        }
+		}
+		logger.info("End of file upload");
+		return null;
+    }
+	
 	
 }

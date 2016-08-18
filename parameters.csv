@@ -1,0 +1,11 @@
+id,name,value
+1,movie.include,.mp4
+2,movie.include,.avi
+3,movie.include,.mkv
+5,movie.regex,"(.*).(avi|mp4|mkv), $1"
+6,movie.regex,"(\[(.*)\])(.*), $3"
+7,movie.regex,"^(.*)((.| |\[)(720|1080)p(.| |\]))(.*)$, $1 $6"
+8,movie.regex,"^(.*)((.| |\[)(x264)(.| |\]))(.*)$, $1 $6"
+12,movie.regex,"^(.*)((.| |\[)(TRUEFRENCH|Truefrench|FRENCH)(.| |\]))(.*)$, $1 $6"
+13,movie.regex,"^(.*)((.| |\[)(BRRip|BluRay)(.| |\]))(.*)$, $1 $6"
+14,movie.regex,"([a-zA-Z0-9_ ]*)([\.])*([a-zA-Z0-9_ ]*), $1 $3"

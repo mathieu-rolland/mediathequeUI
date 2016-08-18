@@ -28,6 +28,9 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', function ( $scope , $l
 			case '/load-disk':
 				$scope.page = 'load-disk';
 				break;
+			case '/csv':
+				$scope.page = 'csv';
+				break;
 			default:
 				break;
         }

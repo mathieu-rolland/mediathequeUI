@@ -8,9 +8,10 @@
  * Service in the mediathequeUiApp.
  */
 angular.module('mediathequeUiApp')
-  .service('AllocineWebService', function ($http) {
+  .service('AllocineWebService', function ($http, Upload) {
     
-	  var mainURL = 'http://92.222.86.206:8080/Mediatheque-WebService/';
+	  //var mainURL = 'http://92.222.86.206:8080/Mediatheque-WebService/';
+	  var mainURL = 'http://localhost:8989/';
 	  var moviesSearch = 'movies/search/';
 	  var loadFromDisk = 'movies/my-movies/disk/';
 	  var loadMyMovies = 'movies/my-movies/db/';
@@ -203,5 +204,20 @@ angular.module('mediathequeUiApp')
 			}
 		  };
 	  
+	this.uploadCSVMovies = function( file , callback ){
+		  console.log( file );
+		  Upload.upload({
+	            url: mainURL + 'movies/csv',
+	            data: {file: file, name : file.name}
+	        }).then(function (response) {
+	            callback( response );
+	        }, function (response) {
+	            callback( response );
+	        }, function (evt) {
+	            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+	            console.log(evt);
+	        });
+	};	  
+		  
   });
 
