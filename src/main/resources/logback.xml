@@ -3,7 +3,7 @@
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-		<file>/varsoft/mediatheque/logs/mediatheque.log</file>
+		<file>D:\Programmes\Mediatheque\logs\mediatheque.log</file>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>mediathque-%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -25,7 +25,7 @@
     	</encoder>
 	</appender>
 
-	<root level="DEBUG">
+	<root level="INFO">
     	<appender-ref ref="STDOUT" />
     	<appender-ref ref="FILE" />
   	</root>

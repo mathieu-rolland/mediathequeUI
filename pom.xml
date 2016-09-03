@@ -89,7 +89,7 @@
 		<build.profile.id>dev</build.profile.id>
 	</properties>
 
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<build>
 
