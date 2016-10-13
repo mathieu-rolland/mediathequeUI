@@ -1,3 +1,15 @@
+
+.display-sort{
+	
+	padding-right: 30px;
+
+	&.selected{
+		color:white;
+		font-weight: normal;
+	}
+	
+}
+
 .MyMovies.movie{
 
 	.synchronied{
@@ -5,8 +17,8 @@
 	}
 
 	.content{
-		float: right;
-		width: 70%;
+		float: left;
+		width: 100%;
 	}
 
 	.preview{
@@ -15,8 +27,13 @@
 		
 		img{
 			width: 180px;
+			max-height: 240px;
+			min-height: 100px;
 		}
 		
+		padding: 10px;
+		width: 200px;
+		height: 260px;
 	}
 
 	.synospis{
@@ -28,3 +45,86 @@
 	}
 
 }
+
+.selected-movie{
+
+	display: none;
+	
+	&.activate{
+		display: inline-block;
+		position: fixed;
+		font-family: Arial, Helvetica, sans-serif;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(0, 0, 0, 0.88);
+		z-index: 1000;
+		-webkit-transition: opacity 400ms ease-in;
+		-moz-transition: opacity 400ms ease-in;
+		transition: opacity 400ms ease-in;
+		pointer-events: none;
+		
+		.content{
+		
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 100px;
+			width : 1100px;
+			height: 800px;
+			background: black;
+			opacity: 1;
+			
+			.preview{
+				float: left;
+				width: 550px;
+				margin-top: auto;
+				margin-bottom: auto;
+				
+				img{
+					width: 600px;
+					max-height: 800px;
+				}
+				
+			}
+			
+			.description{
+			
+				.closeButton{
+					pointer-events: all;
+					z-index: 2000;
+					padding-top: 5px;
+					padding-right: 5px;
+					width:20px;
+					float:right;
+				}
+			
+				margin-top:auto;
+				margin-bottom:auto;
+			
+				float: left;
+				padding-left: 75px;
+				padding-right: 10px;
+				width: 540px;
+				margin-top: 0px;
+				text-align: justify;
+  				text-overflow: ellipsis;
+  				
+  				.title{
+  					text-align: center;
+  					color: white;
+  				}
+  				
+  				.synopsis{
+  					
+  				}
+  				
+			}
+			
+		}
+		
+	}
+	
+}
+
+

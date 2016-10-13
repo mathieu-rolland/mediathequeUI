@@ -25,27 +25,41 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-<!-- 	 <div id="cssmenu"> -->
-<!-- 		  <ul> -->
-<!-- 		     <li class="active"><a href="#/"><i class="fa fa-fw fa-home"></i>Recherche de film</a></li> -->
-<!-- 		     <li><a href="#/my-movies"><i class="fa fa-fw fa-cog"></i>Mes films</a></li> -->
-<!-- 		     <li><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
-<!-- 		     <li><a href="#/parameters"><i class="fa fa-fw fa-phone"></i>Paramètres</a></li> -->
-<!-- 		  </ul> -->
-<!-- 	</div> -->
-	
-		<div ng-controller="MenuCtrl">
-			<div class="menu">
-				<h2 class="menu_label">Naviguer</h2>
-				<ul>
-					 <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/">Mes films</a></li>
-					 <li ng-class="page == 'search'    ? 'active' : ''" class="item"><a href="#/search">Recherche de film</a></li>
-				     <li ng-class="page == 'load-disk' ? 'active' : ''" class="item"><a href="#/load-disk">Recherche sur disque</a></li>
-				     <li ng-class="page == 'parameters'? 'active' : ''" class="item"><a href="#/parameters">Paramètres</a></li>
-				     <li ng-class="page == 'csv'? 'active' : ''" class="item"><a href="#/csv">Charger un csv</a></li>
-				</ul>
-			</div>
+	<div ng-controller="MenuCtrl">
+	 <div id="cssmenu">
+	 
+	 	<div class="navigate">
+		  <ul>
+		     <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/"><i class="fa fa-fw fa-home entry"></i>Mes films</a></li>
+		     <li class=""><a href="#/"><i class="fa fa-fw fa-home"></i>Mes séries</a></li>
+         <!--<li><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
+         
+		  </ul>
 		</div>
+		
+		<div class="account">
+		  <ul>
+		  	<li>Rechercher</li>
+		  	<li ng-class="page == 'parameters'? 'active' : ''" class="item"><a href="#/parameters"><i class="fa fa-fw fa-phone"></i>Paramètres</a></li>
+		  </ul>
+		</div>
+	</div>
+	
+	</div>
+	
+	
+<!-- 		<div ng-controller="MenuCtrl"> -->
+<!-- 			<div class="menu"> -->
+<!-- 				<h2 class="menu_label">Naviguer</h2> -->
+<!-- 				<ul> -->
+<!-- 					 <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/">Mes films</a></li> -->
+<!-- 					 <li ng-class="page == 'search'    ? 'active' : ''" class="item"><a href="#/search">Recherche de film</a></li> -->
+<!-- 				     <li ng-class="page == 'load-disk' ? 'active' : ''" class="item"><a href="#/load-disk">Recherche sur disque</a></li> -->
+<!-- 				     <li ng-class="page == 'parameters'? 'active' : ''" class="item"><a href="#/parameters">Paramètres</a></li> -->
+<!-- 				     <li ng-class="page == 'csv'? 'active' : ''" class="item"><a href="#/csv">Charger un csv</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 	
 <!-- 	<div class="nav nav-pills nav-stacked"> -->
 <!-- 		  <ul> -->
@@ -85,7 +99,7 @@
       
     </div>
     
-    <div class="container">
+    <div class="pageContent">
     <div ng-view=""></div>
     </div>
 
