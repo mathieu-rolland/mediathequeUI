@@ -62,5 +62,18 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , 'Alloc
 	//start module: 
 	var alerts = $scope.alerts = [];
 	
+	$scope.displayInPopup = function(movie){
+		if( angular.isUndefined( $scope.selectedMovie ) ){
+			$scope.selectedMovie = movie;
+		}
+	}
 	
+	$scope.closePopup = function(){
+		console.log('Close popup!');
+		$scope.selectedMovie = undefined;
+	}
+	
+	$scope.open = function (size, parentSelector) {
+	};
+	    
 }]);

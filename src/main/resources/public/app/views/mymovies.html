@@ -1,11 +1,11 @@
 <div ng-controller="MymoviesCtrl">
 
-<div class="jumbotron">
-		<h1>Médiathèque</h1>
-		<p class="lead">
-			Mes films <br>
-		</p>
-	</div>
+<!-- <div class="jumbotron"> -->
+<!-- 		<h1>Médiathèque</h1> -->
+<!-- 		<p class="lead"> -->
+<!-- 			Mes films <br> -->
+<!-- 		</p> -->
+<!-- 	</div> -->
 
 
 	<script type="text/ng-template" id="alert.html">
@@ -20,95 +20,137 @@
 		<img src="images/loading.gif">
 	</div>
 
-<div class="search result" ng-show="pageLoaded">
+	<div class="search result" ng-show="pageLoaded">
 	
-	<label ng-show="pageLoaded"> Recherche : <input ng-model="search" /> </label><br />
-	
-	
-	 <!-- Single button using append-to-body -->
-    <div class="btn-group" uib-dropdown dropdown-append-to-body>
-    
-    <label> Trier par : 
-    
-      <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle>
-        {{sortBy}} <span class="caret"></span>
-      </button>
-      
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
-        <li role="menuitem"><a ng-click="changeSort('year')">Date de sortie</a></li>
-        <li role="menuitem"><a ng-click="changeSort('title')">Titre</a></li>
-      </ul>
-    </label>  
-    </div>
-	
-	
-	
-	<div class="MyMovies movie" ng-repeat="movie in movies.list | filter:search | orderBy: sortKey ">
+	<!-- 	<label ng-show="pageLoaded"> Recherche : <input ng-model="search" /> </label><br /> -->
 		
-		<div class="title">
-			<h3>{{movie.title}}</h3>
+		<div>
+		
+			<label class="display-sort selected">de A à Z</label>
+		
+			<label class="display-sort">Derniers ajoutés</label>
+		
+			<label class="display-sort">Derniers sortis</label>
+		
 		</div>
 		
-		<div class="content">
-			
-			<p>
-				<span>{{movie.title}}</span> est sortie en {{movie.year}}
-			</p>
-			
-			<p>	
-				De : <span ng-repeat="person in movie.casting.directors track by $index">{{person}}</span>
-			</p>
-			
-			<p>
-				Avec : <span ng-repeat="person in movie.casting.actors track by $index">{{person}}, </span>
-			</p>
-			
-			<p>
-				Durée : {{movie.duration | formatDuration}}
-			</p>
-			
-			<p>
-				Genre de film : <span ng-repeat="genre in movie.genre track by $index">{{genre.name}}, </span>
-			</p>
-			
-			<p>
-				Le film est disponible ici : <span class="location">{{movie.path}}</span>
-			</p>
-			
-			<p>
-				<p>
-						<span>Evaluation de la presse : </span>	
-					<uib-rating ng-model="movie.statistiques.pressRating" max="max"
-							read-only="true" on-hover="hoveringOver(value)"
-							on-leave="overStar = null"
-							titles="['un','deux','trois', 'quatre', 'cinq']"
-							aria-labelledby="default-rating"></uib-rating>
-				</p>
-				<div>
-					<p>
-						<span>Evaluation public : </span>	
-						<uib-rating
-							ng-model="movie.statistiques.userRating" max="max"
-							read-only="true" on-hover="hoveringOver(value)"
-							on-leave="overStar = null"
-							titles="['un','deux','trois', 'quatre', 'cinq']"
-							aria-labelledby="default-rating"></uib-rating>
-						</p>
-				</div>
-			</p>
-			
-			<p class="synospis">
-				<span>Résumé :</span> <span ng-bind-html="movie.synospis"></span>
-			</p>
-			
-		</div>
+		 <!-- Single button using append-to-body -->
+	<!--     <div class="btn-group" uib-dropdown dropdown-append-to-body> -->
+	    
+	<!--     <label> Trier par :  -->
+	    
+	<!--       <button id="btn-append-to-body" type="button" class="btn btn-primary" uib-dropdown-toggle> -->
+	<!--         {{sortBy}} <span class="caret"></span> -->
+	<!--       </button> -->
+	      
+	<!--       <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body"> -->
+	<!--         <li role="menuitem"><a ng-click="changeSort('year')">Date de sortie</a></li> -->
+	<!--         <li role="menuitem"><a ng-click="changeSort('title')">Titre</a></li> -->
+	<!--       </ul> -->
+	<!--     </label>   -->
+	<!--     </div> -->
 		
-		<div class="preview">
-			<img ng-src="{{movie.poster.href}}">
-		</div>
 		
-		<div class="clear"/>
+		
+		<div class="MyMovies movie" ng-repeat="movie in movies.list | filter:search | orderBy: sortKey ">
+			
+	<!-- 		<div class="title"> -->
+	<!-- 			<h3>{{movie.title}}</h3> -->
+	<!-- 		</div> -->
+			
+	<!-- 		<div class="content"> -->
+				
+	<!-- 			<p> -->
+	<!-- 				<span>{{movie.title}}</span> est sortie en {{movie.year}} -->
+	<!-- 			</p> -->
+				
+	<!-- 			<p>	 -->
+	<!-- 				De : <span ng-repeat="person in movie.casting.directors track by $index">{{person}}</span> -->
+	<!-- 			</p> -->
+				
+	<!-- 			<p> -->
+	<!-- 				Avec : <span ng-repeat="person in movie.casting.actors track by $index">{{person}}, </span> -->
+	<!-- 			</p> -->
+				
+	<!-- 			<p> -->
+	<!-- 				Durée : {{movie.duration | formatDuration}} -->
+	<!-- 			</p> -->
+				
+	<!-- 			<p> -->
+	<!-- 				Genre de film : <span ng-repeat="genre in movie.genre track by $index">{{genre.name}}, </span> -->
+	<!-- 			</p> -->
+				
+	<!-- 			<p> -->
+	<!-- 				Le film est disponible ici : <span class="location">{{movie.path}}</span> -->
+	<!-- 			</p> -->
+				
+	<!-- 			<p> -->
+	<!-- 				<p> -->
+	<!-- 						<span>Evaluation de la presse : </span>	 -->
+	<!-- 					<uib-rating ng-model="movie.statistiques.pressRating" max="max" -->
+	<!-- 							read-only="true" on-hover="hoveringOver(value)" -->
+	<!-- 							on-leave="overStar = null" -->
+	<!-- 							titles="['un','deux','trois', 'quatre', 'cinq']" -->
+	<!-- 							aria-labelledby="default-rating"></uib-rating> -->
+	<!-- 				</p> -->
+	<!-- 				<div> -->
+	<!-- 					<p> -->
+	<!-- 						<span>Evaluation public : </span>	 -->
+	<!-- 						<uib-rating -->
+	<!-- 							ng-model="movie.statistiques.userRating" max="max" -->
+	<!-- 							read-only="true" on-hover="hoveringOver(value)" -->
+	<!-- 							on-leave="overStar = null" -->
+	<!-- 							titles="['un','deux','trois', 'quatre', 'cinq']" -->
+	<!-- 							aria-labelledby="default-rating"></uib-rating> -->
+	<!-- 						</p> -->
+	<!-- 				</div> -->
+	<!-- 			</p> -->
+				
+	<!-- 			<p class="synospis"> -->
+	<!-- 				<span>Résumé :</span> <span ng-bind-html="movie.synospis"></span> -->
+	<!-- 			</p> -->
+				
+			<div class="preview" ng-click="displayInPopup(movie)">
+				<img ng-src="{{movie.poster.href}}">
+			</div>
+		
+		</div>
 		
 	</div>
+	
+	<div ng-class="selectedMovie != null ? 'selected-movie activate' : 'selected-movie'">
+			
+			<div class="content">
+			
+				<div class="preview">
+					<img ng-src="{{selectedMovie.poster.href}}">
+				</div>
+				
+				<div class="description">
+				
+					<div>
+						<img ng-click="closePopup()" class="closeButton" src="styles/images/close-button.png"/>
+					</div>
+					
+					<h1 class="title">{{selectedMovie.title}}</h1>
+					
+					<div class="info">
+						<p><label>Date de sortie : </label></p>
+						<p><label>De : </label></p>
+						<p><label>Avec : </label></p>
+						<p><label>Durée : </label></p>
+						<p><label>Genre : </label></p>
+					</div>
+					
+					<div class="notes">
+					</div>
+					
+					<div class="synopsis">
+						<p ng-bind-html="selectedMovie.synospis"></p>
+					</div>
+						
+					</div>
+				</div>
+			</div>
 	
 </div>
