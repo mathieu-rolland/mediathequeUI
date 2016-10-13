@@ -4,3 +4,7 @@ target/
 .settings/org.eclipse.core.resources.prefs
 src/main/resources/public/app/bower_components/
 dowload/
+src/main/GUI/.sass-cache
+src/main/GUI/.tmp
+src/main/GUI/bower_components
+src/main/GUI/node_modules
