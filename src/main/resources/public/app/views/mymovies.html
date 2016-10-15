@@ -135,11 +135,11 @@
 					<h1 class="title">{{selectedMovie.title}}</h1>
 					
 					<div class="info">
-						<p><label>Date de sortie : </label></p>
-						<p><label>De : </label></p>
-						<p><label>Avec : </label></p>
-						<p><label>Durée : </label></p>
-						<p><label>Genre : </label></p>
+						<p><label>Date de sortie : </label><span> {{selectedMovie.year}}</span></p>
+						<p><label>De : </label><span ng-repeat="person in selectedMovie.casting.directors track by $index"> {{person}}</span></p>
+						<p><label>Avec :</label><span ng-repeat="person in selectedMovie.casting.actors track by $index"> {{person}},</span></p>
+						<p><label>Durée : </label>{{selectedMovie.duration | formatDuration}}</p>
+						<p><label>Genre : </label><span ng-repeat="genre in selectedMovie.genre track by $index"> {{genre.name}},</span></p>
 					</div>
 					
 					<div class="notes">
@@ -149,8 +149,7 @@
 						<p ng-bind-html="selectedMovie.synospis"></p>
 					</div>
 						
-					</div>
 				</div>
 			</div>
-	
+		</div>
 </div>
