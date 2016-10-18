@@ -7,7 +7,9 @@
  * # MymoviesCtrl
  * Controller of the mediathequeUiApp
  */
-angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , 'AllocineWebService' , 'localStorageService' , function ( $scope , AllocineWebService, localStorageService) {
+angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce' , 'AllocineWebService' , 'localStorageService' , function ( $scope , $sce ,  AllocineWebService, localStorageService) {
+	
+	$scope.playIsDemand = false;
 	
 	var myMovieCallback = function(response){
 		console.log(response);
@@ -65,15 +67,43 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , 'Alloc
 	$scope.displayInPopup = function(movie){
 		if( angular.isUndefined( $scope.selectedMovie ) ){
 			$scope.selectedMovie = movie;
+			$scope.isSelectedMovie = true;
 		}
+	}
+	
+	$scope.closePlayer = function(){
+		$scope.isSelectedMovie = false;
+		$scope.playIsDemand = false;
+		$scope.selectedMovie = undefined;
 	}
 	
 	$scope.closePopup = function(){
 		console.log('Close popup!');
 		$scope.selectedMovie = undefined;
+		$scope.isSelectedMovie = false;
 	}
 	
-	$scope.open = function (size, parentSelector) {
-	};
-	    
+	/*Composent video*/
+	$scope.readMovie = function(){
+		console.log($scope.selectedMovie);
+		$scope.playIsDemand = true;
+		$scope.isSelectedMovie = false;
+		if( angular.isDefined( $scope.selectedMovie ) ){
+			$scope.config = {
+					sources: [
+						{src: $sce.trustAsResourceUrl("assets/" + "DisPaRuS 504. Le Petit Prince.jpg" /*$scope.selectedMovie.namedInCache*/ ), type: /*$scope.selectedMovie.videoType*/ 'video/mp4' }
+					],
+					theme: "bower_components/videogular-themes-default/videogular.css",
+					plugins: {
+						poster: $scope.selectedMovie.poster.href,
+						controls: {
+	                        autoHide: true,
+	                        autoHideTime: 5000
+	                    }
+					}
+				};
+		}
+		
+	}
+	
 }]);
