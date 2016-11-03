@@ -63,6 +63,7 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 	
 	//start module: 
 	var alerts = $scope.alerts = [];
+	var videoApi;
 	
 	$scope.displayInPopup = function(movie){
 		if( angular.isUndefined( $scope.selectedMovie ) ){
@@ -83,6 +84,11 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 		$scope.isSelectedMovie = false;
 	}
 	
+	$scope.onPlayerReady = function(API) {
+		videoApi = API;
+		console.log(videoApi);
+    };
+	
 	/*Composent video*/
 	$scope.readMovie = function(){
 		console.log($scope.selectedMovie);
@@ -98,10 +104,15 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 						poster: $scope.selectedMovie.poster.href,
 						controls: {
 	                        autoHide: true,
-	                        autoHideTime: 5000
+	                        autoHideTime: 50
 	                    }
 					}
 				};
+			console.log($sce);
+		}
+		
+		if( videoApi != null ){
+			//videoApi.play();
 		}
 		
 	}

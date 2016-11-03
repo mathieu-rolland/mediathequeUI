@@ -23,6 +23,8 @@ spring:
          dialect: org.hibernate.dialect.MySQL5Dialect
          show-sql: true
          ddl-auto: update
+   resources:
+      static-locations:/Volumes/External Media/cacheMediatheque/
          
 logging:
   org.springframework.web: DEBUG
