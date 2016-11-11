@@ -1,14 +1,6 @@
-spring:
-  profiles:
-    active: dev-external
-    
----
 
 spring:
    profiles: dev
-   logging:
-      path: D:\Programmation\Workspace\UIMediatheque\log
-      file: mediatheque.log
    datasource:
       testWhileIdle: true
       show-sql: true
@@ -65,8 +57,6 @@ mediatheque:
    downloadPath: /varsoft/mediatheque/download
 
 ---
-
-logging.level: debug
 
 spring:
    profiles: dev-pc

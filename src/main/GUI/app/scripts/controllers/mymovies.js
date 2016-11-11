@@ -76,6 +76,11 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 		$scope.isSelectedMovie = false;
 		$scope.playIsDemand = false;
 		$scope.selectedMovie = undefined;
+		if ( angular.isDefined(videoApi) ){
+			videoApi.pause();
+		} else{
+			console.log( "Video API is not ready" );
+		}
 	}
 	
 	$scope.closePopup = function(){
@@ -97,7 +102,7 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 		if( angular.isDefined( $scope.selectedMovie ) ){
 			$scope.config = {
 					sources: [
-						{src: $sce.trustAsResourceUrl("assets/" + "DisPaRuS 504. Le Petit Prince.jpg" /*$scope.selectedMovie.namedInCache*/ ), type: /*$scope.selectedMovie.videoType*/ 'video/mp4' }
+						{src: $sce.trustAsResourceUrl("assets/" + "Mr Robot S02E05 Truefrench WEBrip 720p x264 AAC SBZ.mp4" /*$scope.selectedMovie.namedInCache*/ ), type: /*$scope.selectedMovie.videoType*/ 'video/mp4' }
 					],
 					theme: "bower_components/videogular-themes-default/videogular.css",
 					plugins: {
