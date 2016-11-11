@@ -35,6 +35,12 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
+      'bower_components/videogular/videogular.js',
+      'bower_components/videogular-controls/vg-controls.js',
+      'bower_components/videogular-buffering/vg-buffering.js',
+      'bower_components/videogular-overlay-play/vg-overlay-play.js',
+      'bower_components/jasmine-core/lib/jasmine-core/jasmine.js',
+      'bower_components/videogular-poster/vg-poster.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
