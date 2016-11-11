@@ -10,8 +10,13 @@
 angular.module('mediathequeUiApp')
   .service('AllocineWebService', function ($http, Upload) {
     
-	  //var mainURL = 'http://92.222.86.206:8080/Mediatheque-WebService/';
-	  var mainURL = 'http://localhost:8989/';
+	  var serviceIsReady = true;
+	  
+	  console.log("get properties before");
+	  
+	  var host = undefined;
+	  var port = undefined;
+	  var mainURL = 'http://'+host+':'+port+'/';
 	  var moviesSearch = 'movies/search/';
 	  var loadFromDisk = 'movies/my-movies/disk/';
 	  var loadMyMovies = 'movies/my-movies/db/';
@@ -20,38 +25,68 @@ angular.module('mediathequeUiApp')
 	  var deleteParameters = 'parameters/delete/';
 	  var synchronizeMovie = 'movies/my-movies/disk/synchronize';
 	  
+	  this.executeQueryAfterInit = function( callback ){
+		  
+		  if( angular.isUndefined(host)
+				  || angular.isUndefined(port) ){
+			  console.log("get properties");
+			  $http.get('config/webservice.properties').then(function(response){
+				  console.log(response.data);
+				  if( angular.isDefined(response.data) 
+						  && angular.isDefined(response.data.host) ){
+					  host = response.data.host;
+				  }
+				  if( angular.isDefined(response.data) 
+						  && angular.isDefined(response.data.port) ){
+					  port = response.data.port;
+				  }
+				  serviceIsReady = true;
+				  mainURL = 'http://'+host+':'+port+'/';
+
+				  callback();
+				  
+			  });
+		  }else{
+			  callback();
+		  }
+		  
+	  }
+	  
 	  this.searchMovie = function ( search , callBack ){
-		var response = {};
-		console.log(search);
-		if( search === null || search === '' || search === undefined ){
-			response = { errorCode : -1 , errorDesc: 'La recherche ne peut pas être vide.' , movies:[] };
-			callBack( response );
-			return;
-		}
-		else if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
-			console.error( 'Callback function is not defined' );
-			return;
-		}else{
-			$http.get( mainURL + moviesSearch , {params: {q:search}}).then(
-					function( response ){
-						response = {
-							errorCode:0,
-							errorDesc:'',
-							movies: response.data
-						};
-						callBack( response );
-					},
-					function(){
-						response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
-						callBack( response );
-					}
-			);
-		}
-	  };
+		  this.executeQueryAfterInit( function(){
+				var response = {};
+				console.log(search);
+				if( search === null || search === '' || search === undefined ){
+					response = { errorCode : -1 , errorDesc: 'La recherche ne peut pas être vide.' , movies:[] };
+					callBack( response );
+					return;
+				}
+				else if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
+					console.error( 'Callback function is not defined' );
+					return;
+				}else{
+					$http.get( mainURL + moviesSearch , {params: {q:search}}).then(
+							function( response ){
+								response = {
+									errorCode:0,
+									errorDesc:'',
+									movies: response.data
+								};
+								callBack( response );
+							},
+							function(){
+								response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+								callBack( response );
+							}
+					);
+				}
+		  });
+	};
 	  
 	  
 	  
 	  this.loadDisk = function ( search , callBack ){
+		  this.executeQueryAfterInit( function(){
 		var response = {};
 		console.log(search);
 		if( search === null || search === '' || search === undefined ){
@@ -78,10 +113,11 @@ angular.module('mediathequeUiApp')
 					}
 			);
 		}
-	  };
+		  });};
 	
 	  
 	  this.loadAllParameters = function ( callBack ){
+		  this.executeQueryAfterInit( function(){
 		var response = {};
 		console.log('Start fetch parameters');
 		if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
@@ -103,9 +139,11 @@ angular.module('mediathequeUiApp')
 					}
 			);
 		}
-	  };
+		  });
+		};
 	  
 	  this.addParameter = function ( callBack , param ){
+		  this.executeQueryAfterInit( function(){
 			var response = {};
 			console.log('Start adding parameters');
 			if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
@@ -129,9 +167,11 @@ angular.module('mediathequeUiApp')
 						}
 				);
 			}
+		  });
 	  };
 	  
 	  this.deleteParameter = function ( callBack , param ){
+		  this.executeQueryAfterInit( function(){
 			var response = {};
 			console.log('Start deleting parameters');
 			if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
@@ -155,10 +195,10 @@ angular.module('mediathequeUiApp')
 						}
 				);
 			}
-	  };
+		  }); };
 	  
 	  this.synchronizeMovie = function( callback, localMovie, code){
-		  
+		  this.executeQueryAfterInit( function(){
 		  if( localMovie !== undefined && code !== undefined ){
 			  var movieData = angular.toJson(localMovie, false);
 			  $http.post( mainURL + synchronizeMovie ,  movieData ).then(
@@ -179,9 +219,11 @@ angular.module('mediathequeUiApp')
 				);
 			  
 		  }
-	  };
+		  });
+		 };
 	  
 	  this.loadMyMovie = function ( callBack ){
+		  this.executeQueryAfterInit( function(){
 			var response = {};
 			if( callBack === null || callBack === '' || typeof callBack !== 'function' ){
 				console.error( 'Callback function is not defined' );
@@ -202,9 +244,10 @@ angular.module('mediathequeUiApp')
 						}
 				);
 			}
-		  };
+		  });};
 	  
 	this.uploadCSVMovies = function( file , callback ){
+		this.executeQueryAfterInit( function(){
 		  console.log( file );
 		  Upload.upload({
 	            url: mainURL + 'movies/csv',
@@ -217,7 +260,15 @@ angular.module('mediathequeUiApp')
 	            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 	            console.log(evt);
 	        });
-	};	  
+		});};	  
 		  
   });
 
+function sleep(milliseconds) {
+//	  var start = new Date().getTime();
+//	  for (var i = 0; i < 1e7; i++) {
+//	    if ((new Date().getTime() - start) > milliseconds){
+//	      break;
+//	    }
+//	  }
+	}
