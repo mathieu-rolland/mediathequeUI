@@ -1,10 +1,12 @@
 package com.perso.model.impl;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
 
 import com.api.allocine.model.IMovie;
 import com.perso.model.IMachine;
@@ -17,9 +19,10 @@ public class Machine implements IMachine {
 	private String name;
 	private String user;
 	private String password;
+	private int port;
 	
-	@Transient
-	private ArrayList<IMovie> movies;
+	@OneToMany(targetEntity=Movie.class, mappedBy="machine", fetch=FetchType.EAGER, cascade = CascadeType.ALL )
+	private Collection<IMovie> movies;
 	
 	public String getIp() {
 		return ip;
@@ -49,6 +52,12 @@ public class Machine implements IMachine {
 	public String toString() {
 		return "Machine [ip=" + ip + ", name=" + name + ", user=" + user + ", password=" + password + ", movies="
 				+ movies + "]";
+	}
+	public int getPort() {
+		return port;
+	}
+	public void setPort(int port) {
+		this.port = port;
 	}
 	
 }
