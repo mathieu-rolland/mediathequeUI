@@ -1,9 +1,4 @@
 <div ng-controller="ParametersCtrl" class="parameters_view">
-
-	<div class="jumbotron">
-		<h1>Médiathèque</h1>
-		<p class="lead">Paramètres</p>
-	</div>
 	
 	<script type="text/ng-template" id="alert.html">
     <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
@@ -45,4 +40,5 @@
 		<input ng-model="newParameter.value" class="field input" type="text" name="" ng-value="{{newParameter.value}}"/>
 		<input type="button" class="btn btn-lg btn-success" value="Ajouter un paramètre" ng-click="addParameter(newParameter)"/>
 	</form>
+	
 </div>

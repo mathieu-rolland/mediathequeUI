@@ -23,8 +23,10 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', function ( $scope , $l
 				$scope.page = 'search';
 				break;
 			case '/parameters' :
+			case '/parameters/machine' :
 				$scope.page = 'parameters';
 				break;
+				console.log($scope.page);
 			case '/load-disk':
 				$scope.page = 'load-disk';
 				break;

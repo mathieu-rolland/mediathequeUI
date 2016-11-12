@@ -1,13 +1,5 @@
 <div ng-controller="MymoviesCtrl">
 
-<!-- <div class="jumbotron"> -->
-<!-- 		<h1>Médiathèque</h1> -->
-<!-- 		<p class="lead"> -->
-<!-- 			Mes films <br> -->
-<!-- 		</p> -->
-<!-- 	</div> -->
-
-
 	<script type="text/ng-template" id="alert.html">
     <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
       <div ng-transclude></div>
@@ -16,8 +8,9 @@
 	
 	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
-	<div class="loading" ng-show="!pageLoaded">
-		<img src="images/loading.gif">
+	<div class="loading" ng-show="!pageLoaded" >
+<!-- 		<img src="images/loading.gif"> -->
+		<div class='uil-cube-css' style='-webkit-transform:scale(0.63)'><div></div><div></div><div></div><div></div></div>
 	</div>
 
 	<div class="search result" ng-show="pageLoaded">

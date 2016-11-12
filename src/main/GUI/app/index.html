@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="styles/menu.css">
     <link rel="stylesheet" href="styles/parameters.css">
     <link rel="stylesheet" href="styles/my-movies.css">
-     <link rel="stylesheet" href="styles/csvupload.css">
+    <link rel="stylesheet" href="styles/csvupload.css">
+    <link rel="stylesheet" href="styles/loading.css">
+    <link rel="stylesheet" href="styles/machineParams.css">
     <!-- endbuild -->
   </head>
   
@@ -34,16 +36,25 @@
 		     <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/"><i class="fa fa-fw fa-home entry"></i>Mes films</a></li>
 		     <li class=""><a href="#/"><i class="fa fa-fw fa-home"></i>Mes séries</a></li>
          <!--<li><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
-         
 		  </ul>
 		</div>
 		
 		<div class="account">
 		  <ul>
 		  	<li>Rechercher</li>
-		  	<li ng-class="page == 'parameters'? 'active' : ''" class="item"><a href="#/parameters"><i class="fa fa-fw fa-phone"></i>Paramètres</a></li>
+		  	<li ng-class="page == 'parameters'? 'active' : ''" class="item">
+				<div class="dropdown">
+				  <button class="dropbtn">Paramètres</button>
+				  <div class="dropdown-content">
+				    <a href="#/parameters">General</a>
+				    <a href="#/parameters/machine">Machines</a>
+				  </div>
+				</div>
+<!-- 		  		<a href=""><i class="fa fa-fw fa-phone"></i>Paramètres</a> -->
+		  	</li>
 		  </ul>
 		</div>
+		
 	</div>
 	
 	</div>
@@ -106,7 +117,6 @@
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
     </div>
 
@@ -158,6 +168,7 @@
         <script src="scripts/controllers/menu.js"></script>
         <script src="scripts/filters/formatduration.js"></script>
         <script src="scripts/controllers/csvupload.js"></script>
+        <script src="scripts/controllers/machineparameter.js"></script>
         <!-- endbuild -->
         
 </body>
