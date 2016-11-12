@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -21,6 +22,7 @@ import com.api.allocine.model.IPoster;
 import com.api.allocine.model.IRelease;
 import com.api.allocine.model.IStats;
 import com.perso.model.ILocalMovie;
+import com.perso.model.IMachine;
 
 @Entity
 @Table(name="MOVIE")
@@ -31,27 +33,30 @@ public class Movie implements ILocalMovie{
 	private String originalTitle;
 	private String title;
 	
+	@ManyToOne(targetEntity=Machine.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL )
+	private IMachine machine;
+	
 	@Transient
 	private List<String> keywords;
 	
 	private int year;
 	
-	@OneToOne(targetEntity=Release.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Release.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	private IRelease releaseDate;
 	
-	@OneToOne(targetEntity=Casting.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Casting.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	private ICasting casting;
 	
-	@OneToOne(targetEntity=Stats.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Stats.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	private IStats statistiques;
 	
-	@OneToOne(targetEntity=Poster.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Poster.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	private IPoster poster;
 	
-	@ManyToMany(targetEntity=AllocineLink.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL )
+	@ManyToMany(targetEntity=AllocineLink.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL )
 	private Collection<IAllocineLink> links;
 	
-	@ManyToMany(targetEntity=Genre.class, fetch = FetchType.LAZY , cascade = CascadeType.ALL )
+	@ManyToMany(targetEntity=Genre.class, fetch = FetchType.EAGER , cascade = CascadeType.ALL )
 	private Collection<IGenre> genre;
 	
 	@Column(columnDefinition = "TEXT")
@@ -206,6 +211,14 @@ public class Movie implements ILocalMovie{
 	@Override
 	public boolean isSynchronized() {
 		return isSynchronized;
+	}
+
+	public IMachine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(IMachine machine) {
+		this.machine = machine;
 	}
 	
 }

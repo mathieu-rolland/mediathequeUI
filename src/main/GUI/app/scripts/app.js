@@ -54,6 +54,11 @@ angular
           controller: 'ParametersCtrl',
           controllerAs: 'parameters'
       })
+      .when('/parameters/machine',{
+    	  templateUrl: 'views/machineparameter.html',
+          controller: 'MachineparameterCtrl',
+          controllerAs: 'machineParameters'
+      })
       .when('/load-disk/search',{
     	  templateUrl: 'views/searchlocalmovietoallocine.html',
           controller: 'SearchlocalmovietoallocineCtrl',

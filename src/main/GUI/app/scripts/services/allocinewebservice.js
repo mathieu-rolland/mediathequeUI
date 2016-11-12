@@ -24,6 +24,8 @@ angular.module('mediathequeUiApp')
 	  var addParameters  = 'parameters/add/';
 	  var deleteParameters = 'parameters/delete/';
 	  var synchronizeMovie = 'movies/my-movies/disk/synchronize';
+	  var listMachine = 'machine/list';
+	  var addMachine = 'machine/add';
 	  
 	  this.executeQueryAfterInit = function( callback ){
 		  
@@ -261,6 +263,46 @@ angular.module('mediathequeUiApp')
 	            console.log(evt);
 	        });
 		});};	  
+		
+		
+		
+		this.addMachine = function( params, callback ){
+			this.executeQueryAfterInit( function(){
+			  $http.post( mainURL + addMachine , params).then(
+						function( response ){
+							response = {
+								errorCode:0,
+								errorDesc:'',
+								success: response.data
+							};
+							callback( response );
+						},
+						function(){
+							response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+							callBack( response );
+						}
+				);
+			});
+		};	 
+		
+		this.listAllMachines = function( callback ){
+			this.executeQueryAfterInit( function(){
+			  $http.post( mainURL + listMachine ).then(
+						function( response ){
+							response = {
+								errorCode:0,
+								errorDesc:'',
+								data: response.data
+							};
+							callback( response );
+						},
+						function(){
+							response = { errorCode : -2 , errorDesc: 'Impossible de communiquer avec le web service.' , movies:[] };
+							callBack( response );
+						}
+				);
+			});
+		};	  
 		  
   });
 
