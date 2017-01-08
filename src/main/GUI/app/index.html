@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Mediatheque</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -29,87 +29,49 @@
     <![endif]-->
 
 	<div ng-controller="MenuCtrl">
-	 <div id="cssmenu">
-	 
-	 	<div class="navigate">
-		  <ul>
-		     <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/"><i class="fa fa-fw fa-home entry"></i>Mes films</a></li>
-		     <li class=""><a href="#/"><i class="fa fa-fw fa-home"></i>Mes séries</a></li>
-         <!--<li><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
-		  </ul>
-		</div>
-		
-		<div class="account">
-		  <ul>
-		  	<li>Rechercher</li>
-		  	<li ng-class="page == 'parameters'? 'active' : ''" class="item">
-				<div class="dropdown">
-				  <button class="dropbtn">Paramètres</button>
-				  <div class="dropdown-content">
-				    <a href="#/parameters">General</a>
-				    <a href="#/parameters/machine">Machines</a>
-				  </div>
-				</div>
-<!-- 		  		<a href=""><i class="fa fa-fw fa-phone"></i>Paramètres</a> -->
-		  	</li>
-		  </ul>
-		</div>
-		
-	</div>
+
+    <!-- Menu -->
+  	<div id="cssmenu">
+  	 
+  	 	<div class="navigate">
+  		  <ul>
+  		     <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/"><i class="fa fa-fw fa-home entry"></i>Mes films</a></li>
+  		     <li class=""><a href="#/"><i class="fa fa-fw fa-home"></i>Mes séries</a></li>
+           <!--<li><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
+  		  </ul>
+  		</div>
+  		
+  		<div class="account">
+
+  		  <ul>
+
+  		  	<li>Rechercher</li>
+
+  		  	<li ng-class="page == 'parameters'? 'active' : ''" class="item">
+
+    				<div class="dropdown">
+
+    				  <button class="dropbtn">Paramètres</button>
+    				  <div class="dropdown-content">
+    				    <a ng-href="/#!/parameters">General</a>
+    				    <a href="/#!/parameters/machine">Machines</a>
+    				  </div>
+
+    				</div>
+
+  		  	</li>
+
+  		  </ul>
+
+  		</div>
+  		
+  	</div>
 	
 	</div>
-	
-	
-<!-- 		<div ng-controller="MenuCtrl"> -->
-<!-- 			<div class="menu"> -->
-<!-- 				<h2 class="menu_label">Naviguer</h2> -->
-<!-- 				<ul> -->
-<!-- 					 <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/">Mes films</a></li> -->
-<!-- 					 <li ng-class="page == 'search'    ? 'active' : ''" class="item"><a href="#/search">Recherche de film</a></li> -->
-<!-- 				     <li ng-class="page == 'load-disk' ? 'active' : ''" class="item"><a href="#/load-disk">Recherche sur disque</a></li> -->
-<!-- 				     <li ng-class="page == 'parameters'? 'active' : ''" class="item"><a href="#/parameters">Paramètres</a></li> -->
-<!-- 				     <li ng-class="page == 'csv'? 'active' : ''" class="item"><a href="#/csv">Charger un csv</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-	
-<!-- 	<div class="nav nav-pills nav-stacked"> -->
-<!-- 		  <ul> -->
-<!-- 		     <li role="presentation" class="active"><a href="#/"><i class="fa fa-fw fa-home"></i>Recherche de film</a></li> -->
-<!-- 		     <li role="presentation"><a href="#/my-movies"><i class="fa fa-fw fa-cog"></i>Mes films</a></li> -->
-<!-- 		     <li role="presentation"><a href="#/load-disk"><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
-<!-- 		     <li role="presentation"><a href="#/parameters"><i class="fa fa-fw fa-phone"></i>Paramètres</a></li> -->
-<!-- 		  </ul> -->
-<!-- 	</div> -->
-
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <!-- <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand title" href="#/">mediathequeUi</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active item"><a href="#/">Home</a></li>
-              <li class="item"><a ng-href="#/about">About</a></li>
-            </ul>
-          </div>
-          
-        </div> -->
+      <!-- Add your site or application content here -->
+      <div class="header">
       </div>
-      
-    </div>
+  </div>
     
     <div class="pageContent">
     <div ng-view=""></div>
@@ -156,20 +118,20 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/services/allocinewebservice.js"></script>
-        <script src="scripts/controllers/mymovies.js"></script>
-        <script src="scripts/controllers/loadfromdisk.js"></script>
-        <script src="scripts/controllers/parameters.js"></script>
-        <script src="scripts/controllers/searchlocalmovietoallocine.js"></script>
-        <script src="scripts/controllers/menu.js"></script>
-        <script src="scripts/filters/formatduration.js"></script>
-        <script src="scripts/controllers/csvupload.js"></script>
-        <script src="scripts/controllers/machineparameter.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/services/allocinewebservice.js"></script>
+    <script src="scripts/controllers/mymovies.js"></script>
+    <script src="scripts/controllers/loadfromdisk.js"></script>
+    <script src="scripts/controllers/parameters.js"></script>
+    <script src="scripts/controllers/searchlocalmovietoallocine.js"></script>
+    <script src="scripts/controllers/menu.js"></script>
+    <script src="scripts/filters/formatduration.js"></script>
+    <script src="scripts/controllers/csvupload.js"></script>
+    <script src="scripts/controllers/machineparameter.js"></script>
+    <!-- endbuild -->
         
 </body>
 </html>
