@@ -57,7 +57,7 @@ public class CSVParser {
 				movies.add(movie);
 			}
 		}
-		
+		reader.close();
 		return movies;
 	}
 	
