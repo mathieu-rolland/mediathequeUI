@@ -85,7 +85,7 @@ public class MoviesService {
 			@RequestBody   Movie  movie
 	){
 		
-		System.out.println( "Link movie " + movie );
+		logger.debug( "Link movie " + movie );
 		
 		if( movie != null  ){
 			try {
@@ -95,7 +95,7 @@ public class MoviesService {
 					movieResponse.setPath( movie.getPath() );
 					movieRepository.saveAndFlush( (Movie) movieResponse );
 				}
-				System.out.println( " Response : " + response.getMovie().getClass() );
+				logger.debug( " Response : " + response.getMovie().getClass() );
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 				return false;
