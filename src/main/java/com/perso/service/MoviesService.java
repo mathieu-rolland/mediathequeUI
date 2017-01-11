@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -92,6 +93,7 @@ public class MoviesService {
 				IMovieResponse response = api.getMovieDetails(movie);
 				if( response != null ){
 					ILocalMovie movieResponse = (ILocalMovie) response.getMovie();
+					movieResponse.setAddedDate( new Date() );
 					movieResponse.setPath( movie.getPath() );
 					movieRepository.saveAndFlush( (Movie) movieResponse );
 				}
