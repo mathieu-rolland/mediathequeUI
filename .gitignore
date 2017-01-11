@@ -16,3 +16,7 @@ mediathque-2016-10-13.log
 mediathque-2016-10-14.log
 src/main/resources/node_modules
 *.mp4
+/.apt_generated/
+.factorypath
+.settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.wst.common.project.facet.core.xml
