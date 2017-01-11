@@ -1,5 +1,6 @@
 package com.perso.model.impl;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +33,7 @@ public class Movie implements ILocalMovie{
 	private int code;
 	private String originalTitle;
 	private String title;
+	private Date addedDate;
 	
 	@ManyToOne(targetEntity=Machine.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL )
 	private IMachine machine;
@@ -219,6 +221,14 @@ public class Movie implements ILocalMovie{
 
 	public void setMachine(IMachine machine) {
 		this.machine = machine;
+	}
+
+	public Date getAddedDate() {
+		return addedDate;
+	}
+
+	public void setAddedDate(Date addedDate) {
+		this.addedDate = addedDate;
 	}
 	
 }
