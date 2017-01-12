@@ -93,7 +93,7 @@ public class MoviesService {
 				IMovieResponse response = api.getMovieDetails(movie);
 				if( response != null ){
 					ILocalMovie movieResponse = (ILocalMovie) response.getMovie();
-					movieResponse.setAddedDate( new Date() );
+					movieResponse.setLastSynchronizedDate( new Date() );
 					movieResponse.setPath( movie.getPath() );
 					movieRepository.saveAndFlush( (Movie) movieResponse );
 				}

@@ -33,7 +33,7 @@ public class Movie implements ILocalMovie{
 	private int code;
 	private String originalTitle;
 	private String title;
-	private Date addedDate;
+	private Date lastSynchronizedDate;
 	
 	@ManyToOne(targetEntity=Machine.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL )
 	private IMachine machine;
@@ -43,22 +43,22 @@ public class Movie implements ILocalMovie{
 	
 	private int year;
 	
-	@OneToOne(targetEntity=Release.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Release.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private IRelease releaseDate;
 	
-	@OneToOne(targetEntity=Casting.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Casting.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private ICasting casting;
 	
-	@OneToOne(targetEntity=Stats.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Stats.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private IStats statistiques;
 	
-	@OneToOne(targetEntity=Poster.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Poster.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private IPoster poster;
 	
-	@ManyToMany(targetEntity=AllocineLink.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL )
+	@ManyToMany(targetEntity=AllocineLink.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL )
 	private Collection<IAllocineLink> links;
 	
-	@ManyToMany(targetEntity=Genre.class, fetch = FetchType.EAGER , cascade = CascadeType.ALL )
+	@ManyToMany(targetEntity=Genre.class, fetch = FetchType.LAZY , cascade = CascadeType.ALL )
 	private Collection<IGenre> genre;
 	
 	@Column(columnDefinition = "TEXT")
@@ -223,12 +223,12 @@ public class Movie implements ILocalMovie{
 		this.machine = machine;
 	}
 
-	public Date getAddedDate() {
-		return addedDate;
+	public Date getLastSynchronizedDate() {
+		return lastSynchronizedDate;
 	}
 
-	public void setAddedDate(Date addedDate) {
-		this.addedDate = addedDate;
+	public void setLastSynchronizedDate(Date addedDate) {
+		this.lastSynchronizedDate = addedDate;
 	}
 	
 }

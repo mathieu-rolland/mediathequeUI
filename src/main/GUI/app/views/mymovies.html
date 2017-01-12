@@ -15,13 +15,21 @@
 
 	<div class="search result" ng-show="pageLoaded">
 			
-		<div>
+		<div class="my-movie-header">
 		
-			<label class="display-sort selected">de A à Z</label>
+			<label class="item display-sort selected">de A à Z</label>
 		
-			<label class="display-sort">Derniers ajoutés</label>
+			<label class="item display-sort">Derniers ajoutés</label>
 		
-			<label class="display-sort">Derniers sortis</label>
+			<label class="item display-sort">Derniers sortis</label>
+			
+			<div ng-class="searchClickedClass">
+				<input type="text" ng-model="search" 
+				   	ng-class="searchClickedClassInput"
+				   	value="{{searchAreaValue}}"
+				   	placeholder="Rechercher"/>
+				<p class="search-area" ng-click="toggleClickSearch()" ng-bind-html="searchDisplay" />
+			</div>
 		
 		</div>
 			
