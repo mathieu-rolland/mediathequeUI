@@ -10,6 +10,200 @@
 	
 }
 
+@-webkit-keyframes disable-margin {
+   0% {
+	margin-top: 3px; 
+  }
+
+  30% {
+    margin-top: 0px;
+  }
+  
+  100% {
+    margin-top: 0px;
+  }
+  
+}
+
+@keyframes disable-margin {
+   0% {
+	margin-top: 3px; 
+  }
+
+  30% {
+    margin-top: 0px;
+  }
+  
+  100% {
+    margin-top: 0px;
+  }
+}
+
+@-webkit-keyframes display-progressive {
+   0% {
+	opacity: 0; 
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes display-progressive {
+   0% {
+	opacity: 0; 
+  }
+
+  100% {
+    opacity: 1;
+  }
+  
+}
+
+@-webkit-keyframes hidden-progressive {
+   0% {
+	opacity: 1; 
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hidden-progressive {
+   0% {
+	opacity: 1; 
+  }
+
+  100% {
+    opacity: 0;
+  }
+  
+}
+
+@-webkit-keyframes resize-input {
+   0% {
+	width: 76px;
+	background: #202020;
+	opacity:0;
+  }
+
+  20%{
+    border-radius: 15px;
+    padding-left: 10px;
+  }
+
+  40%{
+  	opacity:1;
+  }
+
+  100% {
+    width: 280px;
+    border-radius: 15px;
+    padding-left: 5px;
+    background:black;
+    padding-left: 10px;
+  }
+  
+}
+
+@keyframes resize-input {
+   0% {
+	width: 76px;
+	background: #202020;
+	opacity:0;
+  }
+
+  20%{
+    border-radius: 15px;
+    padding-left: 10px;
+  }
+
+  40%{
+  	opacity:1;
+  }
+
+  100% {
+    width: 280px;
+    border-radius: 15px;
+    padding-left: 5px;
+    background:black;
+    padding-left: 10px;
+  }
+  
+}
+
+.searchAreaInput{
+	float:left;
+	-webkit-animation: resize-input 10s;
+	animation: disable-margin 10s;
+	background: transparent;
+	-webkit-animation: resize-input 2s;
+     animation-fill-mode:forwards;
+     color: white;
+     border:none;
+}
+
+.searchAreaInput:focus{
+	outline: none;
+}
+
+.searchAreaInputHidden{
+	visibility:hidden;
+	float:left;
+	width: 0px;
+	border: none;
+}
+
+.my-movie-header{
+
+	overflow: hidden;
+	height: 26px;
+	
+	.item{
+		float:left;
+		margin-top: 3px;
+	}
+	.item::after{
+		clear:both;
+	}
+	
+	p{
+		margin: 0px;
+	}
+}
+
+.search-area{
+
+	margin: 0px;
+	float:left;
+	
+	img {
+	  -webkit-animation: display-progressive 2s;
+	  animation: display-progressive 2s;
+	  animation-fill-mode:forwards;
+	  -webkit-animation-fill-mode:forwards;
+	  display: inline-block;
+	  width: 20px;
+	  height:20px;
+	  margin-left: 5px;
+	}
+}
+
+.search-area:hover{
+	cursor: pointer;
+}
+
+.search-in-mediatheque{
+	margin-top: 3px;
+}
+
+.search-in-mediatheque.click{
+  -webkit-animation: disable-margin 2s;
+  animation-fill-mode:forwards;
+  -webkit-animation-fill-mode:forwards;
+  display: inline-block;
+
+}
+
 .MyMovies.movie{
 
 	.synchronied{

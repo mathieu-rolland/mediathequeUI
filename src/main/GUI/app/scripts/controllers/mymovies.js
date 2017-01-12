@@ -11,6 +11,8 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 	
 	$scope.playIsDemand = false;
 	
+	var defaultSearchText = 'Rechercher';
+	
 	var myMovieCallback = function(response){
 		console.log(response);
 		 $scope.movies = {
@@ -121,5 +123,22 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 		}
 		
 	}
+	
+	$scope.searchDisplay = defaultSearchText;
+	$scope.searchClickedClass = 'search-in-mediatheque';
+	$scope.searchClickedClassInput = 'searchAreaInputHidden';
+	$scope.toggleClickSearch = function(){
+		
+		if( $scope.searchClickedClass === 'search-in-mediatheque'){
+			$scope.searchDisplay = '<img src="images/white-search.png" alt="" alt/>';
+			$scope.searchClickedClass = 'search-in-mediatheque click';
+			$scope.searchClickedClassInput = 'searchAreaInput';
+		}
+		else{
+			$scope.searchDisplay = defaultSearchText;
+			$scope.searchClickedClass = 'search-in-mediatheque';
+			$scope.searchClickedClassInput = 'searchAreaInputHidden';
+		}
+	};
 	
 }]);
