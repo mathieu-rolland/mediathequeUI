@@ -162,6 +162,11 @@
 		float:left;
 		margin-top: 3px;
 	}
+	
+	.item:hover{
+		color : #A3A3A3;
+	}
+	
 	.item::after{
 		clear:both;
 	}
@@ -190,6 +195,8 @@
 
 .search-area:hover{
 	cursor: pointer;
+	color : #A3A3A3;
+	
 }
 
 .search-in-mediatheque{
@@ -197,6 +204,7 @@
 }
 
 .search-in-mediatheque.click{
+  color : #A3A3A3;
   -webkit-animation: disable-margin 2s;
   animation-fill-mode:forwards;
   -webkit-animation-fill-mode:forwards;
