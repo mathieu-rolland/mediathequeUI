@@ -134,12 +134,20 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
         	}
         	
         	if( $scope.search !== '' || $scope.searchClickedClassInput === "searchAreaInput" ){
-        		$scope.toggleClickSearch();
+        		if( $scope.searchClickedClassInput === "searchAreaInput"  ){
+        			$scope.toggleClickSearch();
+        		}
         		$scope.search = "";
         		$scope.$apply();
         	}
         	
         }
+		if ( event.key === "F3" || (event.ctrlKey && event.keyCode === 70 ) ) {  // CTRL-F press or F3
+    		$scope.toggleClickSearch();
+    		$scope.$apply();
+    		event.preventDefault();
+    	}
+		
     });
 	
 	$scope.searchDisplay = defaultSearchText;
