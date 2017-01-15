@@ -1,0 +1,30 @@
+2017-01-12 20:16:41 [main] DEBUG c.a.allocine.decod.impl.MovieDecoder - Movie [
+code=34917,
+ originalTitle=null,
+  title=Minority Report, 
+  keywords=[], year=2002,
+  release=
+  releaseDate : null, 
+  casting=Casting 
+  [
+  	actors=[Tom Cruise, Kathryn Morris, Colin Farrell, Samantha Morton, Peter Stormare], 
+  	directors=[Steven Spielberg]
+  ], 
+  statistiques=
+  Stats [userRating=3.97574687, pressRating=4.407407], 
+  poster=Poster [path=null, href=http://fr.web.img1.acsta.net/medias/nmedia/00/02/43/42/affiche.jpg], 
+  links=[
+  	AllocineLink [rel=aco:web, href=http://www.allocine.fr/film/fichefilm_gen_cfilm=34917.html], 
+  	AllocineLink [rel=aco:web_casting, href=http://www.allocine.fr/film/fichefilm-34917/casting/], 
+  	AllocineLink [rel=aco:web_trivia, href=http://www.allocine.fr/film/fichefilm-34917/secrets-tournage/], 
+  	AllocineLink [rel=aco:web_showtimes, href=http://www.allocine.fr/seance/film-34917/], 
+  	AllocineLink [rel=aco:web_publicreviews, href=http://www.allocine.fr/film/fichefilm-34917/critiques/spectateurs/],
+  	AllocineLink [rel=aco:web_pressreviews, href=http://www.allocine.fr/film/fichefilm-34917/critiques/presse/], 
+  	AllocineLink [rel=aco:web_shots, href=http://www.allocine.fr/film/fichefilm-34917/photos/], 
+  	AllocineLink [rel=aco:web_trailers, href=http://www.allocine.fr/videos/fichefilm-34917/toutes/], 
+  	AllocineLink [rel=aco:web_products, href=http://www.allocine.fr/film/fichefilm-34917/vod-dvd/]
+  ], 
+  genre=[com.api.allocine.model.impl.Genre@2b98378d], 
+  synospis=A Washington, en 2054, la sociÃ©tÃ© du futur a Ã©radiquÃ© le meurtre en se dotant du systÃ¨me de prÃ©vention / dÃ©tection / rÃ©pression le plus sophistiquÃ© du monde. DissimulÃ©s au coeur du MinistÃ¨re de la Justice, trois extra-lucides captent les signes prÃ©curseurs des violences homicides et en adressent les images Ã  leur contrÃ´leur, John Anderton, le chef de la "PrÃ©crime" devenu justicier aprÃ¨s la disparition tragique de son fils. Celui-ci n'a alors plus qu'Ã  lancer son escouade aux trousses du "coupable"...<br />Mais un jour se produit l'impensable : l'ordinateur lui renvoie sa propre image. D'ici 36 heures, Anderton aura assassinÃ© un parfait Ã©tranger. Devenu la cible de ses propres troupes, Anderton prend la fuite. Son seul espoir pour dÃ©jouer le complot : dÃ©nicher sa future victime ; sa seule arme : les visions parcellaires, Ã©nigmatiques, de la plus fragile des PrÃ©-Cogs : Agatha., duration=8700]
+
+A Washington, en 2054, la sociÃ©tÃ© du futur a Ã©radiquÃ© le meurtre en se dotant du systÃ¨me de prÃ©vention / dÃ©tection / rÃ©pression le plus sophistiquÃ© du monde. DissimulÃ©s au coeur du MinistÃ¨re de la Justice, trois extra-lucides captent les signes prÃ©curseurs des violences homicides et en adressent les images Ã  leur contrÃ´leur, John Anderton, le chef de la "PrÃ©crime" devenu justicier aprÃ¨s la disparition tragique de son fils. Celui-ci n'a alors plus qu'Ã  lancer son escouade aux trousses du "coupable"...<br />Mais un jour se produit l'impensable : l'ordinateur lui renvoie sa propre image. D'ici 36 heures, Anderton aura assassinÃ© un parfait Ã©tranger. Devenu la cible de ses propres troupes, Anderton prend la fuite. Son seul espoir pour dÃ©jouer le complot : dÃ©nicher sa future victime ; sa seule arme : les visions parcellaires, Ã©nigmatiques, de la plus fragile des PrÃ©-Cogs : Agatha.
