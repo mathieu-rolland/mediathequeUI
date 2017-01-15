@@ -7,7 +7,7 @@
  * # MymoviesCtrl
  * Controller of the mediathequeUiApp
  */
-angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce' , 'AllocineWebService' , 'localStorageService' , function ( $scope , $sce ,  AllocineWebService, localStorageService) {
+angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce' , 'AllocineWebService' , 'localStorageService' , '$document' , function ( $scope , $sce ,  AllocineWebService, localStorageService, $document) {
 	
 	$scope.playIsDemand = false;
 	
@@ -86,7 +86,6 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 	}
 	
 	$scope.closePopup = function(){
-		console.log('Close popup!');
 		$scope.selectedMovie = undefined;
 		$scope.isSelectedMovie = false;
 	}
@@ -123,6 +122,25 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 		}
 		
 	}
+	
+	$document.bind("keydown keypress", function(event) {
+
+		if( event.keyCode === 27 ){ //escape press
+        	
+        	if( $scope.isSelectedMovie ){
+        		$scope.closePopup();
+        		$scope.$apply();
+        		return;
+        	}
+        	
+        	if( $scope.search !== '' || $scope.searchClickedClassInput === "searchAreaInput" ){
+        		$scope.toggleClickSearch();
+        		$scope.search = "";
+        		$scope.$apply();
+        	}
+        	
+        }
+    });
 	
 	$scope.searchDisplay = defaultSearchText;
 	$scope.searchClickedClass = 'search-in-mediatheque';
