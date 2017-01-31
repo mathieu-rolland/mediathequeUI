@@ -12,4 +12,6 @@ public interface IMachine {
 	public void setName(String name);
 	public int getPort();
 	public void setPort(int port);
+	public void setPath(String path);
+	public String getPath();
 }
