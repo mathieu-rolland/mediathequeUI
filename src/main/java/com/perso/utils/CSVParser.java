@@ -6,13 +6,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.activation.UnsupportedDataTypeException;
 
-import com.api.allocine.factory.IFactory;
 import com.api.allocine.model.IMovie;
 import com.perso.factory.IMediathequeFactory;
 import com.perso.model.ILocalMovie;

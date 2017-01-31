@@ -97,13 +97,20 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 	
 	/*Composent video*/
 	$scope.readMovie = function(){
-		console.log($scope.selectedMovie);
+		
+		var fileName = $scope.selectedMovie.path.split('/').reverse()[0];
+		
+		console.log( "Start to read movie " + fileName );
+		
 		$scope.playIsDemand = true;
 		$scope.isSelectedMovie = false;
 		if( angular.isDefined( $scope.selectedMovie ) ){
 			$scope.config = {
 					sources: [
-						{src: $sce.trustAsResourceUrl("assets/" + "Mr Robot S02E05 Truefrench WEBrip 720p x264 AAC SBZ.mp4" /*$scope.selectedMovie.namedInCache*/ ), type: /*$scope.selectedMovie.videoType*/ 'video/mp4' }
+							{
+								src: $sce.trustAsResourceUrl("assets/Films/" + fileName ),
+								type: 'video/mp4'
+							}
 					],
 					theme: "bower_components/videogular-themes-default/videogular.css",
 					plugins: {
@@ -126,7 +133,12 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 	$document.bind("keydown keypress", function(event) {
 
 		if( event.keyCode === 27 ){ //escape press
-        	
+
+			if( $scope.playIsDemand ){
+				$scope.closePlayer();
+				return;
+			}
+			
         	if( $scope.isSelectedMovie ){
         		$scope.closePopup();
         		$scope.$apply();

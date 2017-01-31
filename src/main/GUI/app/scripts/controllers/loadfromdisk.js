@@ -42,6 +42,7 @@ angular.module('mediathequeUiApp')
 		  localStorageService.set('searchOnDisk-result' , response.movies );
 		  localStorageService.set( 'searchOnDisk-lastDate' , new Date().getTime() );
 		  $scope.pageLoaded = true;
+		  console.log( response.movies );
 	  };
 	  
 	  
@@ -50,13 +51,50 @@ angular.module('mediathequeUiApp')
 		    $scope.pageLoaded = false;
 			console.log('search : ' + search );
 			localStorageService.set('search-path' , search );
-			console.log( AllocineWebService.loadDisk( search , responseCallBack) );
+			if( $scope.selectedMachine === 'Local' ){
+				console.log( AllocineWebService.loadDisk( search , responseCallBack) );
+			}else{
+				console.log("Use FTP query to load movie");
+				AllocineWebService.listMoviesOnMachines( $scope.selectedMachine, search , responseCallBack );
+			}
 	  };
 	  
 	  $scope.searchMovieInAllocine = function( movie ){
 		  $rootScope.movie = movie;
 		  $location.path('/load-disk/search');
 	  };
+	  
+	  var machineResponseCallback = function( response ){
+		  if( response.errorCode === 0 ){
+			  $scope.machines = response.data;
+			  console.log("Machines list is");
+			  console.log( response.data );
+		  }else{
+			  console.log( "Error " + response.errorDesc );
+		  }
+	  }
+	  
+	  /*Get availabale machines*/
+	  $scope.getMachines = function(){
+		  AllocineWebService.listAllMachines( machineResponseCallback );
+	  };
+	  
+	  $scope.selectedMachine = {
+			  "ip":"Local"
+	  };
+	  
+	  $scope.selectMachine = function(machine){
+		  if(machine === "Local" ){
+			  $scope.selectedMachine = {
+					  "ip":"Local"
+			  };
+		  }else{
+			  $scope.selectedMachine = machine;
+		  }
+	  };
+	  
+	  /*Load machines*/
+	  $scope.getMachines();
 	  
 	  /*Find last search : */
 	  var lastPathSearch = localStorageService.get('search-path');
@@ -86,6 +124,5 @@ angular.module('mediathequeUiApp')
 		  }else{
 			  $scope.searchOnDisk( lastPathSearch );
 		  }
-		  
 	  }
  }]);

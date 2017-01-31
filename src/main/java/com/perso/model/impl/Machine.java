@@ -20,6 +20,7 @@ public class Machine implements IMachine {
 	private String user;
 	private String password;
 	private int port;
+	private String path;
 	
 	@OneToMany(targetEntity=Movie.class, mappedBy="machine", fetch=FetchType.EAGER, cascade = CascadeType.ALL )
 	private Collection<IMovie> movies;
@@ -58,6 +59,12 @@ public class Machine implements IMachine {
 	}
 	public void setPort(int port) {
 		this.port = port;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 }
