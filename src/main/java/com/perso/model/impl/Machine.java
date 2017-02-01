@@ -14,15 +14,16 @@ import com.perso.model.IMachine;
 @Entity
 public class Machine implements IMachine {
 
-	@Id
 	private String ip;
+	
+	@Id
 	private String name;
 	private String user;
 	private String password;
 	private int port;
 	private String path;
 	
-	@OneToMany(targetEntity=Movie.class, mappedBy="machine", fetch=FetchType.EAGER, cascade = CascadeType.ALL )
+	@OneToMany(targetEntity=Movie.class, mappedBy="machine", fetch=FetchType.LAZY, cascade = CascadeType.ALL )
 	private Collection<IMovie> movies;
 	
 	public String getIp() {
@@ -60,9 +61,11 @@ public class Machine implements IMachine {
 	public void setPort(int port) {
 		this.port = port;
 	}
+	
 	public String getPath() {
 		return path;
 	}
+	
 	public void setPath(String path) {
 		this.path = path;
 	}
