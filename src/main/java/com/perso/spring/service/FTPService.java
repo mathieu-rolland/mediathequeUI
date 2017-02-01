@@ -2,7 +2,6 @@ package com.perso.spring.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -30,6 +29,7 @@ public class FTPService {
 		
 		FTPClient ftpClient = new FTPClient();
 		List<IMovie> movies = new ArrayList<IMovie>();
+        ftpClient.setAutodetectUTF8(true);
 		try {
             ftpClient.connect(machine.getIp(), machine.getPort());
             showServerReply(ftpClient);
@@ -49,12 +49,8 @@ public class FTPService {
             ftpClient.enterLocalPassiveMode();
             logger.info( "Search file in " + machine.getPath() );
             
-            movies = getAllFiles(ftpClient , new ArrayList<IMovie>() , machine.getPath() );
-            if( logger.isDebugEnabled() ){
-	            for(IMovie movie : movies){
-	            	logger.debug("Found : " + movie.getTitle());
-	            }
-            }
+            movies = getAllFiles(ftpClient , machine.getPath() );
+
             ftpClient.logout();
             showServerReply(ftpClient);
             ftpClient.disconnect();
@@ -68,23 +64,23 @@ public class FTPService {
 		return  movies;
 	}
 
-	private List<IMovie> getAllFiles(FTPClient ftpClient, List<IMovie> files, String directory) throws IOException{
-		if( directory != null ){
-			FTPFile[] directories = ftpClient.listDirectories( directory );
-			for( FTPFile ftpDirectory : directories ){
-				logger.debug( "Search into " + directory + "/" + ftpDirectory.getName() );
-				files.addAll( getAllFiles(ftpClient, files, directory + "/" + ftpDirectory.getName() ) );
-			}
-		}
+	private List<IMovie> getAllFiles(FTPClient ftpClient, String directory) throws IOException{
+		
+		ArrayList<IMovie> files = new ArrayList<IMovie>();
 		FTPFile[] filesInFTP = ftpClient.listFiles( directory );
 		if( filesInFTP != null ){
 			for( FTPFile ftpFile : filesInFTP ){
-				logger.debug( "Search info about " + directory + "/" + ftpFile.getName() );
-				ILocalMovie movie = factory.createLocalMovie();
-				movie.setPath( directory + "/" + ftpFile.getName() );
-				movie.setTitle( ftpFile.getName() );
-				files.add( movie );
-				showServerReply(ftpClient);
+				if ( ftpFile.isDirectory() ){
+					logger.debug(ftpFile.getName() + " is a directory");
+					files.addAll( getAllFiles(ftpClient, directory + "/" + ftpFile.getName() ) );
+				}else{
+					logger.debug( "Search info about " + directory + "/" + ftpFile.getName() );
+					ILocalMovie movie = factory.createLocalMovie();
+					movie.setPath( directory + "/" + ftpFile.getName() );
+					movie.setTitle( ftpFile.getName() );
+					files.add( movie );
+					showServerReply(ftpClient);
+				}
 			}
 		}
 		return files;
