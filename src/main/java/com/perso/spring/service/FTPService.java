@@ -14,8 +14,15 @@ import org.springframework.stereotype.Service;
 
 import com.api.allocine.model.IMovie;
 import com.perso.factory.IMediathequeFactory;
+import com.perso.manager.movies.MoviesLoader;
 import com.perso.model.ILocalMovie;
 import com.perso.model.IMachine;
+import com.perso.model.IParameter;
+import com.perso.model.IRegexParameter;
+import com.perso.model.impl.Parameter;
+import com.perso.repository.MovieRepository;
+import com.perso.repository.ParametersRepository;
+import com.perso.service.MoviesService;
 
 @Service
 public class FTPService {
@@ -25,11 +32,24 @@ public class FTPService {
 	@Autowired
 	private IMediathequeFactory factory;
 	
-	public List<IMovie> listMovieOnFTPServer(IMachine machine){
+	@Autowired
+	private MovieRepository movieRepository;
+	
+	@Autowired
+	private ParametersRepository paramRepository;
+	
+	public List<ILocalMovie> listMovieOnFTPServer(IMachine machine){
 		
 		FTPClient ftpClient = new FTPClient();
-		List<IMovie> movies = new ArrayList<IMovie>();
+		List<ILocalMovie> movies = new ArrayList<ILocalMovie>();
         ftpClient.setAutodetectUTF8(true);
+        
+        List<Parameter> paramsInclude = paramRepository.findByName("movie.include");
+        List<Parameter> paramsRegex = paramRepository.findByName("movie.regex");
+        
+        List<IRegexParameter> allRegex = MoviesLoader.generateRegexFromParameter( factory , paramsRegex );
+       
+        
 		try {
             ftpClient.connect(machine.getIp(), machine.getPort());
             showServerReply(ftpClient);
@@ -49,7 +69,7 @@ public class FTPService {
             ftpClient.enterLocalPassiveMode();
             logger.info( "Search file in " + machine.getPath() );
             
-            movies = getAllFiles(ftpClient , machine.getPath() );
+            movies = getAllFiles(ftpClient , machine.getPath() , paramsInclude, allRegex);
 
             ftpClient.logout();
             showServerReply(ftpClient);
@@ -61,29 +81,45 @@ public class FTPService {
             return null;
         }
 		logger.info("End of FTP process");
-		return  movies;
+		
+		/*Filter and rename with parameters in db*/
+		return MoviesLoader.findSynchronizedMovies( movieRepository ,  movies );
 	}
 
-	private List<IMovie> getAllFiles(FTPClient ftpClient, String directory) throws IOException{
+	private List<ILocalMovie> getAllFiles(FTPClient ftpClient, String directory, List<Parameter> paramInclude, List<IRegexParameter> allRegex) throws IOException{
 		
-		ArrayList<IMovie> files = new ArrayList<IMovie>();
+		ArrayList<ILocalMovie> files = new ArrayList<ILocalMovie>();
 		FTPFile[] filesInFTP = ftpClient.listFiles( directory );
 		if( filesInFTP != null ){
 			for( FTPFile ftpFile : filesInFTP ){
 				if ( ftpFile.isDirectory() ){
 					logger.debug(ftpFile.getName() + " is a directory");
-					files.addAll( getAllFiles(ftpClient, directory + "/" + ftpFile.getName() ) );
+					files.addAll( getAllFiles(ftpClient, directory + "/" + ftpFile.getName() , paramInclude , allRegex ) );
 				}else{
-					logger.debug( "Search info about " + directory + "/" + ftpFile.getName() );
-					ILocalMovie movie = factory.createLocalMovie();
-					movie.setPath( directory + "/" + ftpFile.getName() );
-					movie.setTitle( ftpFile.getName() );
-					files.add( movie );
-					showServerReply(ftpClient);
+					if( isInclude( ftpFile.getName() , paramInclude ) ) {
+						logger.debug( "Search info about " + directory + "/" + ftpFile.getName() );
+						ILocalMovie movie = factory.createLocalMovie();
+						movie.setPath( directory + "/" + ftpFile.getName() );
+						movie.setTitle( ftpFile.getName() );
+						MoviesLoader.preformateMovieName(movie, allRegex);
+						files.add( movie );
+						showServerReply(ftpClient);
+					}
 				}
 			}
 		}
 		return files;
+	}
+	
+	private boolean isInclude(String filename, List<Parameter> paramInclude){
+		
+		for(Parameter extension : paramInclude ){
+			if( filename.endsWith(extension.getValue()) ){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	private void showServerReply(FTPClient ftpClient) {
