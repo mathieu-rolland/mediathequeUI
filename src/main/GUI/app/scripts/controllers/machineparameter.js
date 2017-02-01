@@ -12,6 +12,10 @@ angular.module('mediathequeUiApp')
 
 	  //Variables communes :
 	  $scope.machines = [];
+	  var textActionButtonAdd    = "Ajouter cette machine";
+	  var textActionButtonUpdate = "Mettre à jour ";
+	  /*Default value*/
+	  $scope.actionButton = textActionButtonAdd;
 	  
 	  //Fonction callback :
 	  var addMachineCallback = function(response){
@@ -24,10 +28,11 @@ angular.module('mediathequeUiApp')
 	  
 	  var listAllMachinesCallback = function( response ){
 		  if( response != null ){
-			  
 			  if( response.errorCode  == 0 ){
 				  if( angular.isDefined(response.data) ){
 					  $scope.machines = response.data;
+					  $scope.newMachine = {};
+					  $scope.actionButton = textActionButtonAdd;
 				  }
 			  }
 			  
@@ -42,6 +47,10 @@ angular.module('mediathequeUiApp')
 		  AllocineWebService.addMachine( newMachine , addMachineCallback );
 	  }
 	  
-	  
+	  $scope.update = function( machine ){
+		  console.log( machine );
+		  $scope.newMachine = machine;
+		  $scope.actionButton = textActionButtonUpdate;
+	  }
 	  
   });

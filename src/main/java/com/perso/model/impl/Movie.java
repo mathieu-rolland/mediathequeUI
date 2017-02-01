@@ -1,8 +1,8 @@
 package com.perso.model.impl;
 
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -35,7 +36,8 @@ public class Movie implements ILocalMovie{
 	private String title;
 	private Date lastSynchronizedDate;
 	
-	@ManyToOne(targetEntity=Machine.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL )
+	@ManyToOne(targetEntity=Machine.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL )
+	@JoinColumn(name="name")
 	private IMachine machine;
 	
 	@Transient
