@@ -92,7 +92,6 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 	
 	$scope.onPlayerReady = function(API) {
 		videoApi = API;
-		console.log(videoApi);
     };
 	
 	/*Composent video*/
@@ -117,11 +116,15 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 						poster: $scope.selectedMovie.poster.href,
 						controls: {
 	                        autoHide: true,
-	                        autoHideTime: 50
+	                        autoHideTime: 2000
+	                    },
+	                    autohideCursor: {
+	                    	enabled: true,
+	                    	time: 2000
 	                    }
 					}
 				};
-			console.log($sce);
+			console.log($scope.config);
 		}
 		
 		if( videoApi != null ){
