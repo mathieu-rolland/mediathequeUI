@@ -155,7 +155,7 @@ public class MoviesService {
 	
 	@RequestMapping(value = "my-movie/machine/search", method = {RequestMethod.GET, RequestMethod.POST}, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<IMovie> getMoviesOnMachine( @RequestBody Machine machine ){
+	public List<ILocalMovie> getMoviesOnMachine( @RequestBody Machine machine ){
 		
 		logger.info( "Start to listing movies on machine " + machine + " located on " + machine.getPath() );
 		return ftpService.listMovieOnFTPServer( machine );
