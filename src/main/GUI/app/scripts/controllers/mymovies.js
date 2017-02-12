@@ -181,6 +181,7 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 			$scope.searchDisplay = '<img src="images/white-search.png" alt="" alt/>';
 			$scope.searchClickedClass = 'search-in-mediatheque click';
 			$scope.searchClickedClassInput = 'searchAreaInput';
+			setTimeout(function(){angular.element('#searchMovieInputId').focus();},100);
 		}
 		else{
 			$scope.searchDisplay = defaultSearchText;
