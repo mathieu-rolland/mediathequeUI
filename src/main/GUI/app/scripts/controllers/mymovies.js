@@ -133,6 +133,13 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 		
 	}
 	
+	angular.element(window).on('mousewheel', function(event){
+		//if popup displayed : stop scroll
+		if( $scope.playIsDemand || $scope.isSelectedMovie ){
+			event.preventDefault();
+		}
+	});
+	
 	$document.bind("keydown keypress", function(event) {
 
 		if( event.keyCode === 27 ){ //escape press
