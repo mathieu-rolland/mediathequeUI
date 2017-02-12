@@ -182,12 +182,70 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 			$scope.searchClickedClass = 'search-in-mediatheque click';
 			$scope.searchClickedClassInput = 'searchAreaInput';
 			setTimeout(function(){angular.element('#searchMovieInputId').focus();},100);
+			$scope.changeDisplayMode('displayMode1', 1);
 		}
 		else{
 			$scope.searchDisplay = defaultSearchText;
 			$scope.searchClickedClass = 'search-in-mediatheque';
 			$scope.searchClickedClassInput = 'searchAreaInputHidden';
 		}
+	};
+	
+	/*Change display mode : */
+	var displayModeConfig = {
+			displayMode1:{
+				name: 'movies-list',
+				params: {
+					sortKey: 'title',
+					quantity:9999,
+					reverseOrder: false,
+					movieComparator: ''
+				}
+			},
+			displayMode2: {
+				name : 'last-added',
+				params: {
+					sortKey: 'lastSynchronizedDate',
+					quantity: 10,
+					reverseOrder: true,
+					movieComparator: 'myMovieDateComparator',
+				}
+			},
+			displayMode3: {
+				name : 'last-release',
+				params: {
+					sortKey: 'year',
+					quantity: 10,
+					reverseOrder: true,
+					movieComparator: 'myMovieDateComparator',
+				}
+			},
+			currentDisplayMode : 'displayMode1'
+		};
+		
+	 $scope.changeDisplayMode = function( mode , labelNumber){
+		console.log('change display mode to ' + mode);
+		var displayModeParams = displayModeConfig[mode];
+		
+		if( displayModeParams == null ){
+			console.log('The ' + mode + ' is not available' );
+			return;
+		}
+
+		if( $scope.searchClickedClassInput !== 'searchAreaInputHidden'
+			&& mode !== "displayMode1" ){
+			$scope.toggleClickSearch();
+		}
+		
+		/*Update view : */
+		angular.element('div.my-movie-header > label').removeClass('selected');
+		angular.element('div.my-movie-header > label:nth-child('+labelNumber+')').addClass('selected');
+		
+		$scope.numberOfDisplayMovie = displayModeParams.params.quantity;
+		$scope.sortKey = displayModeParams.params.sortKey;
+		$scope.reverseOrder = displayModeParams.params.reverseOrder;
+		$scope.movieComparator = displayModeParams.params.movieComparator;
+		
 	};
 	
 }]);

@@ -17,11 +17,11 @@
 			
 		<div class="my-movie-header">
 		
-			<label class="item display-sort selected">de A à Z</label>
+			<label class="item display-sort selected" ng-click='changeDisplayMode("displayMode1", 1)'>de A à Z</label>
 		
-			<label class="item display-sort">Derniers ajoutés</label>
+			<label class="item display-sort" ng-click='changeDisplayMode("displayMode2", 2)'>Derniers ajoutés</label>
 		
-			<label class="item display-sort">Derniers sortis</label>
+			<label class="item display-sort" ng-click='changeDisplayMode("displayMode3", 3)'>Derniers sortis</label>
 			
 			<div ng-class="searchClickedClass">
 				<input type="text" ng-model="search" 
@@ -33,8 +33,9 @@
 			</div>
 		
 		</div>
-			
-		<div class="MyMovies movie" ng-repeat="movie in movies.list | filter:search | orderBy: sortKey ">
+		
+		<!--	sortKey:reverseOrder:movieComparator -->
+		<div class="MyMovies movie" ng-repeat="movie in movies.list | filter:search | orderBy:sortKey:reverseOrder  | limitTo: numberOfDisplayMovie">
 			
 			<div class="preview" ng-click="displayInPopup(movie)">
 				<img ng-src="{{movie.poster.href}}">
