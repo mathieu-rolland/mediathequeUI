@@ -79,30 +79,17 @@
   
 }
 
-@-webkit-keyframes resize-input {
-   0% {
-	width: 76px;
-	background: #202020;
-	opacity:0;
-  }
-
-  20%{
-    border-radius: 15px;
-    padding-left: 10px;
-  }
-
-  40%{
-  	opacity:1;
+@keyframes resize-movie-preview {
+    0% {
+   	 width: 180px;
+   	 margin: 0px;
   }
 
   100% {
-    width: 280px;
-    border-radius: 15px;
-    padding-left: 5px;
+    width: 160px;
     background:black;
-    padding-left: 10px;
+	margin:10px;
   }
-  
 }
 
 @keyframes resize-input {
@@ -176,6 +163,7 @@
 	
 	.item:hover{
 		color : #A3A3A3;
+		cursor: pointer;
 	}
 	
 	.item::after{
@@ -242,6 +230,7 @@
 			width: 180px;
 			max-height: 240px;
 			min-height: 100px;
+			
 		}
 		
 		padding: 10px;
