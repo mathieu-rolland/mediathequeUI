@@ -2,7 +2,6 @@ package com.perso.factory.impl;
 
 import java.io.File;
 import java.lang.reflect.Type;
-import java.sql.Date;
 
 import com.api.allocine.IAllocineAPI;
 import com.api.allocine.IAllocineAPI.RESPONSE_FORMAT;
