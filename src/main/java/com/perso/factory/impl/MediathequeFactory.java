@@ -2,6 +2,7 @@ package com.perso.factory.impl;
 
 import java.io.File;
 import java.lang.reflect.Type;
+import java.sql.Date;
 
 import com.api.allocine.IAllocineAPI;
 import com.api.allocine.IAllocineAPI.RESPONSE_FORMAT;
@@ -42,6 +43,7 @@ import com.perso.model.impl.Release;
 import com.perso.model.impl.Result;
 import com.perso.model.impl.SearchResponse;
 import com.perso.model.impl.Stats;
+import com.perso.serializer.DateDeserializer;
 import com.perso.serializer.HibernateProxyTypeAdapter;
 import com.perso.serializer.InterfaceSerializer;
 
@@ -149,6 +151,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		decoder.addTypeAdapter( IGenre.class , new InterfaceSerializer<Genre>( this, decoder ) );
 		decoder.addTypeAdapter( IChapter.class , new InterfaceSerializer<Chapter>( this, decoder ) );
 		decoder.addTypeAdapter( ISerie.class , new InterfaceSerializer<Serie>( this, decoder ) );
+		decoder.addTypeAdapter( java.util.Date.class,  new DateDeserializer() );
 		decoder.addTypeAdapter( IMachine.class , new AllocineInstanceCreator<Machine>( this ) );
 		decoder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
 		return decoder;
@@ -171,8 +174,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 
 	@Override
 	public ISerie createSerie() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Serie();
 	}
 
 	@Override
