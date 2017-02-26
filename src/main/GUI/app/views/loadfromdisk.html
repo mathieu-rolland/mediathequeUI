@@ -40,16 +40,30 @@
 	
 	
 	<div ng-show="pageLoaded">
+		
+		<h2>A ajouter : </h2>
+		
 		<table>
-			<tr ng-repeat="movie in movies.list" ng-class="{synchronized:movie.isSynchronized}">
+			<tr ng-repeat="movie in movies.list | filter:movie.isSynchronized == true | orderBy:title" ng-class="{synchronized:movie.isSynchronized}">
 				<td>{{movie.path}}</td>
 				<td>{{movie.title}}</td>
 				<td>
-					<a ng-if="!movie.isSynchronized" class="btn btn-lg btn-success" type="button" ng-click="searchMovieInAllocine(movie);">Search in allocine</a>
-					<a ng-if="movie.isSynchronized" class="btn btn-lg btn-warning" type="button" ng-click="searchMovieInAllocine(movie);">Update in allocine</a>
+					<a class="btn btn-lg btn-success" type="button" ng-click="searchMovieInAllocine(movie);">Search in allocine</a>
 				</td>
 			</tr>
 		</table>
+		
+		<h2>A mettre à jour : </h2>
+		<table>
+			<tr ng-repeat="movie in movies.list | filter:movie.isSynchronized != true" ng-class="{synchronized:movie.isSynchronized}">
+				<td>{{movie.path}}</td>
+				<td>{{movie.title}}</td>
+				<td>
+					<a class="btn btn-lg btn-warning" type="button" ng-click="searchMovieInAllocine(movie);">Update in allocine</a>
+				</td>
+			</tr>
+		</table>
+		
 	</div>
 
 </div>	

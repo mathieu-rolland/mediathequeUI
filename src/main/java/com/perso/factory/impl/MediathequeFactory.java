@@ -43,7 +43,7 @@ import com.perso.model.impl.Release;
 import com.perso.model.impl.Result;
 import com.perso.model.impl.SearchResponse;
 import com.perso.model.impl.Stats;
-import com.perso.serializer.DateDeserializer;
+import com.perso.serializer.DateSerializer;
 import com.perso.serializer.HibernateProxyTypeAdapter;
 import com.perso.serializer.InterfaceSerializer;
 
@@ -151,7 +151,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		decoder.addTypeAdapter( IGenre.class , new InterfaceSerializer<Genre>( this, decoder ) );
 		decoder.addTypeAdapter( IChapter.class , new InterfaceSerializer<Chapter>( this, decoder ) );
 		decoder.addTypeAdapter( ISerie.class , new InterfaceSerializer<Serie>( this, decoder ) );
-		decoder.addTypeAdapter( java.util.Date.class,  new DateDeserializer() );
+		decoder.addTypeAdapter( java.util.Date.class,  new DateSerializer() );
 		decoder.addTypeAdapter( IMachine.class , new AllocineInstanceCreator<Machine>( this ) );
 		decoder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
 		return decoder;
