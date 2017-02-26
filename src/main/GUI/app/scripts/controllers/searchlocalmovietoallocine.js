@@ -79,6 +79,9 @@ angular.module('mediathequeUiApp')
 	  
 	  $scope.synchronizeMovie = function( code ){
 		  $scope.pageLoaded = false;
+		  
+		  angular.element('.result').addClass('hide-anim');
+		  
 		  console.log('code : ' + code );
 		  console.log( $scope.movie );
 		  if( $scope.movie !== undefined ){
