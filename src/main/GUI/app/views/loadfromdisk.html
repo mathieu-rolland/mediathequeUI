@@ -39,11 +39,11 @@
 	</div>
 	
 	
-	<div ng-show="pageLoaded">
+	<div ng-show="pageLoaded" class="movie-on-disk">
 		
 		<h2>A ajouter : </h2>
 		
-		<table>
+		<table class="result">
 			<tr ng-repeat="movie in movies.list | filter:movie.isSynchronized == true | orderBy:title" ng-class="{synchronized:movie.isSynchronized}">
 				<td>{{movie.path}}</td>
 				<td>{{movie.title}}</td>
@@ -54,7 +54,7 @@
 		</table>
 		
 		<h2>A mettre à jour : </h2>
-		<table>
+		<table class="result">
 			<tr ng-repeat="movie in movies.list | filter:movie.isSynchronized != true" ng-class="{synchronized:movie.isSynchronized}">
 				<td>{{movie.path}}</td>
 				<td>{{movie.title}}</td>
