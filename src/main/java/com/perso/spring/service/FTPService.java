@@ -12,17 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.api.allocine.model.IMovie;
 import com.perso.factory.IMediathequeFactory;
 import com.perso.manager.movies.MoviesLoader;
 import com.perso.model.ILocalMovie;
 import com.perso.model.IMachine;
-import com.perso.model.IParameter;
 import com.perso.model.IRegexParameter;
 import com.perso.model.impl.Parameter;
 import com.perso.repository.MovieRepository;
 import com.perso.repository.ParametersRepository;
-import com.perso.service.MoviesService;
 
 @Service
 public class FTPService {
