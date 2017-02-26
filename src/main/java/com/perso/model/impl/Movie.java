@@ -232,5 +232,10 @@ public class Movie implements ILocalMovie{
 	public void setLastSynchronizedDate(Date addedDate) {
 		this.lastSynchronizedDate = addedDate;
 	}
+
+	@Override
+	public Collection<IAllocineLink> getLinks() {
+		return this.links;
+	}
 	
 }
