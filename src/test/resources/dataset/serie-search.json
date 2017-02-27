@@ -1,0 +1,39 @@
+{
+   "feed":{
+      "page":1,
+      "count":10,
+      "results":[
+         {
+            "type":"tvseries",
+            "$":1
+         }
+      ],
+      "totalResults":1,
+      "tvseries":[
+         {
+            "code":7157,
+            "originalTitle":"Game of Thrones",
+            "castingShort":{
+               "creators":"D.B. Weiss, David Benioff",
+               "actors":"Peter Dinklage, Nikolaj Coster-Waldau, Lena Headey, Emilia Clarke, Kit Harington"
+            },
+            "yearStart":2011,
+            "seasonCount":8,
+            "statistics":{
+               "pressRating":4.08333,
+               "userRating":4.67552
+            },
+            "poster":{
+               "path":"\/pictures\/15\/12\/01\/15\/35\/063097.jpg",
+               "href":"http:\/\/fr.web.img5.acsta.net\/pictures\/15\/12\/01\/15\/35\/063097.jpg"
+            },
+            "link":[
+               {
+                  "rel":"aco:web",
+                  "href":"http:\/\/www.allocine.fr\/series\/ficheserie_gen_cserie=7157.html"
+               }
+            ]
+         }
+      ]
+   }
+}

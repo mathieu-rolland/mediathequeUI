@@ -1,18 +1,17 @@
 package com.perso.model.impl;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import com.api.allocine.model.IFeed;
-import com.api.allocine.model.IMovie;
 import com.api.allocine.model.IResult;
 
-public class Feed implements IFeed{
+public class Feed<T> implements IFeed<T>{
 
 	private int page;
 	private int count;
-	private ArrayList<IResult> results;
+	private Collection<IResult> results;
 	private int totalResults;
-	private ArrayList<IMovie> movie;
+	private Collection<T> apiAllocineObject;
 	
 	public int getPage() {
 		return page;
@@ -30,11 +29,11 @@ public class Feed implements IFeed{
 		this.count = count;
 	}
 
-	public ArrayList<IResult> getResults() {
+	public Collection<IResult> getResults() {
 		return results;
 	}
 
-	public void setResults(ArrayList<IResult> results) {
+	public void setResults(Collection<IResult> results) {
 		this.results = results;
 	}
 
@@ -46,16 +45,18 @@ public class Feed implements IFeed{
 		this.totalResults = totalResults;
 	}
 
-	public ArrayList<IMovie> getMovies() {
-		return movie;
-	}
-
-	public void setMovies(ArrayList<IMovie> movie) {
-		this.movie = movie;
-	}
-
 	public String toString(){
-		return "Page : " + page  + " nb movie(s) : " + (movie == null ? "null" : movie.size());
+		return "Page : " + page  + " nb movie(s) : " + (apiAllocineObject == null ? "null" : apiAllocineObject.size());
 	}
-	
+
+	@Override
+	public void setApiAllocineObject(Collection<T> apiAllocineObject) {
+		this.apiAllocineObject = apiAllocineObject;
+	}
+
+	@Override
+	public Collection<T> getApiAllocineObject() {
+		return apiAllocineObject;
+	}
+
 }

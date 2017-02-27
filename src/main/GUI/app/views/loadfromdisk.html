@@ -1,0 +1,69 @@
+<div ng-controller="LoadfromdiskCtrl">
+	<div class="jumbotron">
+			<h1>Médiathèque</h1>
+			<p class="lead">
+				Rechercher un film sur disque<br>
+	
+			</p>
+			<p>
+				
+				<div class="btn-group" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+        {{selectedMachine.ip}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+      	<li ng-repeat="machine in machines" role="menuitem" ng-click="selectMachine(machine)"><a>{{machine.ip}}</a></li>
+      	<li role="menuitem" ng_click="selectMachine('Local')"><a>Local</a></li>
+      </ul>
+    </div>
+
+			
+				<input type="text" ng-model="movies.path" placeholder="Film" /> <a
+					class="btn btn-lg btn-success" ng-href="/#!/load-disk"
+					ng-click="searchOnDisk(movies.path)">Rechercher<span
+					class="glyphicon glyphicon-ok"></span></a>
+			</p>
+	
+		</div>
+	
+		<script type="text/ng-template" id="alert.html">
+    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+      <div ng-transclude></div>
+    </div>
+	</script>
+		
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+	
+	<div class="loading" ng-show="!pageLoaded">
+		<img src="images/loading.gif">
+	</div>
+	
+	
+	<div ng-show="pageLoaded" class="movie-on-disk">
+		
+		<h2>A ajouter : </h2>
+		
+		<table class="result">
+			<tr ng-repeat="movie in movies.list | filter:movie.isSynchronized == true | orderBy:title" ng-class="{synchronized:movie.isSynchronized}">
+				<td>{{movie.path}}</td>
+				<td>{{movie.title}}</td>
+				<td>
+					<a class="btn btn-lg btn-success" type="button" ng-click="searchMovieInAllocine(movie);">Search in allocine</a>
+				</td>
+			</tr>
+		</table>
+		
+		<h2>A mettre à jour : </h2>
+		<table class="result">
+			<tr ng-repeat="movie in movies.list | filter:movie.isSynchronized != true" ng-class="{synchronized:movie.isSynchronized}">
+				<td>{{movie.path}}</td>
+				<td>{{movie.title}}</td>
+				<td>
+					<a class="btn btn-lg btn-warning" type="button" ng-click="searchMovieInAllocine(movie);">Update in allocine</a>
+				</td>
+			</tr>
+		</table>
+		
+	</div>
+
+</div>	

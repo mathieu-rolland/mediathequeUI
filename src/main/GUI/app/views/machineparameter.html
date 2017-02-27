@@ -1,0 +1,56 @@
+<div class="machineParams">
+
+	<h1>Mes machines</h1>
+
+
+	<div class="createMachine">
+		
+		<div>
+			<div class="machineParams">
+				<img class="icon" src="images/computer-desktop.png"/>
+			</div>
+		</div>
+	
+	
+		<form>
+			<label>Nom : </label>
+			<input ng-model="newMachine.name" class="field input" type="text" name="" ng-value="{{newMachine.name}}"/> <br/>
+			<label>IP de la machine : </label>
+			<input ng-model="newMachine.ip" class="field input" type="text" name="" ng-value="{{newMachine.ip}}"/><br />
+			<label>Utilisateur : </label>
+			<input ng-model="newMachine.user" class="field input" type="text" name="" ng-value="{{newMachine.user}}"/><br />
+			<label>Mot de passe : </label>
+			<input ng-model="newMachine.password" class="field input" type="password" name="" ng-value="{{newMachine.password}}"/><br />
+			<label>Port : </label>
+			<input ng-model="newMachine.port" class="field input" type="text" name="" ng-value="{{newMachine.port}}"/><br />
+			<input type="button" class="btn btn-lg btn-success" value="{{actionButton}}" ng-click="addMachine(newMachine)"/>
+		</form>
+		
+		<div class="clear"/>
+		
+	</div>
+	
+	
+	<div class="allAvailableMachine">
+		
+		<div class="machine" ng-repeat='machine in machines'>
+		
+			<h3 class="title">{{machine.name}}</h3>
+			<p><label>IP : </label>{{machine.ip}}</p>
+			<p><label>Utilisateur : </label>{{machine.user}}</p>
+			<p><label>Password : </label>{{machine.password}}</p>
+			<p><label>Films disponible : </label>{{machine.movies.length}}</p>
+			<div class="actions">
+				<input type="button" class="btn btn-sm btn-success" value="Ajouter des films" ng-click="addMovie(machine)"/>
+				<input type="button" class="btn btn-sm btn-warning" value="Mettre ра jour" ng-click="update(machine)"/>
+				<input type="button" class="btn btn-sm btn-danger" value="Supprimer" ng-click="delete(machine)"/>
+			</div>
+			
+			<div class="clear" />
+			
+		</div>
+		
+		<div class="clear"/>
+	</div>
+
+</div>

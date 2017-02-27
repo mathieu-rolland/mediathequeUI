@@ -77,7 +77,7 @@ public class MoviesLoader {
 				if( f.isDirectory() ) return true;
 				
 				for(String extension : extensions ){
-					System.out.println(dir.getAbsolutePath() + "/" + name);
+					logger.debug(dir.getAbsolutePath() + "/" + name);
 					if( name.endsWith(extension) ){
 						return true;
 					}

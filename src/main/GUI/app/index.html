@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mediatheque</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/videogular-themes-default/videogular.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/parameters.css">
+    <link rel="stylesheet" href="styles/my-movies.css">
+    <link rel="stylesheet" href="styles/csvupload.css">
+    <link rel="stylesheet" href="styles/loading.css">
+    <link rel="stylesheet" href="styles/machineParams.css">
+    <link rel="stylesheet" href="styles/search-allocine.css">
+    <!-- endbuild -->
+  </head>
+  
+  <body ng-app="mediathequeUiApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+	<div ng-controller="MenuCtrl">
+
+    <!-- Menu -->
+  	<div id="cssmenu">
+  	 
+  	 	<div class="navigate">
+  		  <ul>
+  		     <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/"><i class="fa fa-fw fa-home entry"></i>Mes films</a></li>
+  		     <li class=""><a href="#/"><i class="fa fa-fw fa-home"></i>Mes séries</a></li>
+           <!--<li><a ><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
+  		  </ul>
+  		</div>
+  		
+  		<div class="account">
+
+  		  <ul>
+
+  		  	<li ng-class="page == 'search'  ? 'active' : ''" class="item" ><a href="/#!/load-disk">Rechercher</a></li>
+
+  		  	<li ng-class="page == 'parameters'? 'active' : ''" class="item">
+
+    				<div class="dropdown">
+
+    				  <button class="dropbtn">Paramètres</button>
+    				  <div class="dropdown-content">
+    				    <a ng-href="/#!/parameters">General</a>
+    				    <a href="/#!/parameters/machine">Machines</a>
+    				  </div>
+
+    				</div>
+
+  		  	</li>
+
+  		  </ul>
+
+  		</div>
+  		
+  	</div>
+	
+	</div>
+      <!-- Add your site or application content here -->
+      <div class="header">
+      </div>
+  </div>
+    
+    <div class="pageContent">
+    <div ng-view=""></div>
+    </div>
+
+    <div class="footer">
+      <div class="container">
+      </div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/videogular/videogular.js"></script>
+    <script src="bower_components/videogular-controls/vg-controls.js"></script>
+    <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
+    <script src="bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+    <script src="bower_components/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+    <script src="bower_components/videogular-poster/vg-poster.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/services/allocinewebservice.js"></script>
+    <script src="scripts/controllers/mymovies.js"></script>
+    <script src="scripts/controllers/loadfromdisk.js"></script>
+    <script src="scripts/controllers/parameters.js"></script>
+    <script src="scripts/controllers/searchlocalmovietoallocine.js"></script>
+    <script src="scripts/controllers/menu.js"></script>
+    <script src="scripts/filters/formatduration.js"></script>
+    <script src="scripts/controllers/csvupload.js"></script>
+    <script src="scripts/controllers/machineparameter.js"></script>
+    <!-- endbuild -->
+        
+</body>
+</html>
