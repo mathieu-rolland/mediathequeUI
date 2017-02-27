@@ -6,3 +6,21 @@ src/main/GUI/.sass-cache
 src/main/GUI/node_modules
 src/main/GUI/bower_components
 src/main/GUI/.tmp
+src/main/resources/public/app/bower_components/
+dowload/
+src/main/GUI/.sass-cache
+src/main/GUI/.tmp
+src/main/GUI/bower_components
+src/main/GUI/node_modules
+src/main/GUI/dist
+DisPaRuS 504. Le Petit Prince.jpg
+logs
+mediathque-2016-10-10.log
+mediathque-2016-10-13.log
+mediathque-2016-10-14.log
+src/main/resources/node_modules
+*.mp4
+/.apt_generated/
+.factorypath
+.settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.wst.common.project.facet.core.xml

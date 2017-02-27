@@ -11,6 +11,7 @@ public class CustomMessageConverter  {
 	
     @Bean
     public GsonHttpMessageConverter configureMessageConverters(IDecoder allocineDecoder) {
+    	System.out.println("***************** configureMessageConverters *********************");
     	GsonHttpMessageConverter msgConverter = new GsonHttpMessageConverter();
     	msgConverter.setGson( allocineDecoder.getGson() );
     	return msgConverter;

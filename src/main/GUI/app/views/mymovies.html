@@ -1,0 +1,126 @@
+<div ng-controller="MymoviesCtrl">
+
+	<script type="text/ng-template" id="alert.html">
+    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+      <div ng-transclude></div>
+    </div>
+	</script>
+	
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+	<div class="loading" ng-show="!pageLoaded" >
+<!-- 		<img src="images/loading.gif"> -->
+		<div class='uil-cube-css' style='-webkit-transform:scale(0.63)'><div></div><div></div><div></div><div></div></div>
+	</div>
+
+	<div class="search result" ng-show="pageLoaded">
+			
+		<div class="my-movie-header">
+		
+			<label class="item display-sort selected" ng-click='changeDisplayMode("displayMode1", 1)'>de A à Z</label>
+		
+			<label class="item display-sort" ng-click='changeDisplayMode("displayMode2", 2)'>Derniers ajoutés</label>
+		
+			<label class="item display-sort" ng-click='changeDisplayMode("displayMode3", 3)'>Derniers sortis</label>
+			
+			<div ng-class="searchClickedClass">
+				<input type="text" ng-model="search" 
+					id="searchMovieInputId"
+				   	ng-class="searchClickedClassInput"
+				   	value="{{searchAreaValue}}"
+				   	placeholder="Rechercher"/>
+				<p class="search-area" ng-click="toggleClickSearch()" ng-bind-html="searchDisplay" />
+			</div>
+		
+		</div>
+		
+		<!--	sortKey:reverseOrder:movieComparator -->
+		<div class="MyMovies movie" ng-repeat="movie in movies.list | filter:search | orderBy:sortKey:reverseOrder  | limitTo: numberOfDisplayMovie">
+			
+			<div class="preview" ng-click="displayInPopup(movie)">
+				<img ng-src="{{movie.poster.href}}">
+			</div>
+		
+		</div>
+		
+	</div>
+	
+	<div ng-class="isSelectedMovie ? 'selected-movie activate' : 'selected-movie'">
+			
+			<div class="content">
+			
+				<div class="preview">
+					<img ng-src="{{selectedMovie.poster.href}}">
+				</div>
+				
+				<div class="description">
+				
+					<div>
+						<img ng-click="closePopup()" class="closeButton" src="styles/images/close-button.png"/>
+					</div>
+					
+					<h1 class="title">{{selectedMovie.title}}</h1>
+					
+					<div class="info">
+						<p><label>Date de sortie : </label><span> {{selectedMovie.year}}</span></p>
+						<p><label>De : </label><span ng-repeat="person in selectedMovie.casting.directors track by $index"> {{person}}</span></p>
+						<p><label>Avec : </label><span ng-repeat="person in selectedMovie.casting.actors track by $index"> {{person}},</span></p>
+						<p><label>Durée :&nbsp;</label>{{selectedMovie.duration | formatDuration}}</p>
+						<p><label>Genre : </label><span ng-repeat="genre in selectedMovie.genre track by $index"> {{genre.name}},</span></p>
+					</div>
+					
+					<div class="notes">
+					</div>
+					
+					<div class="synopsis">
+						<p ng-bind-html="selectedMovie.synospis"></p>
+					</div>
+					
+					<div class="button-control">
+						<img class="play-button" src="images/play-button.png" ng-click="readMovie()"/>
+					</div>
+						
+				</div>
+			</div>
+		</div>
+		
+<div class="videogular-wrapper" ng-show="playIsDemand">	
+
+	<div class="playerControl">
+		<img ng-click="closePlayer()" class="closeButton" src="styles/images/close-button.png"/>
+	</div>	
+	
+	<div class="videogular-container">
+		
+		<videogular vg-theme="config.theme" 
+					vg-player-ready="onPlayerReady($API)">
+		
+			<vg-media vg-src="config.sources"
+					  vg-tracks="config.tracks">
+			</vg-media>
+	
+			<vg-controls 
+				vg-autohide="config.plugins.controls.autoHide" 
+				vg-autohide-time="config.plugins.controls.autoHideTime">
+				
+				<vg-play-pause-button></vg-play-pause-button>
+				<vg-time-display>{{ currentTime | date:'HH:mm:ss':'UTC' }}</vg-time-display>
+				<vg-scrub-bar>
+					<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+				</vg-scrub-bar>
+				<vg-time-display>{{ timeLeft | date:'HH:mm:ss':'UTC' }}</vg-time-display>
+				<vg-volume>
+					<vg-mute-button></vg-mute-button>
+					<vg-volume-bar></vg-volume-bar>
+				</vg-volume>
+				<vg-fullscreen-button></vg-fullscreen-button>
+			</vg-controls>
+	
+			<vg-overlay-play></vg-overlay-play>
+			<vg-buffering></vg-buffering>
+			<vg-poster vg-url='config.plugins.poster'></vg-poster>
+		</videogular>
+	</div>
+	</div>
+</div>
+

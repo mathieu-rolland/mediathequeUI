@@ -1,0 +1,44 @@
+<div ng-controller="ParametersCtrl" class="parameters_view">
+	
+	<script type="text/ng-template" id="alert.html">
+    <div class="alert" style="background-color:#fa39c3;color:white" role="alert">
+      <div ng-transclude></div>
+    </div>
+	</script>
+	
+	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+	
+	<table class="parameters">
+		<thead>
+			<tr>
+				<th>
+					Nom du paramètre
+				</th>
+				<th>
+					Valeur
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			
+			<tr ng-repeat="parameter in parameters">
+				<td><input class="field input" type="text" name="" value="{{parameter.name}}"/></td>
+				<td><input class="field input" type="text" name="" value="{{parameter.value}}"/></td>
+				<td><input type="button" class="btn btn-lg btn-success" value="Mettre à jour" ng-click="updateParameter(parameter)" /></td>
+				<td><input type="button" class="btn btn-lg btn-fail" value="Supprimer" ng-click="deleteParameter(parameter)" /></td>
+			</tr>
+			
+		</tbody>
+	
+	</table>
+	
+	<form>
+		<p>Ajouter un nouveau paramètre : </p>
+		<input ng-model="newParameter.name" class="field input" type="text" name="" ng-value="{{newParameter.name}}"/>
+		<input ng-model="newParameter.value" class="field input" type="text" name="" ng-value="{{newParameter.value}}"/>
+		<input type="button" class="btn btn-lg btn-success" value="Ajouter un paramètre" ng-click="addParameter(newParameter)"/>
+	</form>
+	
+</div>

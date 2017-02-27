@@ -3,7 +3,7 @@
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-		<file>/varsoft/mediatheque/logs/mediatheque.log</file>
+		<file>${log.dir}/mediatheque.log</file>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>mediathque-%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -25,7 +25,10 @@
     	</encoder>
 	</appender>
 
-	<root level="DEBUG">
+  	<logger name="org.hibernate" level="${log.level}" />
+	<logger name="com.api.allocine" level="DEBUG" />
+
+	<root level="${log.level}">
     	<appender-ref ref="STDOUT" />
     	<appender-ref ref="FILE" />
   	</root>

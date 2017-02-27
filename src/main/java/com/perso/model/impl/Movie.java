@@ -2,6 +2,7 @@ package com.perso.model.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,7 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -21,6 +24,7 @@ import com.api.allocine.model.IPoster;
 import com.api.allocine.model.IRelease;
 import com.api.allocine.model.IStats;
 import com.perso.model.ILocalMovie;
+import com.perso.model.IMachine;
 
 @Entity
 @Table(name="MOVIE")
@@ -30,6 +34,11 @@ public class Movie implements ILocalMovie{
 	private int code;
 	private String originalTitle;
 	private String title;
+	private Date lastSynchronizedDate;
+	
+	@ManyToOne(targetEntity=Machine.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL )
+	@JoinColumn(name="name")
+	private IMachine machine;
 	
 	@Transient
 	private List<String> keywords;
@@ -206,6 +215,27 @@ public class Movie implements ILocalMovie{
 	@Override
 	public boolean isSynchronized() {
 		return isSynchronized;
+	}
+
+	public IMachine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(IMachine machine) {
+		this.machine = machine;
+	}
+
+	public Date getLastSynchronizedDate() {
+		return lastSynchronizedDate;
+	}
+
+	public void setLastSynchronizedDate(Date addedDate) {
+		this.lastSynchronizedDate = addedDate;
+	}
+
+	@Override
+	public Collection<IAllocineLink> getLinks() {
+		return this.links;
 	}
 	
 }

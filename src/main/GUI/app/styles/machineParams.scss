@@ -1,0 +1,73 @@
+
+.machineParams{
+
+	.createMachine{
+		
+		padding-right:auto;
+		padding-left:auto;
+		
+		.machineParams{
+			
+			display:block;
+			float:left;
+			
+			.icon{
+				width: 250px;
+			}
+			
+		}
+	
+		form{
+		
+			display:block;
+			float:left;
+			padding-top:30px;
+			padding-left: 20px;
+			
+			label{
+				width : 150px;
+				text-decoration: none;
+				color: white;
+				padding-top: 15px;
+			}
+		
+			.btn{
+				margin-right: auto;
+				margin-left: auto;
+				margin-top: 20px;
+			}
+		}
+	}
+	
+	
+	.allAvailableMachine{
+		
+		margin-top: 20px;
+		
+		.machine{
+			width:315px;
+			display: block;
+			float: left;
+			padding: 5px;
+			margin: 15px;
+			border: 1px solid grey;
+			border-radius:3px;
+		
+			.title{
+				text-align:center;
+				color: white;
+			}
+		
+			label{
+				color: white;
+				width: 140px;
+			}
+		}
+	
+	}	
+
+}
+
+.clear{
+	clear: both;
+}

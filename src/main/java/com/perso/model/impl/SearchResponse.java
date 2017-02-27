@@ -1,17 +1,18 @@
 package com.perso.model.impl;
 
+import com.api.allocine.model.IAllocineObject;
 import com.api.allocine.model.IFeed;
 import com.api.allocine.model.ISearchResponse;
 
-public class SearchResponse implements ISearchResponse{
+public class SearchResponse implements ISearchResponse<IAllocineObject>{
 
-	private Feed feed;
+	private IFeed<IAllocineObject> feed;
 	
-	public IFeed getFeed() {
+	public IFeed<IAllocineObject> getFeed() {
 		return feed;
 	}
 
-	public void setFeed(Feed feed) {
+	public void setFeed(IFeed<IAllocineObject> feed) {
 		this.feed = feed;
 	}
 	

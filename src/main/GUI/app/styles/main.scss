@@ -1,0 +1,144 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+
+// Font Variables
+$body-font: 'Roboto Slab', serif;   
+$open-sans: 'Open Sans', sans-serif;
+
+body {
+  padding: 0;
+  background-color:#202020; 
+  font-family: $body-font;
+  font-weight: normal;
+  
+  .pageContent{
+  	padding-top: 100px;
+  	margin-left: 20px;
+  	margin-right: 20px;
+  }
+  
+}
+
+a{
+	text-decoration: none;
+	color:white;
+}
+
+a:hover{
+	text-decoration: none;
+	color:white;
+}
+
+a:visited{
+	text-decoration: none;
+	color:white;
+}
+
+.menu{
+
+	float: left;
+	position:fixed;
+	width: 200px;
+	text-color: white;
+	//background-color: rgb(55, 62, 77);
+	background-color: #449d44;
+	
+	a{
+		color: none;
+	}
+	
+	ul{
+		padding: 0;
+		margin: 0;
+		color: white;
+		
+	 	li{
+			text-decoration : none;
+			list-style: none;
+			
+			a{
+				text-decoration: none;
+				color:inherit;
+			}
+			
+		}
+	}
+
+	.item{
+	
+		padding: 20px;
+		height: 60px;
+		vertical-align: middle;
+		
+		&:hover{
+
+			padding: 0px;
+
+			&:before{
+					background-color: #333333;
+					width: 5px;
+					height: 61px;
+					display: inline-block;
+					content: "";
+					margin-right: 15px;
+					vertical-align: middle;
+			}
+		}
+		
+		&.active{
+		
+			padding: 0px;
+			
+			&:before{
+			
+				background-color: #333333;
+				width: 5px;
+				height: 61px;
+				display: inline-block;
+				content: "";
+				margin-right: 15px;
+				vertical-align: middle;
+				
+			}
+		}
+		
+	}
+
+	.menu_label{
+		
+		font-style: bold;
+		padding-left:15px; 
+		
+		&:before{
+			background-image: url('../images/simple_menu.png');
+			background-size: 40px 40px;
+			background-repeat: no-repeat;
+    		display: inline-block;
+    		width: 50px; 
+    		height: 40px;
+    		content:"";
+    		vertical-align: middle;
+		}
+	}
+
+}
+
+.loading{
+	text-align:center;
+	
+	img{
+		width : 150px;
+	}
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
