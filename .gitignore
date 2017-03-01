@@ -17,4 +17,8 @@ src/main/resources/node_modules
 *.mp4
 /.apt_generated/
 .factorypath
+<<<<<<< HEAD
+=======
+.settings/org.eclipse.jdt.apt.core.prefs
+>>>>>>> update git ignore
 .settings/org.eclipse.wst.common.project.facet.core.xml
