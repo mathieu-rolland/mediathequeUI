@@ -4,3 +4,10 @@ target/
 .settings/org.eclipse.core.resources.prefs
 src/main/resources/public/app/bower_components/
 dowload/
+src/main/GUI/node_modules/
+src/main/GUI/bower_components/
+src/main/GUI/.sass-cache/
+src/
+.settings/org.eclipse.jdt.apt.core.prefs
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.factorypath
