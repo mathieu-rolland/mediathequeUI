@@ -70,6 +70,11 @@ angular
     	  controller: 'CsvuploadCtrl',
     	  controllerAs: 'cvupload'
       })
+      .when('/user',{
+    	  templateUrl : 'views/user.html',
+    	  controller: 'UserCtrl',
+    	  controllerAs: 'userctrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
