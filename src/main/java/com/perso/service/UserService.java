@@ -1,5 +1,7 @@
 package com.perso.service;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.perso.security.entity.AccessToken;
+import com.perso.security.entity.Role;
 import com.perso.security.entity.User;
 import com.perso.security.service.DaoUserService;
 
@@ -27,10 +30,15 @@ public class UserService {
 		AccessToken token = userService.loginUser(user);
 		
 		if( token == null ){
-			return new ResponseEntity<AccessToken>(org.springframework.http.HttpStatus.NOT_FOUND);
+			return new ResponseEntity<AccessToken>(org.springframework.http.HttpStatus.UNAUTHORIZED);
 		}
 		
-		return new ResponseEntity<AccessToken>( token , org.springframework.http.HttpStatus.ACCEPTED );
+		return new ResponseEntity<AccessToken>( token , org.springframework.http.HttpStatus.OK );
+	}
+	
+	@RequestMapping( value = "/authorization", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE )
+	public @ResponseBody ResponseEntity<Set<Role>> getUserAuthorization(@RequestBody User user){
+		return new ResponseEntity<Set<Role>> ( userService.findUserInAuthorization( user ) , org.springframework.http.HttpStatus.OK );
 	}
 	
 	@RequestMapping("/logout")
