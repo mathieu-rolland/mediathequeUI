@@ -2,6 +2,7 @@ package com.perso.security.service;
 
 import java.util.UUID;
 
+import org.hibernate.mapping.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,11 +55,12 @@ public class DaoUserService implements UserService {
         return this.accessTokenRepository.save(accessToken);
 	}
 	
+	public java.util.Set<Role> findUserInAuthorization(User user){
+		return userRepository.findUser( user.getName() , user.getPassword() ).getAuthorities();
+	}
 	
 	public AccessToken loginUser(User user){
 		logger.debug("Login user by : " + user );
-		user.getAuthorities().add( Role.ADMIN );
-		userRepository.saveAndFlush(user);
 		User userInDataBase = userRepository.loginUser( user.getName() , user.getPassword() );
 		if( userInDataBase != null ){
 			return createAccessToken( userInDataBase );
