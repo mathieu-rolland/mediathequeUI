@@ -25,7 +25,7 @@ angular
 	'com.2fdevs.videogular.plugins.poster',
 	'com.2fdevs.videogular.plugins.buffering'
   ])
-  .config(function ($routeProvider , localStorageServiceProvider) {
+  .config([ '$routeProvider' , 'localStorageServiceProvider' , '$httpProvider', function ($routeProvider , localStorageServiceProvider, $httpProvider) {
 	
 	localStorageServiceProvider.setPrefix('uiMediatheque');
 	  
@@ -78,4 +78,14 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+    
+    /*$httpProvider.interceptors.push(function(){
+    	return {
+    		'request' : function(config){
+    			config.headers["X-Access-Token"] = 'my custom token';
+    			return config;
+    		}
+    	};
+    })*/
+    
+  }]);
