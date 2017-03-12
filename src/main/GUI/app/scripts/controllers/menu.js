@@ -7,7 +7,8 @@
  * # MainCtrl
  * Controller of the mediathequeUiApp
  */
-angular.module('mediathequeUiApp').controller('MenuCtrl', function ( $scope , $location) {
+angular.module('mediathequeUiApp').controller('MenuCtrl', [ 'Security', '$scope' , '$location',
+	 function ( Security, $scope , $location) {
 
 
 	$scope.$on('$routeChangeSuccess', function () {
@@ -44,4 +45,8 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', function ( $scope , $l
 	
 	$scope.page = '';
 	
-});
+	$scope.logout = function(){
+		Security.logout();
+	};
+	
+}]);

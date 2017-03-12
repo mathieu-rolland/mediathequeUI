@@ -8,27 +8,14 @@
  * Controller of the mediathequeUiApp
  */
 angular.module('mediathequeUiApp')
-  .controller('UserCtrl', function ($scope , $location , AllocineWebService , localStorageService, Security) {
+  .controller('UserCtrl', ['$scope', '$location' , 'AllocineWebService' , 'localStorageService', 'Security', '$http', 
+	  	function ($scope , $location , AllocineWebService , localStorageService, Security , $http) {
 
-	  var currentToken = "";//localStorageService.get('auth-token');
-	  
-	  if( angular.isDefined(currentToken) && currentToken != "" ){
-		  //AllocineWebService.setToken( currentToken );
-		  //$location.path('/');
-		  console.log( currentToken );
-	  }
-	  
-	  var loginCallback = function( response ){
-//		  AllocineWebService.setToken( response.data.token );
-//		  console.log( response.data.token );
-//		  localStorageService.set ('auth-token' , response.data.token );
-//		  $location.path('/');
-	  };
-	  
+	  Security.setHttp( $http );
+  
 	  $scope.login = function(){
 		  console.log( $scope.user );
-		  //AllocineWebService.login( $scope.user , loginCallback );
-		  Security.login();
+		  Security.login( $scope.user );
 	  };
 	  
-  });
+  }]);
