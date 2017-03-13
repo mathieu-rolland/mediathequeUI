@@ -33,7 +33,7 @@
 	<div ng-controller="MenuCtrl">
 
     <!-- Menu -->
-  	<div id="cssmenu">
+  	<div id="cssmenu" ng-show="authenticated">
   	 
   	 	<div class="navigate">
   		  <ul>
@@ -62,7 +62,7 @@
     				</div>
 
   		  	</li>
-  		  	<li ng-class="page == 'logout'  ? 'active' : ''" class="item" ><a href="" ng-click="logout()">logout</a></li>
+  		  	<li ng-class="page == 'logout'  ? 'active' : ''" class="item" ><a href="" ng-click="logout()">logout {{user.name}}</a></li>
 
   		  </ul>
 
