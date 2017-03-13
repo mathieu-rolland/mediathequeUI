@@ -21,6 +21,8 @@ angular.module('mediathequeUiApp')
 	  var mainURL = undefined;
 	  var loginUser = 'user/login';
 	  
+	  var currentUser;
+	  
 	  service.setHttp = function( http ){
 		  service.http = http;
 	  };
@@ -51,12 +53,11 @@ angular.module('mediathequeUiApp')
 		  console.log('login in progress...');
 		  return preconfigure (
 				function(){
-					console.log(service.mainURL + 'user/login');
 				  service.http.post( service.mainURL + 'user/login' , user )
 			  		.then(function (response) {
 		              if (response.data && response.data.token) {
 		            	  service.token=response.data.token;
-		                  console.log( response.data.token );
+		            	  service.currentUser=response.data.user;
 		                  $location.path('/');
 		              }
 	          });
@@ -64,12 +65,21 @@ angular.module('mediathequeUiApp')
 	  };
 	  
 	  service.logout = function(){
-		  service.token = '';
+		  service.token = undefined;
+		  service.currentUser = undefined;
 		  $location.path('/user');
 	  };
 	  
 	  service.getToken = function(){
 		  return service.token;
+	  };
+	  
+	  service.getUser = function(){
+		  return service.currentUser;
+	  };
+	  
+	  service.isAuthenticated = function(){
+		return angular.isDefined(service.token) && angular.isDefined(service.currentUser);  
 	  };
 	  
   }])
@@ -78,17 +88,16 @@ angular.module('mediathequeUiApp')
 	  var service = this;
 	  
 	  service.request = function(config){
-		  console.log("Use token : " + Security.getToken() );
+		  	console.log("Use token : " + Security.getToken() );
 			config.headers["X-Access-Token"] = Security.getToken() ;
 			return config;
 	  };
 	  
 	  service.responseError = function( response ){
-		  console.log(response);
 		  if( angular.isDefined(response) && angular.isDefined(response.status)){
 			  
 			  if( response.status == 401 ){
-				  $location.path('/user');
+				  Security.logout(); // used to clean in memory token
 			  }
 			  
 			  if( response.status == 403 ){

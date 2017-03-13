@@ -10,11 +10,14 @@
 angular.module('mediathequeUiApp').controller('MenuCtrl', [ 'Security', '$scope' , '$location',
 	 function ( Security, $scope , $location) {
 
-
+	
+	
 	$scope.$on('$routeChangeSuccess', function () {
         
         var path = $location.path();
         console.log('path : ' + path + ' ' + $scope.page);
+        $scope.user = Security.getUser();
+        $scope.authenticated = Security.isAuthenticated();
         
         switch( path ){
 			case '/':

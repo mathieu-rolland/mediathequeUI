@@ -1,23 +1,32 @@
 
-<div class="login-page">
+<div class="user_page" ng-controller="UserCtrl">
 
-  <div class="form">
-
-    <form class="register-form">
-      <input type="text" placeholder="Utilisateur"/>
-      <input type="password" placeholder="mot de passe"/>
-      <input type="text" placeholder="adresse mail"/>
-      <button>Demander</button>
-      <p class="message">Déjà enregistré<a href="#">Connexion</a></p>
-    </form>
-    <form class="login-form">
-      <input type="text" placeholder="username" ng-model="user.name"/>
-      <input type="password" placeholder="password" ng-model="user.password"/>
-      <button ng-click="login()">Connexion</button>
-      <p class="message">Pas de compte? <a href="#">Demander un compte</a></p>
-    </form>
-    
-  </div>
+	<div class="title">
+		<img src="styles/images/logo-mediatheque.png" alt="logo.png" />
+	</div>
+	
+	<div class="login-page">
+	
+	
+	
+	  <div class="form">
+	
+	    <form class="register-form">
+	      <input type="text" placeholder="Utilisateur"/>
+	      <input type="password" placeholder="mot de passe"/>
+	      <input type="text" placeholder="adresse mail"/>
+	      <button>Demander</button>
+	      <p class="message">Déjà enregistré<a href="#">Connexion</a></p>
+	    </form>
+	    <form class="login-form">
+	      <input type="text" placeholder="username" ng-model="user.name"/>
+	      <input type="password" placeholder="password" ng-model="user.password"/>
+	      <button ng-click="login()">Connexion</button>
+	      <p class="message">Pas de compte? <a href="#">Demander un compte</a></p>
+	    </form>
+	    
+	  </div>
+	
+	</div>
 
 </div>
-
