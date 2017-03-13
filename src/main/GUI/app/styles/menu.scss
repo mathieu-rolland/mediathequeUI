@@ -18,13 +18,24 @@
 		color: white;
 		
 		&.active{
-			a{
+			a, a:active, a:hover, a:focus, a:visited{
 				color: #F8ED41;
+				outline: none;
+				text-decoration: none;
 			}
+		}
+
+		a, a:active, a:hover, a:focus, a:visited{
+			outline: none;
+			text-decoration: none;
 		}
 		
 	}
 	
+	a:active, a:hover, a:focus,a {
+ 	 outline: none;
+	}
+
 	.navigate{
 		float: left;	
 	}
