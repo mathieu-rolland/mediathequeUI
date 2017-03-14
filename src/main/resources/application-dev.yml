@@ -19,21 +19,17 @@ spring:
       static-locations: /Volumes/External Media/cacheMediatheque/
    mail:
      host: smtp.gmail.com
-     port: 465
-     username:
-     password:
+     port: 587
+     username: $config.mail.user
+     password: $config.mail.password
+     debug: true
      properties:
-       mail:
-         smtp:
-           auth: true
-           startttls:
-             enable: true
-             required: true
-         
-logging:
-  org.springframework.web: DEBUG
-  guru.springframework.controllers: DEBUG
-  org.hibernate: DEBUG
+        mail:
+           smtp:
+              auth: true
+              startttls:
+                 enable: true
+                 required: true
    
 server:
    address: 127.0.0.1
