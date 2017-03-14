@@ -8,8 +8,8 @@
  * Controller of the mediathequeUiApp
  */
 angular.module('mediathequeUiApp')
-  .controller('UserCtrl', ['$scope', '$location' , 'AllocineWebService' , 'localStorageService', 'Security', '$http', 
-	  	function ($scope , $location , AllocineWebService , localStorageService, Security , $http) {
+  .controller('UserCtrl', ['$scope', '$location' , 'AllocineWebService' , 'localStorageService', 'Security', '$http', '$routeParams',
+	  	function ($scope , $location , AllocineWebService , localStorageService, Security , $http, $routeParams) {
 
 	  Security.setHttp( $http );
   
@@ -17,5 +17,17 @@ angular.module('mediathequeUiApp')
 		  console.log( $scope.user );
 		  Security.login( $scope.user );
 	  };
+	  
+	  $scope.create = function(){
+		  console.log( $scope.user );
+		  Security.create( $scope.user );
+	  }
+	  
+	  //user activation :
+	  var currentLocation = $location.path();
+	  if( currentLocation === '/user/active-account' ){
+		  console.log("Key : " + $routeParams.q );
+		  Security.activeAccount( $routeParams.q );
+	  }
 	  
   }]);

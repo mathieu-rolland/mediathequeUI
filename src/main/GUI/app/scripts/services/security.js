@@ -75,6 +75,28 @@ angular.module('mediathequeUiApp')
 		  });
 	  };
 	  
+	  service.create = function( user ){
+		  preconfigure(function(){
+			  
+			  service.http.post( service.mainURL + 'user/create-account' , user )
+		  		.then(function (response) {
+		  			console.log(response);
+		  		});
+		  		
+		  });
+	  }
+	  
+	  service.activeAccount = function( key ){
+		  
+		  preconfigure(function(){
+			  service.http.get( service.mainURL + 'user/active-account?q=' +  key )
+		  		.then(function (response) {
+		  			console.log(response);
+		  		});
+		  });
+		  
+	  }
+	  
 	  service.logout = function(){
 		  service.token = undefined;
 		  service.currentUser = undefined;

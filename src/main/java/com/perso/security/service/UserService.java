@@ -9,5 +9,6 @@ public interface UserService extends UserDetailsService {
 
 	public User findUserByAccessToken(String token);
 	AccessToken createAccessToken( User user );
+	public String generateActivationKeyForUSer(User u);
 	
 }

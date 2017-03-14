@@ -38,8 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http
 		.httpBasic().and().csrf().disable()
 		.authorizeRequests()
-			.antMatchers("/js","/user/login","/").permitAll()
-			.antMatchers("/machine/**","/parameters/**").hasRole( Role.ADMIN.toString() )
+			.antMatchers("/js","/user/login","/", "/user/active-account", "/user/create-account").permitAll()
+			.antMatchers("/machine/**","/parameters/**", "/user/**").hasRole( Role.ADMIN.toString() )
 			.anyRequest().authenticated();
 		http
 			.addFilterBefore( new CORSFilter() , BasicAuthenticationFilter.class)

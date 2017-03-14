@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ import com.perso.security.entity.AccessToken;
 import com.perso.security.entity.Role;
 import com.perso.security.entity.User;
 import com.perso.security.service.DaoUserService;
+import com.perso.security.service.MailService;
 
 @RestController
 @RequestMapping("/user")
@@ -25,6 +27,9 @@ public class UserService {
 	
 	@Autowired 
 	DaoUserService userService;
+	
+	@Autowired
+	MailService mailService;
 	
 	Logger logger = LoggerFactory.getLogger(User.class);
 	
@@ -51,4 +56,25 @@ public class UserService {
 		return null;
 	}
 	
+	@RequestMapping("create-account")
+	public @ResponseBody ResponseEntity<User> createUser(@RequestBody User user){
+		
+		User createdUser = userService.createUser(user);
+		if( createdUser == null ){
+			logger.warn("Failed to create user " + user );
+			return new ResponseEntity<User>(org.springframework.http.HttpStatus.OK);
+		}
+		mailService.sendActivationEmail( user );
+		return new ResponseEntity<User>( SecureData.cleaningUser(createdUser) , org.springframework.http.HttpStatus.OK);
+	}
+	
+	@RequestMapping("active-account")
+	public @ResponseBody ResponseEntity<Boolean> activeAccount(@RequestParam(name = "q") String query){
+		logger.info( "Request for activation user " );
+		User u = userService.activateAccount( query );
+		if( u != null){
+			return new ResponseEntity<Boolean>( (Boolean) u.isActivated() , org.springframework.http.HttpStatus.OK ); 
+		}
+		return new ResponseEntity<Boolean>( (Boolean) false , org.springframework.http.HttpStatus.OK );
+	}
 }

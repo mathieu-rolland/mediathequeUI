@@ -75,6 +75,16 @@ angular
     	  controller: 'UserCtrl',
     	  controllerAs: 'userctrl'
       })
+      .when('/admin/users',{
+    	  templateUrl : 'views/admin/manageusers.html',
+    	  controller: 'ManageUserCtrl',
+    	  controllerAs: 'ManageUserCtrl'
+      })
+      .when('/user/active-account',{
+    	  templateUrl : 'views/user.html',
+    	  controller: 'UserCtrl',
+    	  controllerAs: 'UserCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
