@@ -100,6 +100,24 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+	
+
+<!-- 		Emai dependencie -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-support</artifactId>
+		    <version>2.0.8</version>
+		</dependency>
+			
 	</dependencies>
 
 	<properties>
