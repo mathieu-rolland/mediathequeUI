@@ -8,7 +8,7 @@
  * Factory in the mediathequeUiApp.
  */
 angular.module('mediathequeUiApp')
-  .service('Security', [ '$location', function ( $location ) {
+  .service('Security', [ '$location' , 'localStorageService' , function ( $location , localStorageService ) {
 
 	  var service = this;
 	  
@@ -26,6 +26,15 @@ angular.module('mediathequeUiApp')
 	  service.setHttp = function( http ){
 		  service.http = http;
 	  };
+	  
+	  //Init : 
+	  var tokenInStorage = localStorageService.get('auth-token');
+	  if( angular.isDefined(tokenInStorage) && tokenInStorage !== "" ){
+		  service.token = tokenInStorage;
+		  service.currentUser = localStorageService.get('auth-user');
+		  $location.path('/');
+	  }
+	  //End of init
 	  
 	  function preconfigure( callback ){
 		  
@@ -58,6 +67,8 @@ angular.module('mediathequeUiApp')
 		              if (response.data && response.data.token) {
 		            	  service.token=response.data.token;
 		            	  service.currentUser=response.data.user;
+		            	  localStorageService.set('auth-token' , service.token );
+		            	  localStorageService.set('auth-user' , service.currentUser );
 		                  $location.path('/');
 		              }
 	          });
@@ -67,6 +78,7 @@ angular.module('mediathequeUiApp')
 	  service.logout = function(){
 		  service.token = undefined;
 		  service.currentUser = undefined;
+		  localStorageService.set('auth-token' , undefined);
 		  $location.path('/user');
 	  };
 	  
