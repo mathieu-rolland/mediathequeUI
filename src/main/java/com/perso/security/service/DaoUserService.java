@@ -1,5 +1,8 @@
 package com.perso.security.service;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import org.hibernate.mapping.Set;
@@ -20,6 +23,8 @@ public class DaoUserService implements UserService {
 	private AccessTokenRepository accessTokenRepository;
 	
 	protected DaoUserService(){}
+	private static final int TOKEN_VALIDITY = 1; //en jour
+	
 	
 	private Logger logger = LoggerFactory.getLogger( DaoUserService.class );
 	
@@ -41,8 +46,9 @@ public class DaoUserService implements UserService {
 			return null;
 		}
 		
-		if( accessToken.isExpired() ){
-			accessTokenRepository.delete(accessToken);
+		if( !accessToken.isValid() ){
+			logger.info("Token " + accessToken.getToken() + " is not valid anymore");
+			//accessTokenRepository.delete(accessToken);
 			return null;
 		}
 		
@@ -52,7 +58,14 @@ public class DaoUserService implements UserService {
 	@Override
 	public AccessToken createAccessToken(User user) {
 		AccessToken accessToken = new AccessToken(user, UUID.randomUUID().toString());
-        return this.accessTokenRepository.save(accessToken);
+
+		Calendar gc = GregorianCalendar.getInstance();
+		gc.add( Calendar.DATE , TOKEN_VALIDITY);
+		accessToken.setExpirationDate( gc.getTime() );
+        
+		accessToken.setActivated( true );
+		
+		return this.accessTokenRepository.saveAndFlush(accessToken);
 	}
 	
 	public java.util.Set<Role> findUserInAuthorization(User user){
@@ -63,6 +76,12 @@ public class DaoUserService implements UserService {
 		logger.debug("Login user by : " + user );
 		User userInDataBase = userRepository.loginUser( user.getName() , user.getPassword() );
 		if( userInDataBase != null ){
+			AccessToken token = accessTokenRepository.findUserToken( userInDataBase.getId() );
+			if( token != null && token.isValid() ){
+				logger.info("User " + user.getName() + " use an existing token " + token.getToken() );
+				return token;
+			}
+			logger.info("User " + user.getName() + " need new token." );
 			return createAccessToken( userInDataBase );
 		}
 		return null;

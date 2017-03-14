@@ -15,6 +15,7 @@ public class AccessToken {
 	private Long id;
 	
 	private String token;
+	private boolean activated;
 	
 	@ManyToOne
 	private User user;
@@ -74,7 +75,19 @@ public class AccessToken {
             return false;
         }
 
-        return this.expirationDate.getTime() > System.currentTimeMillis();
+        return this.expirationDate.getTime() < System.currentTimeMillis();
     }
+
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean isActivated) {
+		this.activated = isActivated;
+	}
+
+	public boolean isValid() {
+		return !isExpired() && isActivated();
+	}
 	
 }
