@@ -38,11 +38,15 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean{
         if (null != accessToken) {
             User user = this.userService.findUserByAccessToken(accessToken);
             logger.info( "User found in database : " + user );
-            if (null != user) {
-            	logger.info("User is not null : " + user);
-                UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (null != user ){ 
+            	if ( user.isActivated() && !user.isSuspended()) {
+	            	logger.info("User is not null : " + user);
+	                UsernamePasswordAuthenticationToken authentication =
+	                        new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+	                SecurityContextHolder.getContext().setAuthentication(authentication);
+            	}else{
+            		logger.info( "User " + user.getEmail() + " is not activated" );
+            	}
             }
             else{
             	logger.info( "No user found for token : " + accessToken );

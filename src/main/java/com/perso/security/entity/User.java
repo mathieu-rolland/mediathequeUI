@@ -25,14 +25,20 @@ public class User implements UserDetails {
 	private Long id;
 	
 	private String name;
-	
+	private String email;
 	private String password;
+	
+	private boolean activated;
+	private boolean suspended;
+	
+	private String activationKey;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<Role> roles = new HashSet<Role>();
 	
 	protected User(){
-		
+		suspended = false;
+		activated = false;
 	}
 	
 	public User( String name, String password ){
@@ -100,6 +106,42 @@ public class User implements UserDetails {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", roles=" + roles + "]";
+	}
+
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
+
+	public boolean isSuspended() {
+		return suspended;
+	}
+
+	public void setSuspended(boolean suspended) {
+		this.suspended = suspended;
+	}
+
+	public String getActivationKey() {
+		return activationKey;
+	}
+
+	public void setActivationKey(String activationKey) {
+		this.activationKey = activationKey;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

@@ -11,11 +11,11 @@
 	
 	  <div class="form">
 	
-	    <form class="register-form">
-	      <input type="text" placeholder="Utilisateur"/>
-	      <input type="password" placeholder="mot de passe"/>
-	      <input type="text" placeholder="adresse mail"/>
-	      <button>Demander</button>
+	    <form class="">
+	      <input type="text" placeholder="Utilisateur" ng-model="user.name"/>
+	      <input type="text" placeholder="adresse mail" ng-model="user.email"/>
+	      <input type="password" placeholder="mot de passe" ng-model="user.password"/>
+	      <button ng-click="create()">Créer</button>
 	      <p class="message">Déjà enregistré<a href="#">Connexion</a></p>
 	    </form>
 	    <form class="login-form">
