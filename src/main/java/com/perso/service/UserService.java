@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.perso.data.SecureData;
 import com.perso.security.entity.AccessToken;
 import com.perso.security.entity.Role;
 import com.perso.security.entity.User;
@@ -35,7 +36,7 @@ public class UserService {
 			logger.warn("Fail to login user with empty credential");
 			return new ResponseEntity<AccessToken>(org.springframework.http.HttpStatus.FORBIDDEN);
 		}
-		
+		token.setUser( SecureData.cleaningUser( token.getUser() ) );
 		return new ResponseEntity<AccessToken>( token , org.springframework.http.HttpStatus.OK );
 	}
 	

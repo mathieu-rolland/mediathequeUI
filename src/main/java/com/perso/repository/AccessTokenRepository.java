@@ -12,4 +12,7 @@ public interface AccessTokenRepository extends JpaRepository<AccessToken, Long> 
 	@Query ("select at from AccessToken at where at.token = ?")
 	public AccessToken findAccessToken( String accessToken );
 	
+	@Query ("select at from AccessToken at where at.user.id = ? and at.expirationDate > sysdate()")
+	public AccessToken findUserToken( Long userId );
+
 }
