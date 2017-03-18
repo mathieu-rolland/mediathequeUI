@@ -62,7 +62,17 @@
     				</div>
 
   		  	</li>
-  		  	<li ng-class="page == 'logout'  ? 'active' : ''" class="item" ><a href="" ng-click="logout()">logout {{user.name}}</a></li>
+  		  	<li ng-class="page == 'logout'  ? 'active' : ''" class="item">
+
+   				<div class="dropdown">
+
+   				  <button class="dropbtn">Bonjour {{user.name}}</button>
+   				  <div class="dropdown-content">
+<!--    				    <a ng-href="">Mes infos</a> -->
+   				    <a href="" ng-click="logout()">Deconnexion</a>
+   				  </div>
+   				</div>
+  		  	</li>
 
   		  </ul>
 
