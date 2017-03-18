@@ -23,6 +23,9 @@ angular.module('mediathequeUiApp')
 	  
 	  var currentUser;
 	  
+	  var userPages = {};
+	  userPages['my-movies'] = true;
+	  
 	  service.setHttp = function( http ){
 		  service.http = http;
 	  };
@@ -115,6 +118,31 @@ angular.module('mediathequeUiApp')
 	  service.isAuthenticated = function(){
 		return angular.isDefined(service.token) && angular.isDefined(service.currentUser);  
 	  };
+	  
+	  service.isAuthorized = function(page){
+		  console.log( service.currentUser );
+		  var roles = service.currentUser.roles;
+
+		  if( angular.isDefined(roles)){
+			  var isAuthorized = false;
+			  roles.forEach( function(el){
+				  console.log('check for role ' + el + ' and for page ' + page);
+				  if( el === 'USER' && userPages[page] ){
+					  console.log( 'User is authorized for page ' + page );
+					  isAuthorized = true;
+				  }
+				  else if( el === 'ADMIN' ){
+					  console.log( 'Admin is authorized for page ' + page );
+					  isAuthorized = true;
+				  }
+			  });
+			  return isAuthorized;
+		  }else{
+			  return false;
+		  }
+		  console.log( 'Not authorized for page ' + page );
+		  return false;
+	  }
 	  
   }])
   .service('httpSecurityInterceptor', [ '$location', 'Security', function( $location, Security ){

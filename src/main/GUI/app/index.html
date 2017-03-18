@@ -47,9 +47,9 @@
 
   		  <ul>
 
-  		  	<li ng-class="page == 'search'  ? 'active' : ''" class="item" ><a href="/#!/load-disk">Rechercher</a></li>
+  		  	<li ng-show='isAuthorized("search")' ng-class="page == 'search'  ? 'active' : ''" class="item" ><a href="/#!/load-disk">Rechercher</a></li>
 
-  		  	<li ng-class="page == 'parameters'? 'active' : ''" class="item">
+  		  	<li ng-show='isAuthorized("parameters")' ng-class="page == 'parameters'? 'active' : ''" class="item">
 
     				<div class="dropdown">
 
