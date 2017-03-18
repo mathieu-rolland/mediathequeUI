@@ -52,4 +52,9 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', [ 'Security', '$scope'
 		Security.logout();
 	};
 	
+	//Security managment :
+	$scope.isAuthorized = function(page){
+		return Security.isAuthorized(page);
+	};
+	
 }]);
