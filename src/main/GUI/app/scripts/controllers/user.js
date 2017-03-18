@@ -30,4 +30,8 @@ angular.module('mediathequeUiApp')
 		  Security.activeAccount( $routeParams.q );
 	  }
 	  
+	  $scope.askingRegister = function(){
+		  angular.element('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+	  };
+	  
   }]);
