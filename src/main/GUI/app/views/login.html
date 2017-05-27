@@ -1,13 +1,19 @@
 
-<div class="user_page" ng-controller="UserCtrl">
+<div class="user_page" ng-controller="LoginCtrl">
 
+  <script type="text/ng-template" id="alert.html">
+    <div ng-transclude></div>
+  </script>
+
+	<div class="alerts">
+	  	<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+	</div>
+	
 	<div class="title">
 		<img src="styles/images/logo-mediatheque.png" alt="logo.png" />
 	</div>
 	
 	<div class="login-page">
-	
-	
 	
 	  <div class="form">
 	

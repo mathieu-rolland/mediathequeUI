@@ -28,6 +28,8 @@ public class EmailConfiguration {
 
 	private boolean debug;
 	
+	private String regexValidation;
+	
 	public String getHost() {
 		return host;
 	}
@@ -66,6 +68,14 @@ public class EmailConfiguration {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getRegex_validation() {
+		return regexValidation;
+	}
+
+	public void setRegex_validation(String regex_validation) {
+		this.regexValidation = regex_validation;
 	}
 	
 }

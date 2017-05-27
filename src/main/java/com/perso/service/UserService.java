@@ -1,5 +1,6 @@
 package com.perso.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -77,4 +78,30 @@ public class UserService {
 		}
 		return new ResponseEntity<Boolean>( (Boolean) false , org.springframework.http.HttpStatus.OK );
 	}
+	
+	@RequestMapping("check-user")
+	public @ResponseBody int checUserToCreate( @RequestBody User user ){
+		return userService.checkUsers(user);
+	}
+	
+	@RequestMapping("list-users")
+	public @ResponseBody List<User> getAllUsers(){
+		return userService.getAllUsers();
+	}
+	
+	@RequestMapping("ban-user")
+	public @ResponseBody User banUser(User u){
+		return userService.banUser(u); 
+	}
+	
+	@RequestMapping("force-activation")
+	public @ResponseBody User forceActivation(User u){
+		return userService.forceUserActivation(u); 
+	}
+	
+	@RequestMapping("revoke-authoritie")
+	public @ResponseBody User revokeAuthority(User u , Role role){
+		return userService.revokeAuthority(u, role); 
+	}
+	
 }

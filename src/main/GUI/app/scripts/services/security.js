@@ -33,9 +33,11 @@ angular.module('mediathequeUiApp')
 	  //Init : 
 	  var tokenInStorage = localStorageService.get('auth-token');
 	  if( angular.isDefined(tokenInStorage) && tokenInStorage !== "" ){
+		  
 		  service.token = tokenInStorage;
 		  service.currentUser = localStorageService.get('auth-user');
 		  $location.path('/');
+		  
 	  }
 	  //End of init
 	  
@@ -44,6 +46,7 @@ angular.module('mediathequeUiApp')
 		  if (angular.isUndefined(service.mainUrl)){
 			  
 			  service.http.get('config/webservice.properties').then(function(response){
+				  
 				  if( angular.isDefined(response.data) 
 						  && angular.isDefined(response.data.host) ){
 					  host = response.data.host;
@@ -60,34 +63,56 @@ angular.module('mediathequeUiApp')
 		  }
 	  };
 	  
-	  service.login = function( user ){
+	  service.login = function( user , callback ){
 		  
 		  console.log('login in progress...');
+		  
 		  return preconfigure (
 				function(){
 				  service.http.post( service.mainURL + 'user/login' , user )
 			  		.then(function (response) {
-		              if (response.data && response.data.token) {
-		            	  service.token=response.data.token;
-		            	  service.currentUser=response.data.user;
-		            	  localStorageService.set('auth-token' , service.token );
-		            	  localStorageService.set('auth-user' , service.currentUser );
-		                  $location.path('/');
+		              if (	response.data && angular.isDefined( response.data.token ) ) {
+		            	  console.log(response.data.user);
+		            	  if( !response.data.user.activated ){
+		            		  callback( false , "" , "Veuillez activer votre compte." );
+		            	  }else{
+			            	  service.token=response.data.token;
+			            	  service.currentUser=response.data.user;
+			            	  localStorageService.set('auth-token' , service.token );
+			            	  localStorageService.set('auth-user' , service.currentUser );
+			                  callback( true , "/" , "" );
+		            	  }
+		              }else{
+		            	  callback( false , "" , "Utilisateur ou mot de passe incorrecte" );
 		              }
 	          });
 		  });
 	  };
 	  
 	  service.create = function( user ){
+		  
 		  preconfigure(function(){
 			  
 			  service.http.post( service.mainURL + 'user/create-account' , user )
 		  		.then(function (response) {
-		  			console.log(response);
+		  				console.log( response );
+		  				if( response && response.status && response.status === 200 ){
+		  					var userCreated = response.data;		  					
+		  					if( userCreated.name === user.name
+		  						&& userCreated.email === user.email ){
+		  						$location.path('/');
+		  						callback( true, '/' );
+		  					}else{
+		  						callback( false , '' , "Erreur lors de la création du compte" );
+		  					}
+		  				}else{
+		  					callback( false , '' , "Erreur lors de la création du compte" );
+		  				}
 		  		});
 		  		
 		  });
-	  }
+		  
+	  };
 	  
 	  service.activeAccount = function( key ){
 		  
@@ -104,7 +129,7 @@ angular.module('mediathequeUiApp')
 		  service.token = undefined;
 		  service.currentUser = undefined;
 		  localStorageService.set('auth-token' , undefined);
-		  $location.path('/user');
+		  $location.path('/login');
 	  };
 	  
 	  service.getToken = function(){
@@ -131,11 +156,11 @@ angular.module('mediathequeUiApp')
 		
 				  roles.forEach( function(el){
 					  if( el === 'USER' && userPages[page] ){
-						  console.log( 'User is authorized for page ' + page );
+						  //console.log( 'User is authorized for page ' + page );
 						  isAuthorized = true;
 					  }
 					  else if( el === 'ADMIN' ){
-						  console.log( 'Admin is authorized for page ' + page );
+						  //console.log( 'Admin is authorized for page ' + page );
 						  isAuthorized = true;
 					  }
 				  });
@@ -147,6 +172,44 @@ angular.module('mediathequeUiApp')
 		  }
 		  console.log( 'Not authorized for page ' + page );
 		  return false;
+	  }
+	  
+	  service.getAllUsers = function( callback ){
+		  preconfigure( function(){
+			
+			  service.http.get( service.mainURL + 'user/list-users' )
+		  		.then(function (response) {
+		  			callback(response);
+		  		});
+			  
+		  });
+	  };
+	  
+	  
+	  service.checkUser = function( user , callback){
+		  preconfigure(function(){
+			  
+			  service.http.post( service.mainURL + 'user/check-user' , user )
+		  		.then(function (response) {
+		  			var returnCode = response.data;
+		  			var message = "";
+		  			if( returnCode === 100 ){
+		  				message = "L'utilisateur existe déjà";
+		  			}else if( returnCode === 200 ){
+		  				message = "L'email n'est pas correctement rempli";
+		  			}else if( returnCode === 201 ){
+		  				message = "L'email n'est pas valide";
+		  			}else if( returnCode === 300 ){
+		  				message = "Le nom d'utilisateur n'est pas valide";
+		  			}else if( returnCode === 301 ){
+		  				message = "Ce nom d'utilisateur existe déjà";
+		  			}else if( returnCode === 300 ){
+		  				message = "Le mot de passe n'est pas valide";
+		  			}
+		  			callback(response , message);
+		  		});
+		  		
+		  });
 	  }
 	  
   }])

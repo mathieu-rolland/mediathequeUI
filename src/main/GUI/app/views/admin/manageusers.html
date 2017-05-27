@@ -1,0 +1,41 @@
+
+<div  class="user_management_page" ng-controller="ManageUserCtrl">
+
+
+	<div class="user_management_page_title">
+		<h1>Gérer les utilisateurs</h1>
+	</div>
+
+	<div class="loading" ng-show="!pageLoaded" >
+		<div class='uil-cube-css' style='-webkit-transform:scale(0.63)'><div></div><div></div><div></div><div></div></div>
+	</div>
+
+
+	<div class="user_list_content" ng-show="pageLoaded">
+		
+		<table class="user_list_table">
+			<thead class="user_list_header">
+				<tr>
+					<th>Nom</th>
+					<th>E-mail</th>
+					<th>Droits</th>
+					<th>Comtpe activé</th>
+					<th>Compte banni</th>
+				</tr>
+			</thead>
+			
+			<tr ng-repeat="user in userList" class="user_details_line">
+				<td>{{user.name}}</td>
+				<td>{{user.email}}</td>
+				<td>
+					<a ng-repeat='role in user.roles' class="btn btn-lg btn-success" type="button" ng-click="revoke(user.id,user.role)">Revoker {{role}}</a>
+				</td>
+				<td><a class="btn btn-lg btn-success" type="button" ng-click="authorize(user.id)">{{user.activated ? 'Comtpe activé':'Forcer l\'activation'}}</td>
+				<td><a ng-class="user.suspended ? 'btn btn-lg btn-success':'btn btn-lg btn-warning'" type="button" ng-click="bannir(user.id)">{{user.suspended ? 'Autoriser à nouveau':'Bannir'}}</a></td>
+			</tr>
+			
+		</table>
+		
+	</div>
+
+</div>

@@ -70,10 +70,10 @@ angular
     	  controller: 'CsvuploadCtrl',
     	  controllerAs: 'cvupload'
       })
-      .when('/user',{
-    	  templateUrl : 'views/user.html',
-    	  controller: 'UserCtrl',
-    	  controllerAs: 'userctrl'
+      .when('/login',{
+    	  templateUrl : 'views/login.html',
+    	  controller: 'LoginCtrl',
+    	  controllerAs: 'LoginCtrl'
       })
       .when('/admin/users',{
     	  templateUrl : 'views/admin/manageusers.html',
@@ -81,9 +81,9 @@ angular
     	  controllerAs: 'ManageUserCtrl'
       })
       .when('/user/active-account',{
-    	  templateUrl : 'views/user.html',
-    	  controller: 'UserCtrl',
-    	  controllerAs: 'UserCtrl'
+    	  templateUrl : 'views/login.html',
+    	  controller: 'LoginCtrl',
+    	  controllerAs: 'LoginCtrl'
       })
       .otherwise({
         redirectTo: '/'

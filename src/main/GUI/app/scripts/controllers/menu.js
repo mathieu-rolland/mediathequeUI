@@ -37,6 +37,9 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', [ 'Security', '$scope'
 			case '/csv':
 				$scope.page = 'csv';
 				break;
+			case '/admin/users':
+				$scope.page = 'user'
+				break;
 			default:
 				break;
         }
