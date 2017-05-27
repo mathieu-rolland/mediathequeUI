@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="styles/loading.css">
     <link rel="stylesheet" href="styles/machineParams.css">
     <link rel="stylesheet" href="styles/search-allocine.css">
-    <link rel="stylesheet" href="styles/user.css">
+    <link rel="stylesheet" href="styles/login.css">
+     <link rel="stylesheet" href="styles/admin/manageusers.css">
     <!-- endbuild -->
   </head>
   
@@ -68,7 +69,7 @@
 
    				  <button class="dropbtn">Bonjour {{user.name}}</button>
    				  <div class="dropdown-content">
-<!--    				    <a ng-href="">Mes infos</a> -->
+   				    <a href="/#!/admin/users" ng-show='isAuthorized("parameters")'>Gérer les utilisateurs</a>
    				    <a href="" ng-click="logout()">Deconnexion</a>
    				  </div>
    				</div>
@@ -145,7 +146,7 @@
     <script src="scripts/filters/formatduration.js"></script>
     <script src="scripts/controllers/csvupload.js"></script>
     <script src="scripts/controllers/machineparameter.js"></script>
-    <script src="scripts/controllers/user.js"></script>
+    <script src="scripts/controllers/login.js"></script>
     <script src="scripts/admin/controllers/manageusers.js"></script>
     <!-- endbuild -->
         

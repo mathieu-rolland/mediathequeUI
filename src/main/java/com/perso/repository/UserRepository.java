@@ -21,4 +21,10 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Query ("select u from User u where u.email = ?")
 	public User findUserByEmail(String email);
 	
+	@Query ("select count(1) from User u where u.email = ?")
+	public int getNumberOfUserWithEmail(String email);
+	
+	@Query ("select count(1) from User u where u.name = ?")
+	public int getNumberOfUserWithName(String name);
+	
 }
