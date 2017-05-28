@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.perso.repository.AccessTokenRepository;
@@ -15,6 +17,7 @@ import com.perso.security.entity.Role;
 import com.perso.security.entryPoint.AuthenticationTokenProcessingFilter;
 import com.perso.security.service.DaoUserService;
 import com.perso.spring.cors.CORSFilter;
+
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +37,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
 		http
 		.httpBasic().and().csrf().disable()
 		.authorizeRequests()
@@ -48,6 +50,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.addFilterBefore( new CORSFilter() , BasicAuthenticationFilter.class)
 			.addFilterBefore( new AuthenticationTokenProcessingFilter( new DaoUserService(userRepo, accessTokenRepo) ) , BasicAuthenticationFilter.class );
 		super.configure(http);
+	}
+	
+	
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder( 10 );
 	}
 	
 }

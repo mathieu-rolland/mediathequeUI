@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.perso.repository.AccessTokenRepository;
 import com.perso.repository.UserRepository;
@@ -31,6 +33,9 @@ public class DaoUserService implements UserService {
 	
 	@Autowired
 	private EmailConfiguration configuration;
+	
+	@Autowired
+	private PasswordEncoder pwdEncoder;
 	
 	protected DaoUserService(){}
 	private static final int TOKEN_VALIDITY = 1; //en jour
@@ -94,13 +99,20 @@ public class DaoUserService implements UserService {
 	}
 	
 	public java.util.Set<Role> findUserInAuthorization(User user){
-		return userRepository.findUser( user.getName() , user.getPassword() ).getAuthorities();
+		return userRepository.findUser( user.getName() , pwdEncoder.encode( user.getPassword() ) ).getAuthorities();
 	}
 	
 	public AccessToken loginUser(User user){
-		logger.debug("Login user by : " + user );
-		User userInDataBase = userRepository.loginUser( user.getName() , user.getPassword() );
+		logger.info("Login user by : " + user );
+		logger.info( "Check database password with " + pwdEncoder.encode( user.getPassword() ) + " / " + user.getPassword() );
+		
+		
+		User userInDataBase = userRepository.loadUserByUsername( user.getName() );
+		
 		if( userInDataBase != null ){
+			if( !pwdEncoder.matches( user.getPassword() , userInDataBase.getPassword()) ){
+				return null;
+			}
 			AccessToken token = accessTokenRepository.findUserToken( userInDataBase.getId() );
 			if( token != null && token.isValid() ){
 				logger.info("User " + user.getName() + " use an existing token " + token.getToken() );
@@ -122,6 +134,7 @@ public class DaoUserService implements UserService {
 			String activationKey = UUID.randomUUID().toString();
 			user.setActivationKey( Base64.getEncoder().encodeToString( activationKey.getBytes() ) );
 			user.setRoles( roles );
+			user.setPassword( pwdEncoder.encode( user.getPassword() ) );
 			return userRepository.saveAndFlush( user );
 			
 		}
