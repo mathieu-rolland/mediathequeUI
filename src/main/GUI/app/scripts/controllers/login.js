@@ -55,7 +55,7 @@ angular.module('mediathequeUiApp')
 			  } , 2000 );
 		  }
 	  };
-	  	  
+
 	  $scope.closeAlert = function(index){
 		  $scope.alerts.splice(index , 1);
 	  };

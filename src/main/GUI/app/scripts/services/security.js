@@ -218,6 +218,15 @@ angular.module('mediathequeUiApp')
 						callback( index, response );
 					});
 			});
+	  };
+
+	  service.forceUserActivation = function( index , user , callback ){
+		  preconfigure(function(){
+				service.http.post( service.mainURL + 'user/force-activation' , user  )
+					.then(function( response ){
+						callback( index, response );
+					});
+			});
 	  }
 
   }])
