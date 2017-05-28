@@ -25,9 +25,17 @@ angular.module('mediathequeUiApp')
 		  Security.checkUser( $scope.user , securityCheckCallback);
 	  }
 	  
-	  var securityCheckCallback = function(data , message){
-		  console.log("Check user : " + data.data );
-		  Security.create( $scope.user , securityCallback );
+	  var securityCheckCallback = function(response , message){
+		  console.log("Check user : " + response.data );
+		  //Security.create( $scope.user , securityCallback );
+		  if( response.data !== 0){
+		   	$scope.alerts.push( { type : "danger" , msg: message} );
+			  $timeout( function(){
+				  $scope.closeAlert( $scope.alerts.length -1 );
+			  } , 2000 );
+		  }else{
+			  Security.create( $scope.user , securityCallback );
+		  }
 	  };
 	  
 	  //user activation :
