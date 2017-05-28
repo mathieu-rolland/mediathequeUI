@@ -89,7 +89,7 @@ angular.module('mediathequeUiApp')
 		  });
 	  };
 	  
-	  service.create = function( user ){
+	  service.create = function( user , callback ){
 		  
 		  preconfigure(function(){
 			  

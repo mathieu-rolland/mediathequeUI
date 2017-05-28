@@ -13,9 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	public User loadUserByUsername( String username );
 	
 	@Query ("select u from User u where u.name = ? and u.password = ?")
-	public User loginUser( String username, String password );
-	
-	@Query ("select u from User u where u.name = ? and u.password = ?")
 	public User findUser( String username, String password );
 	
 	@Query ("select u from User u where u.email = ?")
@@ -26,5 +23,5 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	@Query ("select count(1) from User u where u.name = ?")
 	public int getNumberOfUserWithName(String name);
-	
+
 }
