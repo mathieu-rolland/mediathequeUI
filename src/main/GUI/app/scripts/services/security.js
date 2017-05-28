@@ -185,7 +185,6 @@ angular.module('mediathequeUiApp')
 		  });
 	  };
 	  
-	  
 	  service.checkUser = function( user , callback){
 		  preconfigure(function(){
 			  
@@ -194,11 +193,11 @@ angular.module('mediathequeUiApp')
 		  			var returnCode = response.data;
 		  			var message = "";
 		  			if( returnCode === 100 ){
-		  				message = "L'utilisateur existe déjà";
+		  				message = "L'utilisateur "+ user.name +" existe déjà";
 		  			}else if( returnCode === 200 ){
-		  				message = "L'email n'est pas correctement rempli";
+		  				message = "L'email "+ user.email +" n'est pas correctement rempli";
 		  			}else if( returnCode === 201 ){
-		  				message = "L'email n'est pas valide";
+		  				message = "L'email "+ user.email +" n'est pas valide";
 		  			}else if( returnCode === 300 ){
 		  				message = "Le nom d'utilisateur n'est pas valide";
 		  			}else if( returnCode === 301 ){
@@ -211,7 +210,16 @@ angular.module('mediathequeUiApp')
 		  		
 		  });
 	  }
-	  
+
+	  service.banUser = function( index, user , callback ){
+			preconfigure(function(){
+				service.http.post( service.mainURL + 'user/ban-user' , user  )
+					.then(function( response ){
+						callback( index, response );
+					});
+			});
+	  }
+
   }])
   .service('httpSecurityInterceptor', [ '$location', 'Security', function( $location, Security ){
 	  

@@ -1,6 +1,9 @@
 
 <div  class="user_management_page" ng-controller="ManageUserCtrl">
 
+	<div class="alerts">
+	  	<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+	</div>
 
 	<div class="user_management_page_title">
 		<h1>Gérer les utilisateurs</h1>
@@ -30,8 +33,8 @@
 				<td>
 					<a ng-repeat='role in user.roles' class="btn btn-lg btn-success" type="button" ng-click="revoke(user.id,user.role)">Revoker {{role}}</a>
 				</td>
-				<td><a class="btn btn-lg btn-success" type="button" ng-click="authorize(user.id)">{{user.activated ? 'Comtpe activé':'Forcer l\'activation'}}</td>
-				<td><a ng-class="user.suspended ? 'btn btn-lg btn-success':'btn btn-lg btn-warning'" type="button" ng-click="bannir(user.id)">{{user.suspended ? 'Autoriser à nouveau':'Bannir'}}</a></td>
+				<td><a class="btn btn-lg btn-success" type="button" ng-click="authorize(user)">{{user.activated ? 'Comtpe activé':'Forcer l\'activation'}}</td>
+				<td><a ng-class="user.suspended ? 'btn btn-lg btn-success':'btn btn-lg btn-warning'" type="button" ng-click="bannir($index, user)">{{user.suspended ? 'Autoriser à nouveau':'Bannir'}}</a></td>
 			</tr>
 			
 		</table>

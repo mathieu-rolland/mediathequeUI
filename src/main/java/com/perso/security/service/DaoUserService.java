@@ -106,7 +106,6 @@ public class DaoUserService implements UserService {
 		logger.info("Login user by : " + user );
 		logger.info( "Check database password with " + pwdEncoder.encode( user.getPassword() ) + " / " + user.getPassword() );
 		
-		
 		User userInDataBase = userRepository.loadUserByUsername( user.getName() );
 		
 		if( userInDataBase != null ){
@@ -249,10 +248,10 @@ public class DaoUserService implements UserService {
 		return userRepository.findAll();
 	}
 
-	public User banUser(User u){
+	public User toggleBanUser(User u){
 		User dbUser = userRepository.findOne( u.getId() );
 		if( dbUser != null ){
-			dbUser.setSuspended( true );
+			dbUser.setSuspended( !dbUser.isSuspended() );
 			userRepository.save(dbUser);
 			return dbUser;
 		}
@@ -268,7 +267,6 @@ public class DaoUserService implements UserService {
 		}
 		return null;
 	}
-
 
 	public User revokeAuthority(User u, Role role) {
 		User dbUser = userRepository.findOne( u.getId() );

@@ -89,18 +89,18 @@ public class UserService {
 		return userService.getAllUsers();
 	}
 	
-	@RequestMapping("ban-user")
-	public @ResponseBody User banUser(User u){
-		return userService.banUser(u); 
+	@RequestMapping(value = "ban-user" , method = RequestMethod.POST)
+	public @ResponseBody User banUser( @RequestBody User u){
+		return userService.toggleBanUser(u); 
 	}
 	
-	@RequestMapping("force-activation")
-	public @ResponseBody User forceActivation(User u){
+	@RequestMapping(value = "force-activation" , method = RequestMethod.POST)
+	public @ResponseBody User forceActivation(@RequestBody User u){
 		return userService.forceUserActivation(u); 
 	}
 	
-	@RequestMapping("revoke-authoritie")
-	public @ResponseBody User revokeAuthority(User u , Role role){
+	@RequestMapping( value = "revoke-authority" , method = RequestMethod.POST)
+	public @ResponseBody User revokeAuthority(@RequestBody User u ,@RequestBody Role role){
 		return userService.revokeAuthority(u, role); 
 	}
 	
