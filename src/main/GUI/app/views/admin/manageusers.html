@@ -33,7 +33,7 @@
 				<td>
 					<a ng-repeat='role in user.roles' class="btn btn-lg btn-success" type="button" ng-click="revoke(user.id,user.role)">Revoker {{role}}</a>
 				</td>
-				<td><a class="btn btn-lg btn-success" type="button" ng-click="authorize(user)">{{user.activated ? 'Comtpe activé':'Forcer l\'activation'}}</td>
+				<td><a class="btn btn-lg btn-success" type="button" ng-click="authorize($index, user)">{{user.activated ? 'Comtpe activé':'Forcer l\'activation'}}</td>
 				<td><a ng-class="user.suspended ? 'btn btn-lg btn-success':'btn btn-lg btn-warning'" type="button" ng-click="bannir($index, user)">{{user.suspended ? 'Autoriser à nouveau':'Bannir'}}</a></td>
 			</tr>
 			

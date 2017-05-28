@@ -57,6 +57,39 @@ angular.module('mediathequeUiApp')
 			}
 	  };
 
+	  $scope.authorize = function($index, user){
+		  Security.forceUserActivation( $index , user, forceAuthorizationCallback );
+	  };
+
+	  var forceAuthorizationCallback = function( index , response ){
+			if( response.status !== 200 ){
+				console.log( response );
+				$scope.alerts.push( { type : 'danger' , msg : 'Erreur survenue dans le web service (' + response.status +')' } );
+			}else{
+				if( response.data !== "" ){
+					var user = response.data;
+					var message = "";
+					
+					//display alert : 
+					if( user.activated ) message = 'Profile utilisateur activé avec succès';
+					else message = 'Progile utilisateur désactivé avec succès';
+					$scope.alerts.push( { type : 'success' , msg : message } );
+					$timeout(function(){
+						$scope.alerts.splice( $scope.alerts.length -1 );
+					} , 2000 );
+
+					//update model value : 
+					/*$scope.userList.forEach(function(element) {
+						if( element.name === user.name ){
+							element.suspended = user.suspended;
+						}
+					}, this);*/
+					$scope.userList[index].activated = user.activated;
+
+				}
+			}
+	  };
+
 	  $scope.bannir = function( index , user ){
 		  Security.banUser( index , user , userBanCallback );
 	  };
