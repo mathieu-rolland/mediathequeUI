@@ -1,5 +1,8 @@
 package com.perso.security.service;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -10,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.perso.security.entity.User;
@@ -25,45 +29,58 @@ public class MailService {
 	@Autowired
 	private Session session;
 	
+	@Autowired
+	@Qualifier("mail-properties")
+	private Properties mailProperties;
+	
 	public void sendActivationEmail( User user ){
 		
-		logger.info( "Start to send email" ) ;
+		logger.debug( "Start to send email" ) ;
 		
 		String generatedKey = userService.generateActivationKeyForUSer(user);
 		
-		String hardcodingBody = "<h3>Bonjour " + user.getName() + " ,</h3>";
-		hardcodingBody += "Merci de vous êtes inscrit à la médiatheque.<br />";
-		hardcodingBody += "<br />Pour valider votre compte, merci de l'activer en suivant le lien suivant ";
-		hardcodingBody += "<a href=http://mathieu35700.ddns.net:9050/user/active-account?q="+generatedKey+">activer mon compte</a>.";
-		hardcodingBody += "<br /><br />";
-		hardcodingBody += "Cordialement,<br />Mathieu.";
+		String mailContent = mailProperties.getProperty("mail-content");
+		mailContent = mailContent.replaceAll("\\{user.name\\}", user.getName() );
+		mailContent = mailContent.replaceAll( "\\{user.generatedKey\\}" , generatedKey );
+		mailContent = mailContent.replaceAll( "\\{user.email\\}" , user.getEmail() );
+		 
+		String mailCopyContent = mailProperties.getProperty("mail-content.copy");
+		mailCopyContent = mailCopyContent.replaceAll("\\{user.name\\}", user.getName() );
+		mailCopyContent = mailCopyContent.replaceAll( "\\{user.generatedKey\\}" , generatedKey );
+		mailCopyContent = mailCopyContent.replaceAll( "\\{user.email\\}" , user.getEmail() );
 		
-		String hardcodingBodyCopy = "<h3>Bonjour Mathieu,</h3>";
-		hardcodingBodyCopy += "L'utilisateur vient de s'inscrire sur la médiatheque avec l'adresse email "+generatedKey+".<br />";
-		hardcodingBodyCopy += "<br />L'adresse d'activation du compte est la suivante : ";
-		hardcodingBodyCopy += "http://mathieu35700.ddns.net:9050/user/active-account?q="+generatedKey;
-		hardcodingBodyCopy += "<br /><br />";
-		hardcodingBodyCopy += "Cordialement,<br />Mathieu.";
+		String subject = mailProperties.getProperty("mail.subject");
+		subject = subject.replaceAll( "\\{user.email\\}" , user.getEmail() );
+		subject = subject.replaceAll("\\{user.name\\}", user.getName() );
 		
-		logger.warn( hardcodingBody );
+		String subjectCopy = mailProperties.getProperty("mail.copy.subject");
+		subjectCopy = subjectCopy.replaceAll( "\\{user.email\\}" , user.getEmail() );
+		subjectCopy = subjectCopy.replaceAll("\\{user.name\\}", user.getName() );
+		
+		if( session.getDebug() ){
+			logger.info( "Generated mail {}" , mailContent );
+		}
 		
 	    Message message = new MimeMessage(session);
 			
 		try {
-			message.setFrom(new InternetAddress("mediatheque@no-replay"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail()));
-			message.setSubject("Inscription sur la médiathèque");
-			message.setContent( hardcodingBody , "text/html; charset=utf-8");
-	        
-			Message copy = new MimeMessage(session);
-			copy.setFrom(new InternetAddress("mediatheque@no-replay"));
-			copy.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mathieu.rolland2705@gmail.com"));
-			copy.setSubject("Inscription de "+ user.getEmail() +" sur la médiathèque");
-			copy.setContent( hardcodingBodyCopy , "text/html; charset=utf-8" );
 			
+			//Email for user :
+			message.setFrom(new InternetAddress( mailProperties.getProperty("mail.from") ));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail()));
+			message.setSubject( subject );
+			message.setContent( mailContent , mailProperties.getProperty("mail.format") );
+	        
+			//Email for admin
+			Message copy = new MimeMessage(session);
+			copy.setFrom(new InternetAddress( mailProperties.getProperty("mail.copy.from") ));
+			copy.setRecipients(Message.RecipientType.TO, InternetAddress.parse( mailProperties.getProperty("mail.copy.to") ));
+			copy.setSubject( subjectCopy );
+			copy.setContent( mailCopyContent , mailProperties.getProperty("mail.copy.format") );
+			
+			//Send emails : 
 			Transport.send(message);
 			Transport.send(copy);
-			
 			
 		} catch (MessagingException e) {
 			e.printStackTrace();
