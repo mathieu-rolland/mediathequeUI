@@ -102,7 +102,7 @@ public class MailBean {
 		fileTemplate = props.getProperty("mail.copy.template");
 		
 		logger.info("Loading mail copy template from {}" , fileTemplate);
-		reader = new BufferedReader( new FileReader( new File(ClassLoader.getSystemResource( fileTemplate ).getFile() ) ) );
+		reader = new BufferedReader( new FileReader( new File( fileTemplate ) ) );
 		
 		mailTemplate = "";
 		
