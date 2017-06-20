@@ -2,7 +2,6 @@ package com.perso.security.configuration;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -31,6 +30,8 @@ public class MailBean {
 	
 	@Bean
 	public Session createMailService( EmailConfiguration config ){
+		
+		logger.info("Starting creating mail session");
 		
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		
@@ -67,18 +68,24 @@ public class MailBean {
 
         //        session.setDebug( config.getDebug() );
         
+        logger.info("Mail session created successfully");
+        
         return session;
 	}
 	
 	@Bean(name = "mail-properties")
 	public Properties readProperties() throws IOException{
 		
+		logger.info("Starting to read mail properties from file {}" ,  properties.getMailSettings());
+		
 		Properties props = new Properties();
 		props.load( ClassLoader.getSystemResourceAsStream( properties.getMailSettings() ) );
 		
 		//Load template (mail for new user) : 
 		String fileTemplate = props.getProperty("mail.template");
-		BufferedReader reader = new BufferedReader( new FileReader( new File(ClassLoader.getSystemResource( fileTemplate ).getFile() ) ) );
+		
+		logger.info("Loading mail template from {}" , fileTemplate);
+		BufferedReader reader = new BufferedReader( new FileReader( new File( fileTemplate ) ) );
 		
 		String mailTemplate = "";
 		
@@ -92,6 +99,8 @@ public class MailBean {
 		
 		//Load template (mail for admin) : 
 		fileTemplate = props.getProperty("mail.copy.template");
+		
+		logger.info("Loading mail copy template from {}" , fileTemplate);
 		reader = new BufferedReader( new FileReader( new File(ClassLoader.getSystemResource( fileTemplate ).getFile() ) ) );
 		
 		mailTemplate = "";
@@ -104,6 +113,7 @@ public class MailBean {
 
 		props.put( "mail-content.copy", mailTemplate );
 		
+		logger.info("Readinf mail properties ended successfully");
 		return props;
 	}
 	
