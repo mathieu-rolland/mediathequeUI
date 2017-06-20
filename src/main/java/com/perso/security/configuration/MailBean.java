@@ -79,7 +79,8 @@ public class MailBean {
 		logger.info("Starting to read mail properties from file {}" ,  properties.getMailSettings());
 		
 		Properties props = new Properties();
-		props.load( ClassLoader.getSystemResourceAsStream( properties.getMailSettings() ) );
+		BufferedReader propertiesReader = new BufferedReader( new FileReader( new File( properties.getMailSettings() ) ) );
+		props.load( propertiesReader );
 		
 		//Load template (mail for new user) : 
 		String fileTemplate = props.getProperty("mail.template");
