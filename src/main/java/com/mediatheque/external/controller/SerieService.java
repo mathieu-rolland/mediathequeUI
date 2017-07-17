@@ -27,15 +27,6 @@ public class SerieService {
 	@Autowired
 	private IAllocineAPI api;
 	
-	/*@Autowired
-	private IMediathequeFactory mediathequeFactory;
-	
-	@Autowired
-	private ParametersRepository parameterRepository;
-	
-	@Autowired
-	private CustomApplicationProperties properties;*/
-	
 	@RequestMapping("/search")
 	public @ResponseBody Collection<ISerie> searchSerie(@RequestParam(value="q", defaultValue="default") String search){
 		try {

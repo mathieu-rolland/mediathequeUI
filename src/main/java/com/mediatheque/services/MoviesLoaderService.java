@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.allocine.model.IMovie;
-import com.mediatheque.db.repository.MovieRepository;
+import com.mediatheque.db.dao.MovieDAO;
+import com.mediatheque.db.dao.ParameterDao;
 import com.mediatheque.factory.IMediathequeFactory;
 import com.mediatheque.model.ILocalMovie;
 import com.mediatheque.model.IRegexParameter;
@@ -19,25 +21,16 @@ import com.mediatheque.model.impl.Parameter;
 @Service
 public class MoviesLoaderService {
 
+	@Autowired
+	private MovieDAO movieDao;
+	
+	@Autowired
+	private ParameterDao parameterDao;
+	
+	@Autowired
+	private IMediathequeFactory mediathequeFactory;
+	
 	private static Logger logger = Logger.getLogger(MoviesLoaderService.class);
-	
-	public static enum MOVIES_FILTER
-	{
-		KIND, YEAR
-	}
-	
-	public List<ILocalMovie> findMyMovies()
-	{
-		List<ILocalMovie> movies = new ArrayList<ILocalMovie>();
-		return movies;
-	}
-	
-	public List<ILocalMovie> findMyMovies(MOVIES_FILTER filter)
-	{
-		List<ILocalMovie> movies = new ArrayList<ILocalMovie>();
-		
-		return movies;
-	}
 	
 	public List<IRegexParameter> generateRegexFromParameter(IMediathequeFactory factory, List<Parameter> allRegexParam ){
 		List<IRegexParameter> allRegex = new ArrayList<IRegexParameter>();
@@ -55,11 +48,14 @@ public class MoviesLoaderService {
 		return allRegex;
 	}
 	
-	public List<ILocalMovie> loadFromDisk(String path , IMediathequeFactory factory, List<Parameter> include, List<Parameter> regex) throws IOException
+	public List<ILocalMovie> loadFromDisk(String path ) throws IOException
 	{
 		
+		List<Parameter> include = parameterDao.findByName( "movie.include" );
+		List<Parameter> regex = parameterDao.findByName( "movie.regex" );
+		
 		File directory = new File(path);
-		List<IRegexParameter> allRegex = generateRegexFromParameter(factory, regex);
+		List<IRegexParameter> allRegex = generateRegexFromParameter(mediathequeFactory, regex);
 		
 		if( ! directory.exists() || ! directory.isDirectory() )
 		{
@@ -88,7 +84,7 @@ public class MoviesLoaderService {
 			}
 		};
 		
-		List<ILocalMovie> movies = searchFile(directory, factory, filter);
+		List<ILocalMovie> movies = searchFile(directory, filter);
 		
 		for(ILocalMovie movie : movies){
 			preformateMovieName(movie, allRegex);
@@ -106,24 +102,24 @@ public class MoviesLoaderService {
 		
 	}
 	
-	private List<ILocalMovie> searchFile( File directory, IMediathequeFactory factory , FilenameFilter filter){
+	private List<ILocalMovie> searchFile( File directory , FilenameFilter filter){
 		List<ILocalMovie> movies = new ArrayList<ILocalMovie>();
 		
 		File[] files = directory.listFiles( filter );
 		for(File f : files){
 			if( f.isDirectory() ){
-				movies.addAll( searchFile(f , factory, filter ) );
+				movies.addAll( searchFile(f, filter ) );
 			}else{
-				movies.add( factory.createLocalMovie( f ) );
+				movies.add( mediathequeFactory.createLocalMovie( f ) );
 			}
 		}
 		return movies;
 	}
 
-	public static List<ILocalMovie> findSynchronizedMovies( MovieRepository repository , List<ILocalMovie> movies )
+	public List<ILocalMovie> findSynchronizedMovies( List<ILocalMovie> movies )
 	{
 		for(ILocalMovie movie : movies ){
-			IMovie synchronizedMovie = repository.findByPath( movie.getPath() );
+			IMovie synchronizedMovie = movieDao.findByPath( movie.getPath() );
 			if (synchronizedMovie != null) movie.setSynchronized(true);
 		}
 		

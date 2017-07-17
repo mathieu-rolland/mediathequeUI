@@ -82,7 +82,7 @@ public class FTPService {
 		logger.info("End of FTP process");
 		
 		/*Filter and rename with parameters in db*/
-		return MoviesLoaderService.findSynchronizedMovies( movieRepository ,  movies );
+		return movieLoader.findSynchronizedMovies( movies );
 	}
 
 	private List<ILocalMovie> getAllFiles(FTPClient ftpClient, String directory, List<Parameter> paramInclude, List<IRegexParameter> allRegex) throws IOException{
