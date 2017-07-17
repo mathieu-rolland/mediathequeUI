@@ -25,7 +25,7 @@ angular
 	'com.2fdevs.videogular.plugins.poster',
 	'com.2fdevs.videogular.plugins.buffering'
   ])
-  .config(function ($routeProvider , localStorageServiceProvider) {
+  .config([ '$routeProvider' , 'localStorageServiceProvider' , '$httpProvider', function ($routeProvider , localStorageServiceProvider, $httpProvider) {
 	
 	localStorageServiceProvider.setPrefix('uiMediatheque');
 	  
@@ -70,7 +70,32 @@ angular
     	  controller: 'CsvuploadCtrl',
     	  controllerAs: 'cvupload'
       })
+      .when('/login',{
+    	  templateUrl : 'views/login.html',
+    	  controller: 'LoginCtrl',
+    	  controllerAs: 'LoginCtrl'
+      })
+      .when('/admin/users',{
+    	  templateUrl : 'views/admin/manageusers.html',
+    	  controller: 'ManageUserCtrl',
+    	  controllerAs: 'ManageUserCtrl'
+      })
+      .when('/user/active-account',{
+    	  templateUrl : 'views/login.html',
+    	  controller: 'LoginCtrl',
+    	  controllerAs: 'LoginCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
-  });
+    
+    /*$httpProvider.interceptors.push(function(){
+    	return {
+    		'request' : function(config){
+    			config.headers["X-Access-Token"] = 'my custom token';
+    			return config;
+    		}
+    	};
+    })*/
+    
+  }]);

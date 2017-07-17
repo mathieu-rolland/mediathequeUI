@@ -7,7 +7,8 @@
  * # MymoviesCtrl
  * Controller of the mediathequeUiApp
  */
-angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce' , 'AllocineWebService' , 'localStorageService' , '$document' , function ( $scope , $sce ,  AllocineWebService, localStorageService, $document) {
+angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce' , 'AllocineWebService' , 'localStorageService' , '$document' , 
+		function ( $scope , $sce ,  AllocineWebService, localStorageService, $document ) {
 	
 	$scope.playIsDemand = false;
 	

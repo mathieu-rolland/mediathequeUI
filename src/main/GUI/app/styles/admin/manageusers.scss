@@ -1,0 +1,36 @@
+
+.user_management_page{
+
+	.user_management_page_title{
+		color: yellow;
+	}
+
+	color:#AFAFAF;
+	
+	.user_list_table{
+	
+		width: 80%;
+		margin: auto;
+		
+		.user_list_header{
+			
+			text-align: center;
+    		font-size: large;
+    		font-weight: bold;
+    
+			th {
+				text-align: center;
+			}
+		
+		}
+	
+		.user_details_line > td{
+			height: 50px;
+			
+			text-align: center;
+			
+		}
+	
+	}
+	
+}

@@ -7,13 +7,17 @@
  * # MainCtrl
  * Controller of the mediathequeUiApp
  */
-angular.module('mediathequeUiApp').controller('MenuCtrl', function ( $scope , $location) {
+angular.module('mediathequeUiApp').controller('MenuCtrl', [ 'Security', '$scope' , '$location',
+	 function ( Security, $scope , $location) {
 
-
+	
+	
 	$scope.$on('$routeChangeSuccess', function () {
         
         var path = $location.path();
         console.log('path : ' + path + ' ' + $scope.page);
+        $scope.user = Security.getUser();
+        $scope.authenticated = Security.isAuthenticated();
         
         switch( path ){
 			case '/':
@@ -33,6 +37,9 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', function ( $scope , $l
 			case '/csv':
 				$scope.page = 'csv';
 				break;
+			case '/admin/users':
+				$scope.page = 'user'
+				break;
 			default:
 				break;
         }
@@ -44,4 +51,13 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', function ( $scope , $l
 	
 	$scope.page = '';
 	
-});
+	$scope.logout = function(){
+		Security.logout();
+	};
+	
+	//Security managment :
+	$scope.isAuthorized = function(page){
+		return Security.isAuthorized(page);
+	};
+	
+}]);
