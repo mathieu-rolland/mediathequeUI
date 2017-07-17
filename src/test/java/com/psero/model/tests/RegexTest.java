@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mediatheque.factory.IMediathequeFactory;
 import com.mediatheque.factory.impl.MediathequeFactory;
-import com.mediatheque.manager.movies.MoviesLoader;
 import com.mediatheque.model.ILocalMovie;
 import com.mediatheque.model.IParameter;
 import com.mediatheque.model.IRegexParameter;
 import com.mediatheque.model.impl.Movie;
 import com.mediatheque.model.impl.Parameter;
+import com.mediatheque.services.MoviesLoaderService;
 
 import junit.framework.TestCase;
 
@@ -25,7 +25,7 @@ public class RegexTest extends TestCase {
 	private String keepValue = "$1 $3";
 	
 	@Autowired
-	private MoviesLoader movieLoader;
+	private MoviesLoaderService movieLoader;
 	
 	@Test
 	public void testParameterRegex(){

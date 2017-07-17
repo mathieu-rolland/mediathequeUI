@@ -1,4 +1,4 @@
-package com.mediatheque.manager.movies;
+package com.mediatheque.services;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -10,16 +10,16 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.api.allocine.model.IMovie;
+import com.mediatheque.db.repository.MovieRepository;
 import com.mediatheque.factory.IMediathequeFactory;
 import com.mediatheque.model.ILocalMovie;
 import com.mediatheque.model.IRegexParameter;
 import com.mediatheque.model.impl.Parameter;
-import com.mediatheque.repository.MovieRepository;
 
 @Service
-public class MoviesLoader {
+public class MoviesLoaderService {
 
-	private static Logger logger = Logger.getLogger(MoviesLoader.class);
+	private static Logger logger = Logger.getLogger(MoviesLoaderService.class);
 	
 	public static enum MOVIES_FILTER
 	{

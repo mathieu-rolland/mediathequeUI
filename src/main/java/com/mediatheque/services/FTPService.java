@@ -1,4 +1,4 @@
-package com.mediatheque.spring.service;
+package com.mediatheque.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,14 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mediatheque.db.repository.MovieRepository;
+import com.mediatheque.db.repository.ParametersRepository;
 import com.mediatheque.factory.IMediathequeFactory;
-import com.mediatheque.manager.movies.MoviesLoader;
 import com.mediatheque.model.ILocalMovie;
 import com.mediatheque.model.IMachine;
 import com.mediatheque.model.IRegexParameter;
 import com.mediatheque.model.impl.Parameter;
-import com.mediatheque.repository.MovieRepository;
-import com.mediatheque.repository.ParametersRepository;
 
 @Service
 public class FTPService {
@@ -36,7 +35,7 @@ public class FTPService {
 	private ParametersRepository paramRepository;
 	
 	@Autowired
-	private MoviesLoader movieLoader;
+	private MoviesLoaderService movieLoader;
 	
 	public List<ILocalMovie> listMovieOnFTPServer(IMachine machine){
 		
@@ -83,7 +82,7 @@ public class FTPService {
 		logger.info("End of FTP process");
 		
 		/*Filter and rename with parameters in db*/
-		return MoviesLoader.findSynchronizedMovies( movieRepository ,  movies );
+		return MoviesLoaderService.findSynchronizedMovies( movieRepository ,  movies );
 	}
 
 	private List<ILocalMovie> getAllFiles(FTPClient ftpClient, String directory, List<Parameter> paramInclude, List<IRegexParameter> allRegex) throws IOException{

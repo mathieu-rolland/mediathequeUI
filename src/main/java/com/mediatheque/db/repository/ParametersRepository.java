@@ -1,4 +1,4 @@
-package com.mediatheque.repository;
+package com.mediatheque.db.repository;
 
 import java.util.List;
 

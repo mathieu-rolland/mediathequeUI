@@ -1,11 +1,10 @@
-package com.mediatheque.spring.cors;
+package com.mediatheque.config;
 
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 public class CORSFilter extends CorsFilter{
-
 
 	public CORSFilter() {
 		super(configurationSource());

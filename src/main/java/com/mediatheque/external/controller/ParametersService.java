@@ -1,4 +1,4 @@
-package com.mediatheque.service;
+package com.mediatheque.external.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mediatheque.db.repository.ParametersRepository;
 import com.mediatheque.model.impl.Parameter;
-import com.mediatheque.repository.ParametersRepository;
 
 @RestController
 @RequestMapping("/parameters")
