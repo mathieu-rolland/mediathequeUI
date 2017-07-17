@@ -1,4 +1,4 @@
-package com.perso.security.service;
+package com.mediatheque.services;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -16,7 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.perso.security.entity.User;
+import com.mediatheque.db.dao.DaoUserService;
+import com.mediatheque.model.impl.User;
 
 @Service
 public class MailService {

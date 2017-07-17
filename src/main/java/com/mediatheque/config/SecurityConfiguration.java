@@ -1,4 +1,4 @@
-package com.perso.security.configuration;
+package com.mediatheque.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,12 +11,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.mediatheque.config.CORSFilter;
-import com.perso.repository.AccessTokenRepository;
-import com.perso.repository.UserRepository;
-import com.perso.security.entity.Role;
-import com.perso.security.entryPoint.AuthenticationTokenProcessingFilter;
-import com.perso.security.service.DaoUserService;
+import com.mediatheque.db.dao.DaoUserService;
+import com.mediatheque.db.repository.AccessTokenRepository;
+import com.mediatheque.db.repository.UserRepository;
+import com.mediatheque.external.entrypoint.AuthenticationTokenProcessingFilter;
+import com.mediatheque.model.impl.Role;
 
 
 @Configuration

@@ -1,9 +1,9 @@
-package com.perso.security.service;
+package com.mediatheque.services;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.perso.security.entity.AccessToken;
-import com.perso.security.entity.User;
+import com.mediatheque.model.impl.AccessToken;
+import com.mediatheque.model.impl.User;
 
 public interface UserService extends UserDetailsService {
 

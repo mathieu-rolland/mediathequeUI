@@ -1,10 +1,10 @@
-package com.perso.repository;
+package com.mediatheque.db.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.perso.security.entity.User;
+import com.mediatheque.model.impl.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{

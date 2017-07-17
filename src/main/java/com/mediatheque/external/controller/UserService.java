@@ -1,4 +1,4 @@
-package com.perso.service;
+package com.mediatheque.external.controller;
 
 import java.util.List;
 import java.util.Set;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.perso.data.SecureData;
-import com.perso.security.entity.AccessToken;
-import com.perso.security.entity.Role;
-import com.perso.security.entity.User;
-import com.perso.security.service.DaoUserService;
-import com.perso.security.service.MailService;
+import com.mediatheque.db.dao.DaoUserService;
+import com.mediatheque.model.impl.AccessToken;
+import com.mediatheque.model.impl.Role;
+import com.mediatheque.model.impl.User;
+import com.mediatheque.services.MailService;
+import com.mediatheque.services.SecureData;
 
 @RestController
 @RequestMapping("/user")
@@ -32,6 +32,9 @@ public class UserService {
 	@Autowired
 	MailService mailService;
 	
+	@Autowired
+	private SecureData secureDate;
+	
 	Logger logger = LoggerFactory.getLogger(User.class);
 	
 	@RequestMapping( value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE )
@@ -42,7 +45,7 @@ public class UserService {
 			logger.warn("Fail to login user with empty credential");
 			return new ResponseEntity<AccessToken>(org.springframework.http.HttpStatus.FORBIDDEN);
 		}
-		token.setUser( SecureData.cleaningUser( token.getUser() ) );
+		token.setUser( secureDate.cleaningUser( token.getUser() ) );
 		return new ResponseEntity<AccessToken>( token , org.springframework.http.HttpStatus.OK );
 	}
 	
@@ -66,7 +69,7 @@ public class UserService {
 			return new ResponseEntity<User>(org.springframework.http.HttpStatus.OK);
 		}
 		mailService.sendActivationEmail( user );
-		return new ResponseEntity<User>( SecureData.cleaningUser(createdUser) , org.springframework.http.HttpStatus.OK);
+		return new ResponseEntity<User>( secureDate.cleaningUser(createdUser) , org.springframework.http.HttpStatus.OK);
 	}
 	
 	@RequestMapping("active-account")

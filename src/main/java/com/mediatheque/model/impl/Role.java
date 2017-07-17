@@ -1,4 +1,4 @@
-package com.perso.security.entity;
+package com.mediatheque.model.impl;
 
 import org.springframework.security.core.GrantedAuthority;
 

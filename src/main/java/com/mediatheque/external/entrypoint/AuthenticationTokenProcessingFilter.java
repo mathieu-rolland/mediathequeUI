@@ -1,4 +1,4 @@
-package com.perso.security.entryPoint;
+package com.mediatheque.external.entrypoint;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
-import com.perso.security.entity.User;
-import com.perso.security.service.UserService;
+import com.mediatheque.model.impl.User;
+import com.mediatheque.services.UserService;
 
 public class AuthenticationTokenProcessingFilter extends GenericFilterBean{
 
