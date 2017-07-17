@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import com.api.allocine.model.IMovie;
 import com.mediatheque.factory.IMediathequeFactory;
@@ -15,6 +16,7 @@ import com.mediatheque.model.IRegexParameter;
 import com.mediatheque.model.impl.Parameter;
 import com.mediatheque.repository.MovieRepository;
 
+@Service
 public class MoviesLoader {
 
 	private static Logger logger = Logger.getLogger(MoviesLoader.class);
@@ -24,20 +26,20 @@ public class MoviesLoader {
 		KIND, YEAR
 	}
 	
-	public static List<ILocalMovie> findMyMovies()
+	public List<ILocalMovie> findMyMovies()
 	{
 		List<ILocalMovie> movies = new ArrayList<ILocalMovie>();
 		return movies;
 	}
 	
-	public static List<ILocalMovie> findMyMovies(MOVIES_FILTER filter)
+	public List<ILocalMovie> findMyMovies(MOVIES_FILTER filter)
 	{
 		List<ILocalMovie> movies = new ArrayList<ILocalMovie>();
 		
 		return movies;
 	}
 	
-	public static List<IRegexParameter> generateRegexFromParameter(IMediathequeFactory factory, List<Parameter> allRegexParam ){
+	public List<IRegexParameter> generateRegexFromParameter(IMediathequeFactory factory, List<Parameter> allRegexParam ){
 		List<IRegexParameter> allRegex = new ArrayList<IRegexParameter>();
 		
 		for(Parameter param : allRegexParam){
@@ -53,7 +55,7 @@ public class MoviesLoader {
 		return allRegex;
 	}
 	
-	public static List<ILocalMovie> loadFromDisk(String path , IMediathequeFactory factory, List<Parameter> include, List<Parameter> regex) throws IOException
+	public List<ILocalMovie> loadFromDisk(String path , IMediathequeFactory factory, List<Parameter> include, List<Parameter> regex) throws IOException
 	{
 		
 		File directory = new File(path);
@@ -95,7 +97,7 @@ public class MoviesLoader {
 		return movies;
 	}
 	
-	public static void preformateMovieName( ILocalMovie movie, List<IRegexParameter> allRegex ){
+	public void preformateMovieName( ILocalMovie movie, List<IRegexParameter> allRegex ){
 		
 		for( IRegexParameter regex : allRegex ){
 			String originalTitle = movie.getTitle();
@@ -104,7 +106,7 @@ public class MoviesLoader {
 		
 	}
 	
-	private static List<ILocalMovie> searchFile( File directory, IMediathequeFactory factory , FilenameFilter filter){
+	private List<ILocalMovie> searchFile( File directory, IMediathequeFactory factory , FilenameFilter filter){
 		List<ILocalMovie> movies = new ArrayList<ILocalMovie>();
 		
 		File[] files = directory.listFiles( filter );

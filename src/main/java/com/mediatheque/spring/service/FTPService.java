@@ -35,6 +35,9 @@ public class FTPService {
 	@Autowired
 	private ParametersRepository paramRepository;
 	
+	@Autowired
+	private MoviesLoader movieLoader;
+	
 	public List<ILocalMovie> listMovieOnFTPServer(IMachine machine){
 		
 		FTPClient ftpClient = new FTPClient();
@@ -44,7 +47,7 @@ public class FTPService {
         List<Parameter> paramsInclude = paramRepository.findByName("movie.include");
         List<Parameter> paramsRegex = paramRepository.findByName("movie.regex");
         
-        List<IRegexParameter> allRegex = MoviesLoader.generateRegexFromParameter( factory , paramsRegex );
+        List<IRegexParameter> allRegex = movieLoader.generateRegexFromParameter( factory , paramsRegex );
        
         
 		try {
@@ -98,7 +101,7 @@ public class FTPService {
 						ILocalMovie movie = factory.createLocalMovie();
 						movie.setPath( directory + "/" + ftpFile.getName() );
 						movie.setTitle( ftpFile.getName() );
-						MoviesLoader.preformateMovieName(movie, allRegex);
+						movieLoader.preformateMovieName(movie, allRegex);
 						files.add( movie );
 						showServerReply(ftpClient);
 					}

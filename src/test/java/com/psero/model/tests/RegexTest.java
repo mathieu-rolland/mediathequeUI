@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mediatheque.factory.IMediathequeFactory;
 import com.mediatheque.factory.impl.MediathequeFactory;
@@ -22,6 +23,9 @@ public class RegexTest extends TestCase {
 	private String regex = "([a-zA-Z0-9_ ]*)([\\.])*([a-zA-Z0-9_ ]*)";
 	private String movieTitle = "The.Walking.Dead.S06E15.VOSTFR WEB-DL.DD5.1.H.264-Visual";
 	private String keepValue = "$1 $3";
+	
+	@Autowired
+	private MoviesLoader movieLoader;
 	
 	@Test
 	public void testParameterRegex(){
@@ -45,7 +49,7 @@ public class RegexTest extends TestCase {
 		List<Parameter> params = new ArrayList<Parameter>();
 		params.add( (Parameter) param );
 		
-		List<IRegexParameter> regex = MoviesLoader.generateRegexFromParameter(factory, params);
+		List<IRegexParameter> regex = movieLoader.generateRegexFromParameter(factory, params);
 		String output = regex.get(0).applyRegex(movieTitle);
 		
 		assertNotSame(movieTitle	, output);
@@ -64,8 +68,8 @@ public class RegexTest extends TestCase {
 		List<Parameter> params = new ArrayList<Parameter>();
 		params.add( (Parameter) param );
 		
-		List<IRegexParameter> regex = MoviesLoader.generateRegexFromParameter(factory, params);
-		MoviesLoader.preformateMovieName(movie, regex);
+		List<IRegexParameter> regex = movieLoader.generateRegexFromParameter(factory, params);
+		movieLoader.preformateMovieName(movie, regex);
 		
 		assertNotSame(movieTitle , movie.getTitle());
 		assertEquals("The Walking Dead S06E15 VOSTFR WEB -DL DD5 1 H 264 -Visual", movie.getTitle());
