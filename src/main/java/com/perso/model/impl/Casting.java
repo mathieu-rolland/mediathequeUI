@@ -20,12 +20,10 @@ public class Casting implements ICasting {
 	@GeneratedValue( strategy = GenerationType.AUTO )
 	private int id;
 	
-//	@ManyToMany(targetEntity=Personn.class)
 	@ElementCollection
 	@CollectionTable( name = "personn" , joinColumns = @JoinColumn(name = "name"))
 	private List<String> actors;
 	
-//	@ManyToMany(targetEntity=Personn.class)
 	@ElementCollection
 	@CollectionTable( name = "personn" , joinColumns = @JoinColumn(name = "name"))
 	private List<String> directors;

@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="styles/loading.css">
     <link rel="stylesheet" href="styles/machineParams.css">
     <link rel="stylesheet" href="styles/search-allocine.css">
+    <link rel="stylesheet" href="styles/login.css">
+     <link rel="stylesheet" href="styles/admin/manageusers.css">
     <!-- endbuild -->
   </head>
   
@@ -32,7 +34,7 @@
 	<div ng-controller="MenuCtrl">
 
     <!-- Menu -->
-  	<div id="cssmenu">
+  	<div id="cssmenu" ng-show="authenticated">
   	 
   	 	<div class="navigate">
   		  <ul>
@@ -46,9 +48,9 @@
 
   		  <ul>
 
-  		  	<li ng-class="page == 'search'  ? 'active' : ''" class="item" ><a href="/#!/load-disk">Rechercher</a></li>
+  		  	<li ng-show='isAuthorized("search")' ng-class="page == 'search'  ? 'active' : ''" class="item" ><a href="/#!/load-disk">Rechercher</a></li>
 
-  		  	<li ng-class="page == 'parameters'? 'active' : ''" class="item">
+  		  	<li ng-show='isAuthorized("parameters")' ng-class="page == 'parameters'? 'active' : ''" class="item">
 
     				<div class="dropdown">
 
@@ -60,6 +62,17 @@
 
     				</div>
 
+  		  	</li>
+  		  	<li ng-class="page == 'logout'  ? 'active' : ''" class="item">
+
+   				<div class="dropdown">
+
+   				  <button class="dropbtn">Bonjour {{user.name}}</button>
+   				  <div class="dropdown-content">
+   				    <a href="/#!/admin/users" ng-show='isAuthorized("parameters")'>Gérer les utilisateurs</a>
+   				    <a href="" ng-click="logout()">Deconnexion</a>
+   				  </div>
+   				</div>
   		  	</li>
 
   		  </ul>
@@ -124,6 +137,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/services/allocinewebservice.js"></script>
+    <script src="scripts/services/security.js"></script>
     <script src="scripts/controllers/mymovies.js"></script>
     <script src="scripts/controllers/loadfromdisk.js"></script>
     <script src="scripts/controllers/parameters.js"></script>
@@ -132,6 +146,8 @@
     <script src="scripts/filters/formatduration.js"></script>
     <script src="scripts/controllers/csvupload.js"></script>
     <script src="scripts/controllers/machineparameter.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/admin/controllers/manageusers.js"></script>
     <!-- endbuild -->
         
 </body>

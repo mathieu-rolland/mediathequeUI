@@ -17,6 +17,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.api.allocine.model.IAllocineLink;
 import com.api.allocine.model.ICasting;
 import com.api.allocine.model.IGenre;
@@ -45,22 +49,30 @@ public class Movie implements ILocalMovie{
 	
 	private int year;
 	
-	@OneToOne(targetEntity=Release.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Release.class, cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
 	private IRelease releaseDate;
 	
-	@OneToOne(targetEntity=Casting.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Casting.class, cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
 	private ICasting casting;
 	
-	@OneToOne(targetEntity=Stats.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Stats.class, cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
 	private IStats statistiques;
 	
-	@OneToOne(targetEntity=Poster.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(targetEntity=Poster.class, cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
 	private IPoster poster;
 	
-	@ManyToMany(targetEntity=AllocineLink.class, fetch=FetchType.LAZY, cascade = CascadeType.ALL )
+	@ManyToMany(targetEntity=AllocineLink.class, cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+	@BatchSize(size=10)
+	@Fetch(FetchMode.SUBSELECT)
 	private Collection<IAllocineLink> links;
 	
-	@ManyToMany(targetEntity=Genre.class, fetch = FetchType.LAZY , cascade = CascadeType.ALL )
+	@ManyToMany(targetEntity=Genre.class, cascade = CascadeType.ALL , fetch = FetchType.EAGER )
+	@BatchSize(size=5)
+	@Fetch(FetchMode.SUBSELECT)
 	private Collection<IGenre> genre;
 	
 	@Column(columnDefinition = "TEXT")
