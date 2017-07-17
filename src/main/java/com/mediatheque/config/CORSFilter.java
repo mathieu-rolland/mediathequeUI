@@ -1,4 +1,4 @@
-package com.mediatheque.spring.cors;
+package com.mediatheque.config;
 
 import java.io.IOException;
 
@@ -20,12 +20,8 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
 
-Logger logger = Logger.getLogger(CORSFilter.class);
-	
-	public CORSFilter() {
-		logger.error("****************** CORS Filters ********************");
-	}
-	
+	Logger logger = Logger.getLogger(CORSFilter.class);
+		
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 
@@ -41,18 +37,11 @@ Logger logger = Logger.getLogger(CORSFilter.class);
 	    chain.doFilter(req, res);
 	}
 
+	@Override
+	public void destroy() {}
 
 	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void init(FilterConfig filterConfig) throws ServletException {}
 
 }
 

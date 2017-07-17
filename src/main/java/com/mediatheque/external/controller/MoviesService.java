@@ -1,4 +1,4 @@
-package com.mediatheque.service;
+package com.mediatheque.external.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -24,14 +24,14 @@ import com.api.allocine.IAllocineAPI;
 import com.api.allocine.model.IMovie;
 import com.api.allocine.model.IMovieResponse;
 import com.mediatheque.config.CustomApplicationProperties;
+import com.mediatheque.db.repository.MovieRepository;
+import com.mediatheque.db.repository.ParametersRepository;
 import com.mediatheque.factory.IMediathequeFactory;
-import com.mediatheque.manager.movies.MoviesLoader;
 import com.mediatheque.model.ILocalMovie;
 import com.mediatheque.model.impl.Machine;
 import com.mediatheque.model.impl.Movie;
-import com.mediatheque.repository.MovieRepository;
-import com.mediatheque.repository.ParametersRepository;
-import com.mediatheque.spring.service.FTPService;
+import com.mediatheque.services.FTPService;
+import com.mediatheque.services.MoviesLoaderService;
 import com.mediatheque.utils.CSVParser;
 
 @RestController
@@ -59,7 +59,7 @@ public class MoviesService {
 	private FTPService ftpService;
 
 	@Autowired
-	private MoviesLoader movieLoader;
+	private MoviesLoaderService movieLoader;
 	
 	@RequestMapping("/search")
 	public @ResponseBody Collection<IMovie> searchMovie(@RequestParam(value="q", defaultValue="default") String search){
@@ -82,7 +82,7 @@ public class MoviesService {
 												parameterRepository.findByName("movie.include") ,
 												parameterRepository.findByName("movie.regex") );
 			if( result != null ){
-				return MoviesLoader.findSynchronizedMovies( movieRepository ,  result );
+				return MoviesLoaderService.findSynchronizedMovies( movieRepository ,  result );
 			}
 			
 		} catch (IOException e) {

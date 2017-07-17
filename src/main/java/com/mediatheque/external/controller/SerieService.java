@@ -1,4 +1,4 @@
-package com.mediatheque.service;
+package com.mediatheque.external.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
