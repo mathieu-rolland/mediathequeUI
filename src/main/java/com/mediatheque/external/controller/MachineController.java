@@ -17,9 +17,9 @@ import org.slf4j.Logger;
 
 @RestController
 @RequestMapping("/machine")
-public class MachineService {
+public class MachineController {
 
-	Logger logger = LoggerFactory.getLogger( MachineService.class );
+	Logger logger = LoggerFactory.getLogger( MachineController.class );
 	
 	@Autowired
 	private MachineRepository repo;

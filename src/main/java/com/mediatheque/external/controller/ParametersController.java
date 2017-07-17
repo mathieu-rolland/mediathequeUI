@@ -10,35 +10,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mediatheque.db.repository.ParametersRepository;
+import com.mediatheque.db.dao.ParameterDao;
 import com.mediatheque.model.impl.Parameter;
 
 @RestController
 @RequestMapping("/parameters")
 @CrossOrigin(origins = "*" , methods = {RequestMethod.GET, RequestMethod.POST })
-public class ParametersService {
+public class ParametersController {
 
+	private Logger logger = Logger.getLogger(ParametersController.class);
+	
 	@Autowired
-	private ParametersRepository repo;
-	private Logger logger = Logger.getLogger(ParametersService.class);
+	private ParameterDao parameterDao;
 	
 	@RequestMapping("/")
 	public List<Parameter> readParameters(){
 		logger.info("Start listing all parameters");
-		return repo.findAll();
+		return parameterDao.findAll();
 	}
 	
 	@RequestMapping(path = "/add", method = RequestMethod.POST)
 	public List<Parameter> addParameter(@RequestBody Parameter param){
 		logger.info("Create new parameter " + param);
-		repo.saveAndFlush(param);
+		parameterDao.save(param);
+		return readParameters();
+	}
+	
+	@RequestMapping(path = "/update", method = RequestMethod.POST)
+	public List<Parameter> updateParameter(@RequestBody Parameter param){
+		logger.info("Update parameter " + param);
+		parameterDao.save(param);
 		return readParameters();
 	}
 	
 	@RequestMapping(path = "/delete", method = RequestMethod.POST)
 	public List<Parameter> deleteParameter(@RequestBody Parameter param){
-		logger.info("Create new parameter " + param);
-		repo.delete(param);
+		logger.info("Delete parameter " + param);
+		parameterDao.delete(param);
 		return readParameters();
 	}
 	

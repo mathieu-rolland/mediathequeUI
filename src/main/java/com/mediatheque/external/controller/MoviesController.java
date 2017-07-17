@@ -1,12 +1,8 @@
 package com.mediatheque.external.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -18,48 +14,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.api.allocine.IAllocineAPI;
 import com.api.allocine.model.IMovie;
 import com.api.allocine.model.IMovieResponse;
-import com.mediatheque.config.CustomApplicationProperties;
-import com.mediatheque.db.repository.MovieRepository;
-import com.mediatheque.db.repository.ParametersRepository;
-import com.mediatheque.factory.IMediathequeFactory;
+import com.mediatheque.db.dao.MovieDAO;
 import com.mediatheque.model.ILocalMovie;
 import com.mediatheque.model.impl.Machine;
 import com.mediatheque.model.impl.Movie;
 import com.mediatheque.services.FTPService;
 import com.mediatheque.services.MoviesLoaderService;
-import com.mediatheque.utils.CSVParser;
 
 @RestController
 @RequestMapping("/movies")
-public class MoviesService {
+public class MoviesController {
 
-	private Logger logger = Logger.getLogger(MoviesService.class);
+	private Logger logger = Logger.getLogger(MoviesController.class);
 	
 	@Autowired
 	private IAllocineAPI api;
 	
 	@Autowired
-	private IMediathequeFactory mediathequeFactory;
-	
-	@Autowired
-	private ParametersRepository parameterRepository;
-	
-	@Autowired
-	private MovieRepository movieRepository;
-	
-	@Autowired
-	private CustomApplicationProperties properties;
-	
-	@Autowired
 	private FTPService ftpService;
 
 	@Autowired
-	private MoviesLoaderService movieLoader;
+	private MoviesLoaderService movieLoaderService;
+	
+	@Autowired
+	private MovieDAO movieDao;
 	
 	@RequestMapping("/search")
 	public @ResponseBody Collection<IMovie> searchMovie(@RequestParam(value="q", defaultValue="default") String search){
@@ -77,12 +59,9 @@ public class MoviesService {
 		logger.info("Start listing data from disk");
 		
 		try {
-			List<ILocalMovie> result = movieLoader.loadFromDisk(	search, 
-												mediathequeFactory , 
-												parameterRepository.findByName("movie.include") ,
-												parameterRepository.findByName("movie.regex") );
+			List<ILocalMovie> result = movieLoaderService.loadFromDisk( search );
 			if( result != null ){
-				return MoviesLoaderService.findSynchronizedMovies( movieRepository ,  result );
+				return movieLoaderService.findSynchronizedMovies( result );
 			}
 			
 		} catch (IOException e) {
@@ -105,10 +84,7 @@ public class MoviesService {
 			try {
 				IMovieResponse response = api.getMovieDetails(movie);
 				if( response != null ){
-					ILocalMovie movieResponse = (ILocalMovie) response.getMovie();
-					movieResponse.setLastSynchronizedDate( new Date() );
-					movieResponse.setPath( movie.getPath() );
-					movieRepository.saveAndFlush( (Movie) movieResponse );
+					movieDao.saveMovie( (ILocalMovie) response.getMovie() );
 				}
 				logger.debug( " Response : " + response.getMovie().getClass() );
 			} catch (UnsupportedEncodingException e) {
@@ -123,39 +99,8 @@ public class MoviesService {
 	
 	@RequestMapping("/my-movies/db/")
 	public @ResponseBody List<Movie> getMyMovies(){
-		return movieRepository.findAll();
+		return movieDao.findAll();
 	}
-	
-	@RequestMapping(value = "/csv", method = RequestMethod.POST )
-	public @ResponseBody List<IMovie> handleFileUpload(@RequestParam("name") String name,
-            @RequestParam("file") MultipartFile file){
-		if ( file != null ){
-			logger.info("File " + file.getName() + " is not empty and download started in " + properties.getDownloadPath() + ".");
-	        if (!file.isEmpty()) {
-	        	
-	            try {
-	                byte[] bytes = file.getBytes();
-	                BufferedOutputStream stream =
-	                        new BufferedOutputStream(new FileOutputStream(new File( properties.getDownloadPath() + File.separator + name )));
-	                stream.write(bytes);
-	                stream.close();
-	            } catch (Exception e) {
-	            	e.printStackTrace();
-	            }
-	            
-	            try {
-					return CSVParser.generateMovieFromFile( properties.getDownloadPath() + File.separator + name , mediathequeFactory);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	            
-	        } else {
-	        	logger.info("File " + file.getName() + " is empty.");
-	        }
-		}
-		logger.info("End of file upload");
-		return null;
-    }
 	
 	@RequestMapping(value = "my-movie/machine/search", method = {RequestMethod.GET, RequestMethod.POST}, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
