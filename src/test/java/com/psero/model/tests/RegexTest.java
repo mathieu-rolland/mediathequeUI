@@ -5,14 +5,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.perso.factory.IMediathequeFactory;
-import com.perso.factory.impl.MediathequeFactory;
-import com.perso.manager.movies.MoviesLoader;
-import com.perso.model.ILocalMovie;
-import com.perso.model.IParameter;
-import com.perso.model.IRegexParameter;
-import com.perso.model.impl.Movie;
-import com.perso.model.impl.Parameter;
+import com.mediatheque.factory.IMediathequeFactory;
+import com.mediatheque.factory.impl.MediathequeFactory;
+import com.mediatheque.manager.movies.MoviesLoader;
+import com.mediatheque.model.ILocalMovie;
+import com.mediatheque.model.IParameter;
+import com.mediatheque.model.IRegexParameter;
+import com.mediatheque.model.impl.Movie;
+import com.mediatheque.model.impl.Parameter;
 
 import junit.framework.TestCase;
 
