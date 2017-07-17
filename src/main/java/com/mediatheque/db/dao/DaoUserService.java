@@ -1,4 +1,4 @@
-package com.perso.security.service;
+package com.mediatheque.db.dao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,12 +18,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.perso.repository.AccessTokenRepository;
-import com.perso.repository.UserRepository;
-import com.perso.security.configuration.EmailConfiguration;
-import com.perso.security.entity.AccessToken;
-import com.perso.security.entity.Role;
-import com.perso.security.entity.User;
+import com.mediatheque.config.EmailConfiguration;
+import com.mediatheque.db.repository.AccessTokenRepository;
+import com.mediatheque.db.repository.UserRepository;
+import com.mediatheque.model.impl.AccessToken;
+import com.mediatheque.model.impl.Role;
+import com.mediatheque.model.impl.User;
+import com.mediatheque.services.UserService;
 
 public class DaoUserService implements UserService {
 

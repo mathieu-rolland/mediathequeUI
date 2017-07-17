@@ -1,4 +1,4 @@
-package com.perso.security.configuration;
+package com.mediatheque.config;
 
 import javax.validation.constraints.NotNull;
 

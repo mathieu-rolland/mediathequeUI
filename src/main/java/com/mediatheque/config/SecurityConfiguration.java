@@ -1,4 +1,4 @@
-package com.perso.security.configuration;
+package com.mediatheque.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

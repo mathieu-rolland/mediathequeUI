@@ -1,4 +1,4 @@
-package com.perso.security.configuration;
+package com.mediatheque.config;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import com.perso.config.CustomApplicationProperties;
-
 
 @Configuration
 public class MailBean {
