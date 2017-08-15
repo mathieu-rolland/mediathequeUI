@@ -1,7 +1,7 @@
 package com.perso.data;
 
-import com.perso.model.impl.Machine;
-import com.perso.security.entity.User;
+import com.mediatheque.model.impl.Machine;
+import com.mediatheque.model.impl.User;
 
 public class SecureData {
 
@@ -14,5 +14,5 @@ public class SecureData {
 		machine.setPassword("");
 		return machine;
 	}
-	
+		
 }
