@@ -1,6 +1,5 @@
 package com.mediatheque.services;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Message;

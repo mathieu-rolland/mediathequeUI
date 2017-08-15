@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mediatheque.db.repository.MovieRepository;
 import com.mediatheque.db.repository.ParametersRepository;
 import com.mediatheque.factory.IMediathequeFactory;
 import com.mediatheque.model.ILocalMovie;
@@ -27,9 +26,6 @@ public class FTPService {
 	
 	@Autowired
 	private IMediathequeFactory factory;
-	
-	@Autowired
-	private MovieRepository movieRepository;
 	
 	@Autowired
 	private ParametersRepository paramRepository;
