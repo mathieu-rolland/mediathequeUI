@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.allocine.IAllocineAPI;
 import com.api.allocine.model.ISerie;
-import com.api.allocine.model.impl.Serie;
+import com.api.allocine.model.ISerieResponse;
+import com.api.allocine.model.impl.Series;
 
 @RestController
 @RequestMapping("/series")
-public class SerieService {
+public class SeriesController {
 
-	private Logger logger = Logger.getLogger(SerieService.class);
+	private Logger logger = Logger.getLogger(SeriesController.class);
 	
 	@Autowired
 	private IAllocineAPI api;
@@ -37,9 +38,22 @@ public class SerieService {
 		return null;
 	}
 	
+	@RequestMapping("/details")
+	public @ResponseBody ISerie getSerieDetails( @RequestBody ISerie serie){
+		
+		ISerieResponse response;
+		try {
+			response = api.getSerieDetails(serie);
+			return response != null ? response.getSerie() : null;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@RequestMapping( value = "/my-series/disk/synchronize" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody boolean linkLocalSerieWithAlloCineSerie( 
-			@RequestBody   Serie  serie
+			@RequestBody   Series  serie
 	){
 		
 		logger.debug( "Link serie " + serie );
@@ -48,8 +62,9 @@ public class SerieService {
 	}
 	
 	
+	
 	@RequestMapping("/my-series/db/")
-	public @ResponseBody List<Serie> getMyMovies(){
+	public @ResponseBody List<Series> getMyMovies(){
 		return null;
 	}
 	

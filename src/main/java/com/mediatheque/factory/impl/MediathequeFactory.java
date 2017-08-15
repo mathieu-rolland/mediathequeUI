@@ -22,10 +22,10 @@ import com.api.allocine.model.IPoster;
 import com.api.allocine.model.IRelease;
 import com.api.allocine.model.IResult;
 import com.api.allocine.model.ISearchResponse;
+import com.api.allocine.model.ISeason;
 import com.api.allocine.model.ISerie;
 import com.api.allocine.model.IStats;
 import com.api.allocine.model.impl.Chapter;
-import com.api.allocine.model.impl.Serie;
 import com.mediatheque.factory.IMediathequeFactory;
 import com.mediatheque.model.ILocalMovie;
 import com.mediatheque.model.IMachine;
@@ -41,6 +41,8 @@ import com.mediatheque.model.impl.RegexParameter;
 import com.mediatheque.model.impl.Release;
 import com.mediatheque.model.impl.Result;
 import com.mediatheque.model.impl.SearchResponse;
+import com.mediatheque.model.impl.Season;
+import com.mediatheque.model.impl.Serie;
 import com.mediatheque.model.impl.Stats;
 import com.mediatheque.serializer.DateSerializer;
 import com.mediatheque.serializer.HibernateProxyTypeAdapter;
@@ -128,9 +130,11 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		if( ILocalMovie.class.equals(type)) return (T) createLocalMovie();
 		if( IGenre.class.equals(type)) return (T) createGenre();
 		if( IMachine.class.equals(type)) return (T) createMachine();
+		if( ISerie.class.equals(type)) return (T) createSerie();
+		if( IChapter.class.equals(type)) return (T) createChapter();
 		return null;
 	}
-
+	
 	public IMachine createMachine() {
 		return new Machine();
 	}
@@ -179,8 +183,12 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 
 	@Override
 	public IChapter createChapter() {
-		// TODO Auto-generated method stub
-		return null;
+		return new com.mediatheque.model.impl.Chapter();
+	}
+
+	@Override
+	public ISeason createSeason() {
+		return new Season();
 	}
 	
 }

@@ -27,7 +27,9 @@ angular.module('mediathequeUiApp')
 	  var listMachine = 'machine/list';
 	  var addMachine = 'machine/add';
 	  var listOnMachine = 'movies/my-movie/machine/search';
-	  
+	  var searchSeries = 'series/search';
+	  var serieDetails = 'series/details';
+
 	  this.executeQueryAfterInit = function( callback ){
 		  
 		  if( angular.isUndefined(host)
@@ -326,6 +328,36 @@ angular.module('mediathequeUiApp')
 			} );
 		};
 		
+		this.searchSerie = function( search , callback ){
+			this.executeQueryAfterInit( function(){
+
+				$http.get( mainURL + searchSeries ,  {params: {q:search}} ).then(
+					function(response){
+						callback( response.data );
+					},
+					function( response ){
+						callback(response);
+					}
+				);
+
+			});
+		};
+
+		this.serieDetails = function( serie , callback ){
+			this.executeQueryAfterInit( function(){
+
+				$http.post( mainURL + serieDetails , serie ).then(
+					function(response){
+						callback( response.data );
+					},
+					function( response ){
+						callback( response );
+					}
+				);
+
+			});
+		};
+
   });
 
 function sleep(milliseconds) {

@@ -85,6 +85,11 @@ angular
     	  controller: 'LoginCtrl',
     	  controllerAs: 'LoginCtrl'
       })
+      .when('/serie', {
+        templateUrl: 'views/serie.html',
+        controller: 'SerieCtrl',
+        controllerAs: 'serie'
+      })
       .otherwise({
         redirectTo: '/'
       });
