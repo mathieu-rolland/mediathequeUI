@@ -90,6 +90,11 @@ angular
         controller: 'SerieCtrl',
         controllerAs: 'serie'
       })
+      .when('/SerieManagment', {
+        templateUrl: 'views/seriemanagment.html',
+        controller: 'SeriemanagmentCtrl',
+        controllerAs: 'SerieManagment'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -9,7 +9,6 @@
 	<uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
 
 	<div class="loading" ng-show="!pageLoaded" >
-<!-- 		<img src="images/loading.gif"> -->
 		<div class='uil-cube-css' style='-webkit-transform:scale(0.63)'><div></div><div></div><div></div><div></div></div>
 	</div>
 
@@ -31,9 +30,11 @@
 				   	placeholder="Rechercher"/>
 				<p class="search-area" ng-click="toggleClickSearch()" ng-bind-html="searchDisplay" />
 			</div>
-		
+
 		</div>
 		
+		<div style="clear:both" />
+
 		<!--	sortKey:reverseOrder:movieComparator -->
 		<div class="MyMovies movie" ng-repeat="movie in movies.list | filter:search | orderBy:sortKey:reverseOrder  | limitTo: numberOfDisplayMovie">
 			
@@ -77,7 +78,7 @@
 					</div>
 					
 					<div class="button-control">
-						<img class="play-button" src="images/play-button.png" ng-click="readMovie()"/>
+						<img class="play-button" src="styles/images/icon-play-on.png" ng-click="readMovie()"/>
 					</div>
 						
 				</div>

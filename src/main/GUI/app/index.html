@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="styles/machineParams.css">
     <link rel="stylesheet" href="styles/search-allocine.css">
     <link rel="stylesheet" href="styles/login.css">
-     <link rel="stylesheet" href="styles/admin/manageusers.css">
+    <link rel="stylesheet" href="styles/admin/manageusers.css">
+    <link rel="stylesheet" href="styles/serieManagment.css">
+    <link rel="stylesheet" href="styles/my-movies-responsive.css">
     <!-- endbuild -->
   </head>
   
@@ -38,23 +40,52 @@
   	 
   	 	<div class="navigate">
   		  <ul>
-  		     <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" ><a href="#/"><i class="fa fa-fw fa-home entry"></i>Mes films</a></li>
-  		     <li class=""><a href="/#!/serie/"><i class="fa fa-fw fa-home"></i>Mes séries</a></li>
+  		     <li ng-class="page == 'my-movie'  ? 'active' : ''" class="item" >
+              <img class="icon-menu" alt="movie.png" ng-src="{{page == 'my-movie' ? 'styles/images/icon-film-on.png' : 'styles/images/icon-film-off.png'}}" />
+              <a href="#/"><i class="fa fa-fw fa-home entry"></i>Mes films</a>
+            </li>
+  		     <li ng-class="page == 'serie'  ? 'active' : ''" class="item">
+              <img class="icon-menu" alt="series.png"  ng-src="{{page == 'serie' ? 'styles/images/icon-series-on.png' : 'styles/images/icon-series-off.png'}}" />
+              <a href="/#!/serie/">
+              <i class="fa fa-fw fa-home"></i>Mes séries</a>
+            </li>
            <!--<li><a ><i class="fa fa-fw fa-phone"></i>Recherche sur disque</a></li> -->
   		  </ul>
   		</div>
-  		
+      
+      <div class="menu-title">
+          <img alt="title-mediatheque.png" src="styles/images/logo-mediatheque.png" />
+      </div>
+
   		<div class="account">
 
   		  <ul>
 
-  		  	<li ng-show='isAuthorized("search")' ng-class="page == 'search'  ? 'active' : ''" class="item" ><a href="/#!/load-disk">Rechercher</a></li>
+          <!-- <li ng-show='isAuthorized("search")' ng-class="page == 'search'  ? 'active' : ''" class="item" ><a href="/#!/load-disk">Rechercher</a></li> -->
+          <li ng-show='isAuthorized("search")' ng-class="page == 'search'? 'active' : ''" class="item">
+
+    				<div class="dropdown">
+
+    				  <button class="dropbtn">
+                  Chercher
+              </button>
+    				  <div class="dropdown-content">
+    				    <a ng-href="/#!/load-disk">Film</a>
+    				    <a ng-href="/#!/SerieManagment">Série</a>
+    				  </div>
+
+    				</div>
+
+  		  	</li>
 
   		  	<li ng-show='isAuthorized("parameters")' ng-class="page == 'parameters'? 'active' : ''" class="item">
 
     				<div class="dropdown">
 
-    				  <button class="dropbtn">Paramètres</button>
+    				  <button class="dropbtn">
+                  <img class="icon-menu" alt="parameters.png" ng-src="{{page == 'parameters' ? 'styles/images/icon-parametres-on.png' : 'styles/images/icon-parametres-off.png'}}" />
+                  Paramètres
+              </button>
     				  <div class="dropdown-content">
     				    <a ng-href="/#!/parameters">General</a>
     				    <a href="/#!/parameters/machine">Machines</a>
@@ -67,7 +98,10 @@
 
    				<div class="dropdown">
 
-   				  <button class="dropbtn">Bonjour {{user.name}}</button>
+   				  <button class="dropbtn">
+              <img class="icon-menu" alt="user.png" src="styles/images/icon-notepublic.png" />
+              {{user.name}}
+            </button>
    				  <div class="dropdown-content">
    				    <a href="/#!/admin/users" ng-show='isAuthorized("parameters")'>Gérer les utilisateurs</a>
    				    <a href="" ng-click="logout()">Deconnexion</a>
@@ -80,7 +114,9 @@
   		</div>
   		
   	</div>
-	
+  
+    <div style="clear:both" />
+
 	</div>
       <!-- Add your site or application content here -->
       <div class="header">
@@ -149,6 +185,7 @@
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/admin/controllers/manageusers.js"></script>
     <script src="scripts/controllers/serie.js"></script>
+    <script src="scripts/controllers/seriemanagment.js"></script>
     <!-- endbuild -->
         
 </body>

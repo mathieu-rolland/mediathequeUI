@@ -131,6 +131,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		if( IGenre.class.equals(type)) return (T) createGenre();
 		if( IMachine.class.equals(type)) return (T) createMachine();
 		if( ISerie.class.equals(type)) return (T) createSerie();
+		if( ISeason.class.equals(type)) return (T) createSeason();
 		if( IChapter.class.equals(type)) return (T) createChapter();
 		return null;
 	}
@@ -155,6 +156,7 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		decoder.addTypeAdapter( IChapter.class , new InterfaceSerializer<Chapter>( this, decoder ) );
 		decoder.addTypeAdapter( ISerie.class , new InterfaceSerializer<Serie>( this, decoder ) );
 		decoder.addTypeAdapter( ICasting.class , new InterfaceSerializer<Casting>( this, decoder ) );
+		decoder.addTypeAdapter( ISeason.class , new InterfaceSerializer<Season>( this, decoder ) );
 		decoder.addTypeAdapter( java.util.Date.class,  new DateSerializer() );
 		decoder.addTypeAdapter( IMachine.class , new AllocineInstanceCreator<Machine>( this ) );
 		decoder.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);

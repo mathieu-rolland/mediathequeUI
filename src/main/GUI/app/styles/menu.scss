@@ -5,18 +5,36 @@
 	position: fixed;
 	background: black;
 	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: space-between;
 
-	padding: 30px;
+	padding: 10px;
 	
 	font-size: 16px;
 	
+	.icon-menu{
+		width: 30px;
+		padding-right: 2px;
+		margin: auto;
+	}
+
+	.menu-title{
+		img {
+			width: 200px;
+		}
+		text-align: center;
+		margin: auto;
+	}
+
 	ul li{
-		float: left;
 		padding-left: 50px;
 		display: inline-block;
 		text-decoration: none;
 		color: white;
-		
+		margin: auto;
+
 		&.active{
 			a, a:active, a:hover, a:focus, a:visited{
 				color: #F8ED41;
@@ -36,13 +54,25 @@
  	 outline: none;
 	}
 
-	.navigate{
-		float: left;	
+	.navigate{	
+		margin: auto;
+		display:flex;
+		flex-flow: row;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	.navigate::after{
+		clear: both;
+	}
+
+	.account::after{
+		clear: both;
 	}
 	
 	.account{
-		float: right;
-		padding-right: 30px;
+		margin: auto;
+		justify-content: flex-end;
 	}
 	
 }
@@ -110,4 +140,8 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     background-color:black;
+}
+
+#cssmenu::after{
+	clear: both;
 }

@@ -29,6 +29,7 @@ angular.module('mediathequeUiApp')
 	  var listOnMachine = 'movies/my-movie/machine/search';
 	  var searchSeries = 'series/search';
 	  var serieDetails = 'series/details';
+	  var chapterDetails = 'series/details/chapter';
 
 	  this.executeQueryAfterInit = function( callback ){
 		  
@@ -348,6 +349,23 @@ angular.module('mediathequeUiApp')
 
 				$http.post( mainURL + serieDetails , serie ).then(
 					function(response){
+						callback( response.data );
+					},
+					function( response ){
+						callback( response );
+					}
+				);
+
+			});
+		};
+
+		this.chapterDetails = function( chapter , callback ){
+			this.executeQueryAfterInit( function(){
+
+				$http.post( mainURL + chapterDetails , chapter ).then(
+					function(response){
+						console.log("response chapter details : ");
+						console.log( response.data );
 						callback( response.data );
 					},
 					function( response ){

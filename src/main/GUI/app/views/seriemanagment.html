@@ -1,0 +1,82 @@
+
+<div class="serieManagmentPage">
+
+    <div class="serieManagment title">
+
+        <h1>Gérer mes séries</h1>
+
+    </div>
+
+    <div class="serieManagment content" >
+
+
+        <div class="serieManagment search">
+
+            <input type="text" ng-model="series.search.name" placeholder="Série" />
+            <a class="btn btn-lg btn-success"
+                ng-click="searchSerie(series.search.name)">Rechercher
+                    <span class="glyphicon glyphicon-ok"></span>
+            </a>
+
+        </div>
+
+        <div class="serieManagment ariane">
+            <p>
+                <span ng-repeat="element in series.ariane track by $index">
+                    {{element}}&nbsp;>
+                </span>
+            <p>
+        </div>
+
+        <div class="serieManagment searchResults" ng-show="showSerieSearchResults">
+
+            <div class="serieManagment searchResult" ng-repeat="result in series.search.result">
+                <div class="serieManagment preview">
+                   <img ng-src={{result.poster.href}} alt="{{result.title}}" />
+                </div>
+                <div class="serieManagment searchResultInfo">
+                    <p>
+                        <label>Date :&nbsp;</label>{{result.year}}<br />
+                        <label>Nombre de saison :&nbsp;</label>{{result.seasonCount}}
+                    </p>
+                </div>
+                <div>
+                    <a class="btn btn-lg btn-success" ng-click="getSerieDetails(result)">
+                        Voir les saisons
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="serieManagment serieDetails" ng-show="showSerieDetailshResults">
+
+            <div class="serieManagment saisonDetails" ng-repeat="saison in series.seasons">
+
+                <div class="serieManagment chapters">
+                  
+                    <div ng-repeat="chapter in saison.chapter">
+                        <p>{{chapter.title}} : </p>
+                        <p>{{chapter.synopsis}}</p>
+                    </div>
+
+                </div>
+                <div class="serieManagment seasonInfo">
+                    <p>
+                        <label>Nombre d'épisode :&nbsp;</label>{{saison.episodeCount}}<br />
+                        <label>Numero de la saison :&nbsp;</label>{{saison.seasonNumber}}
+                    </p>
+                <div>
+    
+            </div>
+
+            <a class="btn btn-lg btn-success" ng-click="getChapters(saison)">
+                        Voir les Episodes
+                </a>
+
+        </div>
+
+    </div>
+
+</div>

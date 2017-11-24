@@ -72,6 +72,7 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 		if( angular.isUndefined( $scope.selectedMovie ) ){
 			$scope.selectedMovie = movie;
 			$scope.isSelectedMovie = true;
+			$('body').css('overflow', 'hidden');
 		}
 	}
 	
@@ -84,11 +85,13 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 		} else{
 			console.log( "Video API is not ready" );
 		}
+		$scope.closePopup();
 	}
 	
 	$scope.closePopup = function(){
 		$scope.selectedMovie = undefined;
 		$scope.isSelectedMovie = false;
+		$('body').css('overflow', 'auto');
 	}
 	
 	$scope.onPlayerReady = function(API) {
@@ -137,7 +140,7 @@ angular.module('mediathequeUiApp').controller('MymoviesCtrl',[ '$scope' , '$sce'
 	angular.element(window).on('mousewheel', function(event){
 		//if popup displayed : stop scroll
 		if( $scope.playIsDemand || $scope.isSelectedMovie ){
-			event.preventDefault();
+			//event.preventDefault();
 		}
 	});
 	

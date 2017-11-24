@@ -40,6 +40,9 @@ angular.module('mediathequeUiApp').controller('MenuCtrl', [ 'Security', '$scope'
 			case '/admin/users':
 				$scope.page = 'user'
 				break;
+			case '/serie':
+				$scope.page = 'serie'
+				break;
 			default:
 				break;
         }

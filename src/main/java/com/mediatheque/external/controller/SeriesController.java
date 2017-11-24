@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.allocine.IAllocineAPI;
+import com.api.allocine.model.IChapter;
+import com.api.allocine.model.IChapterResponse;
 import com.api.allocine.model.ISerie;
 import com.api.allocine.model.ISerieResponse;
 import com.api.allocine.model.impl.Series;
@@ -44,7 +46,22 @@ public class SeriesController {
 		ISerieResponse response;
 		try {
 			response = api.getSerieDetails(serie);
+			System.out.println(response.getSerie());
 			return response != null ? response.getSerie() : null;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@RequestMapping( value = "/details/chapter" , method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody IChapter getSerieDetails( @RequestBody IChapter chapter){
+		
+		IChapterResponse response;
+		try {
+			response = api.getChapterDetails( chapter );
+			System.out.println( response != null ? response.getChapter() : "null" );
+			return response != null ? response.getChapter() : null;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -60,8 +77,6 @@ public class SeriesController {
 			
 		return false;
 	}
-	
-	
 	
 	@RequestMapping("/my-series/db/")
 	public @ResponseBody List<Series> getMyMovies(){
