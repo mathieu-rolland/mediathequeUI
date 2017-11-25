@@ -54,29 +54,38 @@
 
             <div class="serieManagment saisonDetails" ng-repeat="saison in series.seasons">
 
-                <div class="serieManagment chapters">
-                  
-                    <div ng-repeat="chapter in saison.chapter">
-                        <p>{{chapter.title}} : </p>
-                        <p>{{chapter.synopsis}}</p>
-                    </div>
-
-                </div>
                 <div class="serieManagment seasonInfo">
                     <p>
                         <label>Nombre d'épisode :&nbsp;</label>{{saison.episodeCount}}<br />
                         <label>Numero de la saison :&nbsp;</label>{{saison.seasonNumber}}
                     </p>
-                <div>
-    
+
+                    <div>
+        
+                    </div>
+
+                    <div ng-show="displayChapterId == saison.code">
+                        <a class="btn btn-lg btn-success" ng-click="hideChapters( displayChapterId )">
+                                Masquer les Episodes
+                        </a>
+                    </div>
+                    <div ng-show="displayChapterId != saison.code">
+                            <a class="btn btn-lg btn-success" ng-click="getChapters(saison)">
+                                    Voir les Episodes
+                            </a>
+                        </div>
+                </div>
+
+                <div class="chapters" ng-show="displayChapterId == saison.code">
+                    <div class="chapter preview" ng-repeat="chapter in displayedChapters | orderBy:number">
+                        
+                        <img alt="" src="{{chapter.poster.href}}" />
+                        <label>Episode {{chapter.number}}</label>
+                    </div>
+                </div>
+
             </div>
 
-            <a class="btn btn-lg btn-success" ng-click="getChapters(saison)">
-                        Voir les Episodes
-                </a>
-
         </div>
-
     </div>
-
 </div>

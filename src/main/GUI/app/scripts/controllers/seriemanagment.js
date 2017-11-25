@@ -29,7 +29,6 @@ angular.module('mediathequeUiApp')
 
     /*Web service callback : */
     var searchSerieCallback = function( response ){
-        console.log(response);
         $scope.series.search.result = response;
         $scope.showSerieSearchResults = true;
         $scope.showSerieDetailshResults = false;
@@ -51,7 +50,10 @@ angular.module('mediathequeUiApp')
 
     var getChaptersCallback = function( response ){
       if( angular.isDefined(response) ){
-          console.log( "Serie chapter : " + response);
+          if ( angular.isUndefined($scope.displayedChapters ) ){
+            $scope.displayedChapters = [];
+          }
+          $scope.displayedChapters.push( response );
       }
     };
 
@@ -64,11 +66,20 @@ angular.module('mediathequeUiApp')
       AllocineWebService.serieDetails( serie , serieDetailsCallback );
     };
     
+
+    $scope.hideChapters = function( chapterid ){
+      $scope.displayChapterId = undefined;
+    };
+
     $scope.getChapters = function( season ){
-      console.log(season);
+      $scope.displayedChapters = [];
       for( var i = 0 ; i < season.chapters.length ; i++ ){
         AllocineWebService.chapterDetails( season.chapters[i] , getChaptersCallback );
       }
+      $scope.season = {
+        "displayId" : season.code
+      };
+      $scope.displayChapterId = season.code;
     };
 
   }]);

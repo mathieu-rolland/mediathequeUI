@@ -364,8 +364,6 @@ angular.module('mediathequeUiApp')
 
 				$http.post( mainURL + chapterDetails , chapter ).then(
 					function(response){
-						console.log("response chapter details : ");
-						console.log( response.data );
 						callback( response.data );
 					},
 					function( response ){

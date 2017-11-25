@@ -45,6 +45,30 @@
 
         }
 
+        .serieDetails 
+        {
+
+            margin : 20px ;
+
+            .preview{
+                
+                padding-bottom: 20px;
+                padding-right: 10px;
+                height: 240px;
+                overflow: hidden;
+                text-align: center;
+                display: inline-block;
+                margin-top: auto;
+                margin-bottom: auto;
+
+                img{
+                    width: 170px;
+                    align-content: center;
+                }
+
+            }
+        }
+
     }
 
 }
