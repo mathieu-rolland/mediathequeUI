@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.mediatheque.db.dao.DaoUserService;
+import com.mediatheque.db.dao.UserDAO;
 import com.mediatheque.db.repository.AccessTokenRepository;
 import com.mediatheque.db.repository.UserRepository;
 import com.mediatheque.external.entrypoint.AuthenticationTokenProcessingFilter;
@@ -30,8 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	public AccessTokenRepository accessTokenRepo;
 	
 	@Bean
-	public DaoUserService createUserService(){
-		return new DaoUserService(userRepo, accessTokenRepo);
+	public UserDAO createUserService(){
+		return new UserDAO(userRepo, accessTokenRepo);
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.anyRequest().authenticated();
 		http
 			.addFilterBefore( new CORSFilter() , BasicAuthenticationFilter.class)
-			.addFilterBefore( new AuthenticationTokenProcessingFilter( new DaoUserService(userRepo, accessTokenRepo) ) , BasicAuthenticationFilter.class );
+			.addFilterBefore( new AuthenticationTokenProcessingFilter( new UserDAO(userRepo, accessTokenRepo) ) , BasicAuthenticationFilter.class );
 		super.configure(http);
 	}
 	

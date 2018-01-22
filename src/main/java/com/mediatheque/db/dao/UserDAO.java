@@ -26,7 +26,7 @@ import com.mediatheque.model.impl.Role;
 import com.mediatheque.model.impl.User;
 import com.mediatheque.services.UserService;
 
-public class DaoUserService implements UserService {
+public class UserDAO implements UserService {
 
 	private UserRepository userRepository;
 	private AccessTokenRepository accessTokenRepository;
@@ -37,7 +37,7 @@ public class DaoUserService implements UserService {
 	@Autowired
 	private PasswordEncoder pwdEncoder;
 	
-	protected DaoUserService(){}
+	protected UserDAO(){}
 	private static final int TOKEN_VALIDITY = 1; //en jour
 	private static final int ACTIVATION_VALIDITY = 1;
 	private static final String DATE_FORMAT = "yyyyMMddHHmmss";
@@ -52,9 +52,9 @@ public class DaoUserService implements UserService {
 	
 	private SimpleDateFormat dateFormater;
 	
-	private Logger logger = LoggerFactory.getLogger( DaoUserService.class );
+	private Logger logger = LoggerFactory.getLogger( UserDAO.class );
 	
-	public DaoUserService( UserRepository userRepo, AccessTokenRepository accessTokenRepo ){
+	public UserDAO( UserRepository userRepo, AccessTokenRepository accessTokenRepo ){
 		
 		this.userRepository = userRepo;
 		this.accessTokenRepository = accessTokenRepo;

@@ -15,14 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.mediatheque.db.dao.DaoUserService;
+import com.mediatheque.db.dao.UserDAO;
 import com.mediatheque.model.impl.User;
 
 @Service
 public class MailService {
 
 	@Autowired 
-	DaoUserService userService;
+	UserDAO userService;
 	
 	private Logger logger = LoggerFactory.getLogger( MailService.class );
 
