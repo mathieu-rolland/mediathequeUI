@@ -22,10 +22,10 @@ import com.api.allocine.model.IPoster;
 import com.api.allocine.model.IRelease;
 import com.api.allocine.model.IResult;
 import com.api.allocine.model.ISearchResponse;
+import com.api.allocine.model.ISeason;
 import com.api.allocine.model.ISerie;
 import com.api.allocine.model.IStats;
 import com.api.allocine.model.impl.Chapter;
-import com.api.allocine.model.impl.Serie;
 import com.mediatheque.factory.IMediathequeFactory;
 import com.mediatheque.model.ILocalMovie;
 import com.mediatheque.model.IMachine;
@@ -149,7 +149,6 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 		decoder.addTypeAdapter( IAllocineLink.class , new InterfaceSerializer<AllocineLink>( this, decoder ) );
 		decoder.addTypeAdapter( IGenre.class , new InterfaceSerializer<Genre>( this, decoder ) );
 		decoder.addTypeAdapter( IChapter.class , new InterfaceSerializer<Chapter>( this, decoder ) );
-		decoder.addTypeAdapter( ISerie.class , new InterfaceSerializer<Serie>( this, decoder ) );
 		decoder.addTypeAdapter( ICasting.class , new InterfaceSerializer<Casting>( this, decoder ) );
 		decoder.addTypeAdapter( java.util.Date.class,  new DateSerializer() );
 		decoder.addTypeAdapter( IMachine.class , new AllocineInstanceCreator<Machine>( this ) );
@@ -171,14 +170,21 @@ public class MediathequeFactory implements IMediathequeFactory, IFactory {
 	public IGenre createGenre() {
 		return new Genre();
 	}
-
+	
 	@Override
-	public ISerie createSerie() {
-		return new Serie();
+	public IChapter createChapter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public IChapter createChapter() {
+	public ISeason createSeason() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ISerie createSerie() {
 		// TODO Auto-generated method stub
 		return null;
 	}
