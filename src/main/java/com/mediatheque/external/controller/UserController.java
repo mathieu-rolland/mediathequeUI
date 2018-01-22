@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mediatheque.db.dao.DaoUserService;
+import com.mediatheque.db.dao.UserDAO;
 import com.mediatheque.model.impl.AccessToken;
 import com.mediatheque.model.impl.Role;
 import com.mediatheque.model.impl.User;
@@ -24,10 +24,10 @@ import com.mediatheque.services.SecureData;
 
 @RestController
 @RequestMapping("/user")
-public class UserService {
+public class UserController {
 	
 	@Autowired 
-	DaoUserService userService;
+	UserDAO userService;
 	
 	@Autowired
 	MailService mailService;

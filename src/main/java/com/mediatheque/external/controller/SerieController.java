@@ -19,9 +19,9 @@ import com.api.allocine.model.ISerie;
 
 @RestController
 @RequestMapping("/series")
-public class SerieService {
+public class SerieController {
 
-	private Logger logger = Logger.getLogger(SerieService.class);
+	private Logger logger = Logger.getLogger(SerieController.class);
 	
 	@Autowired
 	private IAllocineAPI api;
