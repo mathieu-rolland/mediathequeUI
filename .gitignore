@@ -20,3 +20,5 @@ src/main/resources/node_modules
 .factorypath
 .settings/org.eclipse.jdt.apt.core.prefs
 .settings/org.eclipse.wst.common.project.facet.core.xml
+
+*.log
