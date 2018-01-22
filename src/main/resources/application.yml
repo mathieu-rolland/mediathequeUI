@@ -4,9 +4,9 @@ spring:
    datasource:
       testWhileIdle: true
       show-sql: true
-      url: jdbc:mysql:///mediatheque_dev
-      username: mediatheque_dev
-      password: 
+      url: ${database.url}
+      username: ${database.username}
+      password: ${database.password}
       driver-class-name: com.mysql.jdbc.Driver 
    jpa:
       hibernate:
@@ -18,10 +18,10 @@ spring:
    resources:
       static-locations: /Volumes/External Media/cacheMediatheque/
    mail:
-     host: 
-     port: 
-     username: 
-     password: 
+     host: smtp.google.com
+     port: 587
+     username: ${mail.login}
+     password: ${mail.password}
      debug: true
      regexValidation: ^[0-9a-zA-Z.-]+@[A-Za-z]+.[A-Za-z]+$
      properties:
@@ -38,7 +38,7 @@ server:
 
 mediatheque:
    downloadPath: D:\Programmation\Workspace\UIMediatheque\dowload
-   mailSettings: mail.properties
+   mailSettings: D:/programmation/mediatheque/mediathequeUI/src/main/resources/mail.properties
 ---
 
 spring:
